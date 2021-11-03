@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "scripts": {
+    "validate-html": "java -jar node_modules/vnu-jar/build/dist/vnu.jar --Werror --skip-non-html ./src",
+    "validate-sonar": "export JAVA_HOME=/usr;node_modules/sonar-scanner/bin/sonar-scanner",
+    "validate-sonar-local": "export JAVA_HOME=/usr;node_modules/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=https://sonar.ti.howest.be/",
+    "validate-sonar-local-win": ".\\node_modules\\sonar-scanner\\bin\\sonar-scanner -Dsonar.host.url=https://sonar.ti.howest.be/",
+    "validate": "npm run validate-html && npm run validate-sonar",
+    "validate-local": "npm run validate-html && npm run validate-sonar-local",
+    "validate-local-win": "npm run validate-html && npm run validate-sonar-local-win"
+  },
+  "dependencies": {
+    "sonar-scanner": "^3.1.0",
+    "vnu-jar": "^20.2.28"
+  }
+}
