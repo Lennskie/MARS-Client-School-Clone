@@ -7,10 +7,14 @@
     "validate-sonar-local-win": ".\\node_modules\\sonar-scanner\\bin\\sonar-scanner -Dsonar.host.url=https://sonar.ti.howest.be/",
     "validate": "npm run validate-html && npm run validate-sonar",
     "validate-local": "npm run validate-html && npm run validate-sonar-local",
-    "validate-local-win": "npm run validate-html && npm run validate-sonar-local-win"
+    "validate-local-win": "npm run validate-html && npm run validate-sonar-local-win",
+    "compile-sass": "sass ./src/assets/sass:./src/assets/css"
   },
   "dependencies": {
     "sonar-scanner": "^3.1.0",
     "vnu-jar": "^20.2.28"
+  },
+  "devDependencies": {
+    "sass": "^1.43.4"
   }
 }
