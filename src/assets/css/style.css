@@ -83,7 +83,18 @@ main {
     font-family: "Adobe Clean Bold", sans-serif;
     font-size: 1.5rem;
     color: white;
-    padding: 0 0 0 15rem;
+    padding: 0 0 2rem 15rem;
     text-shadow: black 1px 1px;
     max-width: 40vw;
+}
+
+#subscribe {
+    font-family: "Helvetica Neue", sans-serif;
+    text-decoration: none;
+    border: 1px solid #F7B500;
+    border-radius: 50px;
+    background-color: #F7B500;
+    color: black;
+    padding: 0.5rem 1.5rem;
+    margin: 5rem 0 0 15rem;
 }
