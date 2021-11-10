@@ -12,5 +12,8 @@
   "dependencies": {
     "sonar-scanner": "^3.1.0",
     "vnu-jar": "^20.2.28"
+  },
+  "devDependencies": {
+    "sass": "^1.43.4"
   }
 }
