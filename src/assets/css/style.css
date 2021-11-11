@@ -93,7 +93,7 @@ main {
   text-decoration: none;
   border: 1px solid #F7B500;
   border-radius: 50px;
-  background-color: #F7B500;
+  background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
   color: black;
   padding: 0.5rem 1.5rem;
   margin: 5rem 0 0 15rem;
