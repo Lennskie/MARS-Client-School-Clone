@@ -24,6 +24,7 @@ nav {
 
 #home-link {
   display: flex;
+  cursor: pointer;
 }
 #home-link > p {
   line-height: 100%;
