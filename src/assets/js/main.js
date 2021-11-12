@@ -2,6 +2,7 @@ let config;
 let api;
 
 document.addEventListener("DOMContentLoaded", init);
+document.querySelector('#home-link').addEventListener("click", goHome);
 
 async function init() {
     config = await loadConfig();
@@ -15,3 +16,8 @@ async function loadConfig() {
     const response = await fetch("config.json");
     return response.json();
 }
+
+function goHome() {
+    window.location.href = "./index.html";
+}
+
