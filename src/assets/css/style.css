@@ -206,14 +206,14 @@ p:not(.subscriptions .grid p) {
   align-items: center;
   margin: 4em 0 4em 0;
 }
-.subscriptions .grid .monitoringPatch {
+.subscriptions .grid div {
   margin: 0 auto;
   width: 90%;
 }
-.subscriptions .grid .monitoringPatch em {
+.subscriptions .grid div em {
   color: red;
 }
-.subscriptions .grid .monitoringPatch h2 {
+.subscriptions .grid div h2 {
   font-size: 1.5rem;
   padding: 0.3em 0 0.3em 2em;
   background-image: url("../images/heart.svg");
@@ -221,10 +221,10 @@ p:not(.subscriptions .grid p) {
   background-size: 1.5em;
   background-position-y: center;
 }
-.subscriptions .grid .monitoringPatch h2, .subscriptions .grid .monitoringPatch h3 {
+.subscriptions .grid div h2, .subscriptions .grid div h3 {
   margin-bottom: 0.3em;
 }
-.subscriptions .grid .monitoringPatch p {
+.subscriptions .grid div p {
   margin-bottom: 0.8em;
 }
 
