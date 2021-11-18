@@ -143,7 +143,6 @@ p:not(.subscriptions .grid p)
 /* SUBSCRIPTIONS GRID */
 /*====================*/
 
-/* -- flex article left side (table) -- */
 .subscriptions table
     border-spacing: 10px
     border-collapse: separate
@@ -191,7 +190,7 @@ p:not(.subscriptions .grid p)
 
     margin: 4em 0 4em 0
 
-    article
+    .monitoringPatch
         margin: 0 auto
         width: 90%
 
@@ -213,33 +212,33 @@ p:not(.subscriptions .grid p)
         p
             margin-bottom: 0.8em
 
-        .patchSteps
-            display: flex
-            flex-flow: row
+.patchSteps
+    display: flex
+    flex-flow: row
 
-            div
-                width: 15em
-                background-repeat: no-repeat
-                background-position: top left
-                padding: 10em 0 0 0.6em
+    div
+        width: 15em
+        background-repeat: no-repeat
+        background-position: top left
+        padding: 10em 0 0 0.6em
 
-            div:not(:last-child) p
-                background-image: url("../images/arrow.png")
-                background-repeat: no-repeat
-                background-position: top right
-                background-size: 2.5em
+    div:not(:last-child) p
+        background-image: url("../images/arrow.png")
+        background-repeat: no-repeat
+        background-position: top right
+        background-size: 2.5em
 
-                padding-right: 3em
-                padding-bottom: 1em
+        padding-right: 3em
+        padding-bottom: 1em
 
-            div:nth-child(1)
-                background-image: url("../images/step1.png")
+    div:nth-child(1)
+        background-image: url("../images/step1.png")
 
-            div:nth-child(2)
-                background-image: url("../images/step2.png")
+    div:nth-child(2)
+        background-image: url("../images/step2.png")
 
-            div:nth-child(3)
-                background-image: url("../images/step3.png")
+    div:nth-child(3)
+        background-image: url("../images/step3.png")
 
 /* footer */
 footer
