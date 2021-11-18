@@ -256,4 +256,31 @@ p:not(.subscriptions section p) {
   background-image: url("../images/step 3.png");
 }
 
+/* footer */
+footer {
+  font-family: Poppins, "sans-serif";
+  width: 40em;
+  margin: 0 auto;
+  border-top: solid lightgray 1px;
+}
+footer label {
+  font-size: 1.5rem;
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5em;
+  margin-top: 2em;
+  font-weight: bold;
+}
+footer input {
+  border-radius: 1em;
+  padding: 0.2em;
+  border: none;
+  outline: none;
+}
+footer img {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=style.css.map */
