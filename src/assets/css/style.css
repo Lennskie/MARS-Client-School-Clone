@@ -203,7 +203,7 @@ p:not(.subscriptions section p) {
 .subscriptions section {
   font-family: Poppins, "sans-serif";
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(45em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(40em, 1fr));
   align-items: center;
   margin: 4em 0 4em 0;
 }
@@ -268,7 +268,7 @@ footer label {
   display: block;
   text-align: left;
   margin-bottom: 0.5em;
-  margin-top: 2em;
+  margin-top: 1em;
   font-weight: bold;
 }
 footer input {
