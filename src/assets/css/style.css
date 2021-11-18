@@ -71,7 +71,7 @@ h1 {
   margin-top: 4rem;
 }
 
-p:not(.subscriptionGrid div p) {
+p:not(.subscriptions section p) {
   font-family: "Adobe Clean", sans-serif;
   text-align: center;
   margin: 2rem 30% 0 30%;
@@ -157,37 +157,96 @@ p:not(.subscriptionGrid div p) {
   margin: auto 0;
 }
 
+/*====================*/
 /* SUBSCRIPTIONS GRID */
-.subscriptionTable {
+/*====================*/
+/* -- flex article 1 -- */
+.subscriptions table {
   border-spacing: 10px;
   border-collapse: separate;
-  font-family: Poppins, "sans-serif";
 }
-.subscriptionTable tr td:not(:first-child) {
+.subscriptions table td {
+  padding: 0.6em;
+}
+.subscriptions table tr td:not(:first-child) {
   text-align: center;
   vertical-align: center;
 }
-.subscriptionTable th, .subscriptionTable td {
-  padding: 0.8em;
+.subscriptions table tr td:nth-child(1):not(tfoot tr td) {
+  background-color: #F4FAFF;
 }
-.subscriptionTable #subscribe {
+.subscriptions table tr td:nth-child(2):not(tfoot tr td) {
+  background-color: #FFECEC;
+}
+.subscriptions table tr td:nth-child(3):not(tfoot tr td) {
+  background-color: #F0EFF7;
+}
+.subscriptions table tr td:nth-child(4):not(tfoot tr td) {
+  background-color: #E3FFEF;
+}
+.subscriptions table #subscribe {
   margin-left: 0;
 }
-.subscriptionTable #costs {
+.subscriptions table #costs {
   background: none;
   text-align: right;
 }
-.subscriptionTable tr td:nth-child(1):not(tfoot tr td) {
-  background-color: #F4FAFF;
+
+.subscriptions section {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4em 0 4em 0;
+  font-family: Poppins, "sans-serif";
 }
-.subscriptionTable tr td:nth-child(2):not(tfoot tr td) {
-  background-color: #FFECEC;
+.subscriptions section article {
+  width: 45%;
+  margin: 0 auto;
 }
-.subscriptionTable tr td:nth-child(3):not(tfoot tr td) {
-  background-color: #F0EFF7;
+.subscriptions section article em {
+  color: red;
 }
-.subscriptionTable tr td:nth-child(4):not(tfoot tr td) {
-  background-color: #E3FFEF;
+.subscriptions section article h2 {
+  font-size: 1.5rem;
+  padding: 0.3em 0 0.3em 2em;
+  background-image: url("../images/heart.svg");
+  background-repeat: no-repeat;
+  background-size: 5%;
+  background-position-y: center;
+}
+.subscriptions section article h2, .subscriptions section article h3 {
+  margin-bottom: 0.3em;
+}
+.subscriptions section article p {
+  margin-bottom: 0.8em;
+}
+.subscriptions section article .patchSteps {
+  display: flex;
+  flex-flow: row;
+}
+.subscriptions section article .patchSteps div {
+  width: 15em;
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 10em 0 0 0.6em;
+}
+.subscriptions section article .patchSteps div:not(:last-child) p {
+  background-image: url("../images/arrow.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 2.5em;
+  padding-right: 3em;
+  padding-bottom: 1em;
+}
+.subscriptions section article .patchSteps div:nth-child(1) {
+  background-image: url("../images/step1.png");
+}
+.subscriptions section article .patchSteps div:nth-child(2) {
+  background-image: url("../images/step 2.png");
+}
+.subscriptions section article .patchSteps div:nth-child(3) {
+  background-image: url("../images/step 3.png");
 }
 
 /*# sourceMappingURL=style.css.map */

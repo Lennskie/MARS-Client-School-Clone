@@ -62,7 +62,7 @@ h1
     font-size: 3rem
     margin-top: 4rem
 
-p:not(.subscriptionGrid div p)
+p:not(.subscriptions section p)
     font-family: "Adobe Clean", sans-serif
     text-align: center
     margin: 2rem 30% 0 30%
@@ -139,26 +139,21 @@ p:not(.subscriptionGrid div p)
     height: 3rem
     margin: auto 0
 
+/*====================*/
 /* SUBSCRIPTIONS GRID */
+/*====================*/
 
-.subscriptionTable
+/* -- flex article 1 -- */
+.subscriptions table
     border-spacing: 10px
     border-collapse: separate
-    font-family: Poppins, "sans-serif"
+
+    td
+        padding: 0.6em
 
     tr td:not(:first-child)
         text-align: center
         vertical-align: center
-
-    th, td
-        padding: 0.8em
-
-    #subscribe
-        margin-left: 0
-
-    #costs
-        background: none
-        text-align: right
 
     tr td:nth-child(1):not(tfoot tr td)
         background-color: #F4FAFF
@@ -171,3 +166,72 @@ p:not(.subscriptionGrid div p)
 
     tr td:nth-child(4):not(tfoot tr td)
         background-color: #E3FFEF
+
+    #subscribe
+        margin-left: 0
+
+    #costs
+        background: none
+        text-align: right
+
+.subscriptions section
+    display: flex
+    flex-flow: wrap
+    justify-content: space-between
+    align-items: center
+
+    margin: 4em 0 4em 0
+    font-family: Poppins, "sans-serif"
+
+    article
+        width: 45%
+        margin: 0 auto
+
+        em
+            color: red
+
+        h2
+            font-size: 1.5rem
+            padding: 0.3em 0 0.3em 2em
+
+            background-image: url("../images/heart.svg")
+            background-repeat: no-repeat
+            background-size: 5%
+            background-position-y: center
+
+        h2, h3
+            margin-bottom: 0.3em
+
+        p
+            margin-bottom: 0.8em
+
+        .patchSteps
+            display: flex
+            flex-flow: row
+
+            div
+                width: 15em
+                background-repeat: no-repeat
+                background-position: top left
+                padding: 10em 0 0 0.6em
+
+            div:not(:last-child) p
+                background-image: url("../images/arrow.png")
+                background-repeat: no-repeat
+                background-position: top right
+                background-size: 2.5em
+
+                padding-right: 3em
+                padding-bottom: 1em
+
+            div:nth-child(1)
+                background-image: url("../images/step1.png")
+
+            div:nth-child(2)
+                background-image: url("../images/step 2.png")
+
+            div:nth-child(3)
+                background-image: url("../images/step 3.png")
+
+
+
