@@ -62,7 +62,7 @@ h1
     font-size: 3rem
     margin-top: 4rem
 
-p
+p:not(.subscriptionGrid div p)
     font-family: "Adobe Clean", sans-serif
     text-align: center
     margin: 2rem 30% 0 30%
@@ -138,3 +138,36 @@ p
     width: 3rem
     height: 3rem
     margin: auto 0
+
+/* SUBSCRIPTIONS GRID */
+
+.subscriptionTable
+    border-spacing: 10px
+    border-collapse: separate
+    font-family: Poppins, "sans-serif"
+
+    tr td:not(:first-child)
+        text-align: center
+        vertical-align: center
+
+    th, td
+        padding: 0.8em
+
+    #subscribe
+        margin-left: 0
+
+    #costs
+        background: none
+        text-align: right
+
+    tr td:nth-child(1):not(tfoot tr td)
+        background-color: #F4FAFF
+
+    tr td:nth-child(2):not(tfoot tr td)
+        background-color: #FFECEC
+
+    tr td:nth-child(3):not(tfoot tr td)
+        background-color: #F0EFF7
+
+    tr td:nth-child(4):not(tfoot tr td)
+        background-color: #E3FFEF
