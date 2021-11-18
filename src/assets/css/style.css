@@ -271,7 +271,7 @@ footer label {
   margin-top: 1em;
   font-weight: bold;
 }
-footer input {
+footer select {
   border-radius: 1em;
   padding: 0.2em;
   border: none;
