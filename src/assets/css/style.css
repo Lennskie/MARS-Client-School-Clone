@@ -201,7 +201,7 @@ p:not(.subscriptions section p) {
 }
 
 .subscriptions section {
-  font-family: Poppins, "sans-serif";
+  font-family: Poppins, sans-serif;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40em, 1fr));
   align-items: center;
@@ -258,7 +258,7 @@ p:not(.subscriptions section p) {
 
 /* footer */
 footer {
-  font-family: Poppins, "sans-serif";
+  font-family: Poppins, sans-serif;
   width: 40em;
   margin: 0 auto;
   border-top: solid lightgray 1px;
