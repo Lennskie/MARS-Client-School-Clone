@@ -143,7 +143,7 @@ p:not(.subscriptions section p)
 /* SUBSCRIPTIONS GRID */
 /*====================*/
 
-/* -- flex article 1 -- */
+/* -- flex article left side (table) -- */
 .subscriptions table
     border-spacing: 10px
     border-collapse: separate
@@ -156,36 +156,44 @@ p:not(.subscriptions section p)
         vertical-align: center
 
     tr td:nth-child(1):not(tfoot tr td)
-        background-color: #F4FAFF
+        background-color: #FFADAD
 
     tr td:nth-child(2):not(tfoot tr td)
-        background-color: #FFECEC
+        background-color: #FFDAC7
 
     tr td:nth-child(3):not(tfoot tr td)
-        background-color: #F0EFF7
+        background-color: #FFEFBC
 
     tr td:nth-child(4):not(tfoot tr td)
-        background-color: #E3FFEF
+        background-color: #FFFEB7
 
-    #subscribe
-        margin-left: 0
+    button
+        text-decoration: none
+        background-color: #E93B81
+        color: white
+        border: none
+        padding: 0.5em
+        border-radius: 1em
+
+    button:hover
+        cursor: pointer
 
     #costs
         background: none
         text-align: right
 
 .subscriptions section
-    display: flex
-    flex-flow: wrap
-    justify-content: space-between
+    font-family: Poppins, "sans-serif"
+
+    display: grid
+    grid-template-columns: repeat(auto-fill, minmax(45em, 1fr))
     align-items: center
 
     margin: 4em 0 4em 0
-    font-family: Poppins, "sans-serif"
 
     article
-        width: 45%
         margin: 0 auto
+        width: 90%
 
         em
             color: red
@@ -196,7 +204,7 @@ p:not(.subscriptions section p)
 
             background-image: url("../images/heart.svg")
             background-repeat: no-repeat
-            background-size: 5%
+            background-size: 1.5em
             background-position-y: center
 
         h2, h3
@@ -232,6 +240,3 @@ p:not(.subscriptions section p)
 
             div:nth-child(3)
                 background-image: url("../images/step 3.png")
-
-
-

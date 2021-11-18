@@ -160,7 +160,7 @@ p:not(.subscriptions section p) {
 /*====================*/
 /* SUBSCRIPTIONS GRID */
 /*====================*/
-/* -- flex article 1 -- */
+/* -- flex article left side (table) -- */
 .subscriptions table {
   border-spacing: 10px;
   border-collapse: separate;
@@ -173,19 +173,27 @@ p:not(.subscriptions section p) {
   vertical-align: center;
 }
 .subscriptions table tr td:nth-child(1):not(tfoot tr td) {
-  background-color: #F4FAFF;
+  background-color: #FFADAD;
 }
 .subscriptions table tr td:nth-child(2):not(tfoot tr td) {
-  background-color: #FFECEC;
+  background-color: #FFDAC7;
 }
 .subscriptions table tr td:nth-child(3):not(tfoot tr td) {
-  background-color: #F0EFF7;
+  background-color: #FFEFBC;
 }
 .subscriptions table tr td:nth-child(4):not(tfoot tr td) {
-  background-color: #E3FFEF;
+  background-color: #FFFEB7;
 }
-.subscriptions table #subscribe {
-  margin-left: 0;
+.subscriptions table button {
+  text-decoration: none;
+  background-color: #E93B81;
+  color: white;
+  border: none;
+  padding: 0.5em;
+  border-radius: 1em;
+}
+.subscriptions table button:hover {
+  cursor: pointer;
 }
 .subscriptions table #costs {
   background: none;
@@ -193,16 +201,15 @@ p:not(.subscriptions section p) {
 }
 
 .subscriptions section {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: space-between;
+  font-family: Poppins, "sans-serif";
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45em, 1fr));
   align-items: center;
   margin: 4em 0 4em 0;
-  font-family: Poppins, "sans-serif";
 }
 .subscriptions section article {
-  width: 45%;
   margin: 0 auto;
+  width: 90%;
 }
 .subscriptions section article em {
   color: red;
@@ -212,7 +219,7 @@ p:not(.subscriptions section p) {
   padding: 0.3em 0 0.3em 2em;
   background-image: url("../images/heart.svg");
   background-repeat: no-repeat;
-  background-size: 5%;
+  background-size: 1.5em;
   background-position-y: center;
 }
 .subscriptions section article h2, .subscriptions section article h3 {
