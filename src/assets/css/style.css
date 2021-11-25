@@ -55,6 +55,23 @@ nav {
   font-size: 1rem;
 }
 
+#logged-in {
+  background-color: black;
+  border: 1px black solid;
+  border-radius: 50px 0 0 50px;
+  padding: 0 0.5rem;
+  margin: auto 0;
+  width: 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#logged-in p {
+  display: inline;
+  color: white;
+  margin: auto 0;
+}
+
 #main-nav {
   width: 60%;
   display: flex;
@@ -65,6 +82,12 @@ nav {
   width: 3rem;
 }
 
+.profile {
+  width: 1.5rem;
+  display: inline;
+  padding-right: 0.5rem;
+}
+
 nav > a, #main-nav > a {
   text-decoration: none;
   color: black;
@@ -72,12 +95,16 @@ nav > a, #main-nav > a {
   margin: auto 0;
 }
 
-#btn-login {
+#btn-login, #btn-logout {
   border: 1px solid black;
   border-radius: 50px;
   padding: 0.25rem 1rem;
   background-color: black;
   color: white;
+}
+
+#btn-logout {
+  border-radius: 0 50px 50px 0;
 }
 
 .active-nav {
