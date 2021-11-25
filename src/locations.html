@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/leaflet.css">
+    <title>Mars 16: Mars Active Response System</title>
+</head>
+<body>
+<header>
+    <nav>
+        <div id="home-link" class="">
+            <img class="logo" src="assets/images/ambulance.png" alt="Home">
+            <p>MARS</p>
+        </div>
+        <div id="rescue-request" class="hidden">
+            <img class="logo" src="assets/images/ambulance.png" alt="Home">
+            <p>Request immediate rescue</p>
+        </div>
+        <div id="main-nav">
+            <a class="active-nav" href="locations.html">Locations</a>
+            <a href="rescuers.html">Rescuers</a>
+            <a href="subscriptions.html">Subscriptions</a>
+            <a href="support.html">Support</a>
+        </div>
+        <div class="hidden" id="logged-in">
+            <img class="profile" src="assets/images/profile.png" alt="Profile image">
+            <p>*name*</p>
+        </div>
+        <a class="hidden" id="btn-logout" href="">Logout</a>
+        <a class="" id="btn-login" href="login.html">Login</a>
+        <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+    </nav>
+</header>
+
+<main>
+    <div id="map" class="mapbox leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"></div>
+</main>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/leaflet.js"></script>
+<script src="assets/js/map.js"></script>
+</body>
+</html>
