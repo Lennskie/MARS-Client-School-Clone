@@ -10,12 +10,22 @@ function init() {
 function delegateAction(e) {
     e.preventDefault();
 
-    if(e.target.dataset.call === "active"){
-        console.log("should end call now");
+    if( e.target.classList.contains("activeCall")){
+        endCall(e)
     }
-    if(e.target.dataset.call === "inactive"){
-        console.log("should start");
+    else if( e.target.classList.contains("inactiveCall")){
+        pickupCall(e);
     }
+}
+
+function pickupCall(e) {
+    e.target.classList = "activeCall"
+    e.target.innerHTML = 'End call'
+}
+
+function endCall(e) {
+    e.target.classList = "inactiveCall"
+    e.target.innerHTML = 'Accept call...'
 }
 
 function loadCallsList(data) {
@@ -36,7 +46,7 @@ function loadCallsList(data) {
             <div>
                 <p>${listitem['rescue ETA']}</p>
             </div>
-            <button class="callButton" data-call="${listitem['data']}">${listitem['action']}</button>
+            <button class="${listitem['info']}">${listitem['action']}</button>
             <button>${listitem['location']}</button>
         `)
     })

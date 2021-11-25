@@ -445,12 +445,15 @@ input {
   font-weight: bold;
   font-size: 0.9em;
 }
-.callsGrid .callButton {
+.callsGrid .activeCall, .callsGrid .inactiveCall {
   padding-right: 3em;
   background-image: url("../images/call.png");
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: 90%;
+}
+.callsGrid .activeCall {
+  background-color: #979797;
 }
 
 /*# sourceMappingURL=style.css.map */

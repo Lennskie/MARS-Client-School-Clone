@@ -5,7 +5,7 @@ let callsDataMock =[
         "status":"Standby",
         "rescue ETA":"-",
         "action":"Accept call...",
-        "data":"inactive",
+        "info":"inactiveCall",
         "location":"Show"
     },
     {
@@ -14,7 +14,7 @@ let callsDataMock =[
         "status":"Distress",
         "rescue ETA":"5m 36s",
         "action":"End call",
-        "data":"active",
+        "info":"activeCall",
         "location":"Show"
     },
     {
@@ -23,7 +23,7 @@ let callsDataMock =[
         "status":"Dispatched",
         "rescue ETA":"5m 36s",
         "action":"End call",
-        "data":"active",
+        "info":"activeCall",
         "location":"Show"
     }
 ]
