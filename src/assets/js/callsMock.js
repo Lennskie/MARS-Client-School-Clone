@@ -37,13 +37,13 @@ function loadCallsList(data) {
             <div>
                 <p>${listitem['communication']}</p>
             </div>
-            <div>
+            <div data-id="${listitem['id']}">
                 <p><span>${listitem['caller']}</span></p>
             </div>
-            <div>
+            <div data-id="${listitem['id']}">
                 <p>${listitem['status']}</p>
             </div>
-            <div>
+            <div data-id="${listitem['id']}">
                 <p>${listitem['rescue ETA']}</p>
             </div>
             <button class="${listitem['info']}">${listitem['action']}</button>

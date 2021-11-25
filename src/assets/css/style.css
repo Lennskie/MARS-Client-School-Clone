@@ -402,6 +402,7 @@ input {
 .filter {
   align-items: center;
   display: flex;
+  justify-content: space-between;
   width: 22em;
   margin-top: 3em;
   margin-bottom: 4em;
@@ -413,7 +414,6 @@ input {
   margin-right: 4.5em;
 }
 .filter button {
-  margin-right: 3.5em;
   padding: 0.4em 1.5em;
   border: none;
   border-radius: 1em;

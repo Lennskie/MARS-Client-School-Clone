@@ -25,5 +25,5 @@ let callsDataMock =[
         "action":"End call",
         "info":"activeCall",
         "location":"Show"
-    }
+    },
 ]
