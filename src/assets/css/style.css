@@ -92,7 +92,7 @@ p:not(.subscriptions .grid p) {
   display: flex;
   justify-content: space-evenly;
 }
-.alert > p {
+.alert > #alert-text {
   font-family: "Adobe Clean Bold", sans-serif;
   font-size: 1.75rem;
   text-align: right;
