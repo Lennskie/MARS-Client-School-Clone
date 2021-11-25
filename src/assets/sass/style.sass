@@ -127,13 +127,15 @@ p:not(.subscriptions .grid p)
     text-decoration: none
     border: 1px solid #F7B500
     border-radius: 50px
-    background: linear-gradient(180deg, rgba(255,231,165,1) 0%, rgba(247,181,0,1) 100%)
     color: black
     padding: 0.5rem 1.5rem
     margin-left: 15rem
 
     &.nav
         margin-left: 0
+
+#subscribe, input[type=submit]
+    background: linear-gradient(180deg, rgba(255,231,165,1) 0%, rgba(247,181,0,1) 100%)
 
 /* RESCUERS */
 
@@ -314,3 +316,31 @@ footer
         display: block
         width: 100%
         margin: 0 auto
+
+/* Login page */
+
+form
+    background-image: url("../images/login.png")
+    background-repeat: no-repeat
+    background-position: center
+    background-size: 12em
+    padding-top: 20em
+    width: 100%
+
+input[id=marsID]
+    margin-bottom: 0.4em
+
+input[type=submit]
+    font-weight: bold
+
+input
+    display: block
+    width: 20em
+    margin: 0 auto
+    padding: 0.8em 0.2em 0.8em 0.2em
+    box-sizing: border-box
+    border-radius: 0.3em
+    border-color: lightgray
+    border-width: 1px
+
+
