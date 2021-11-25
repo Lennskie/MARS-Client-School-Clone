@@ -17,6 +17,11 @@ header {
   font-size: 1rem;
 }
 
+hr {
+  margin-top: 2rem;
+  width: 90%;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -75,6 +80,27 @@ p:not(.subscriptions .grid p) {
   font-family: "Adobe Clean", sans-serif;
   text-align: center;
   margin: 2rem 30% 0 30%;
+}
+
+.alert {
+  border: 1px red solid;
+  background-color: red;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  width: 7rem;
+  margin: 2rem auto 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+.alert > #alert-text {
+  font-family: "Adobe Clean Bold", sans-serif;
+  font-size: 1.75rem;
+  text-align: right;
+  margin: 0;
+  display: inline;
+}
+.alert > img {
+  width: 1.75rem;
 }
 
 /* HOME */
@@ -155,6 +181,29 @@ p:not(.subscriptions .grid p) {
   width: 3rem;
   height: 3rem;
   margin: auto 0;
+}
+
+/* SUPPORT */
+#faq {
+  margin: 1rem 10% 0 10%;
+}
+#faq h2 {
+  font-family: Poppins, sans-serif;
+  font-size: 1.5rem;
+}
+#faq h3 {
+  font-family: Poppins, sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 2rem 0 1rem 0;
+}
+#faq p {
+  font-family: Poppins, sans-serif;
+  background-color: lightgray;
+  border-radius: 20px;
+  text-align: left;
+  padding: 1rem;
+  margin: 0;
 }
 
 /*====================*/
