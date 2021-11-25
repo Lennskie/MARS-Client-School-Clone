@@ -97,11 +97,13 @@ function drawMap() {
 }
 
 function mapDrawn() {
+	/*
 	// All logic that requires a map to be present gets delegated here
 	document.querySelector("#addDome").addEventListener("click", addDomeToMapListener);
 	document.querySelector("#addClient").addEventListener("click", addClientToMapListener);
 	document.querySelector("#addVehicle").addEventListener("click", addVehicleToMapListener);
 	document.querySelector("#clearActions").addEventListener("click", clearActions);
+	*/
 }
 
 function addClientToMapListener(e) {

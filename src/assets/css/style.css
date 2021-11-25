@@ -332,4 +332,9 @@ footer img {
   margin: 0 auto;
 }
 
+.mapbox {
+  width: 100%;
+  height: 50em;
+}
+
 /*# sourceMappingURL=style.css.map */
