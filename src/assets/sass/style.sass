@@ -6,6 +6,10 @@
     font-family: "Adobe Clean"
     src: url("../fonts/AdobeClean-Regular.otf") format("opentype")
 
+.hidden
+    visibility: hidden
+    display: none !important
+
 body
     font-size: 16px
 
@@ -23,7 +27,7 @@ nav
     display: flex
     justify-content: space-between
 
-#home-link
+#home-link, #rescue-request
     display: flex
     cursor: pointer
 
@@ -35,12 +39,22 @@ nav
         font-weight: bold
         font-size: 1.5rem
 
+#rescue-request
+    border: 1px solid red
+    background-color: red
+    padding: 0.5rem
+    border-radius: 50px
+
+    & > p
+        color: white
+        font-size: 1rem
+
 #main-nav
     width: 60%
     display: flex
     justify-content: space-around
 
-#logo
+.logo
     width: 3rem
 
 nav > a, #main-nav > a

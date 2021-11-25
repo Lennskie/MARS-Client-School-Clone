@@ -6,6 +6,11 @@
   font-family: "Adobe Clean";
   src: url("../fonts/AdobeClean-Regular.otf") format("opentype");
 }
+.hidden {
+  visibility: hidden;
+  display: none !important;
+}
+
 body {
   font-size: 16px;
 }
@@ -27,16 +32,27 @@ nav {
   justify-content: space-between;
 }
 
-#home-link {
+#home-link, #rescue-request {
   display: flex;
   cursor: pointer;
 }
-#home-link > p {
+#home-link > p, #rescue-request > p {
   line-height: 100%;
   margin: auto 0;
   font-family: Poppins, sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+#rescue-request {
+  border: 1px solid red;
+  background-color: red;
+  padding: 0.5rem;
+  border-radius: 50px;
+}
+#rescue-request > p {
+  color: white;
+  font-size: 1rem;
 }
 
 #main-nav {
@@ -45,7 +61,7 @@ nav {
   justify-content: space-around;
 }
 
-#logo {
+.logo {
   width: 3rem;
 }
 
