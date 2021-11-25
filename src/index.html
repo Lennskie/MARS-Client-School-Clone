@@ -9,9 +9,13 @@
 <body>
 <header>
     <nav>
-        <div id="home-link">
-            <img id="logo" src="assets/images/ambulance.png" alt="Home">
+        <div id="home-link" class="">
+            <img class="logo" src="assets/images/ambulance.png" alt="Home">
             <p>MARS</p>
+        </div>
+        <div id="rescue-request" class="hidden">
+            <img class="logo" src="assets/images/ambulance.png" alt="Home">
+            <p>Request immediate rescue</p>
         </div>
         <div id="main-nav">
             <a href="locations.html">Locations</a>
@@ -19,14 +23,19 @@
             <a href="subscriptions.html">Subscriptions</a>
             <a href="support.html">Support</a>
         </div>
-        <a id="btn-login" href="#">Login</a>
+        <div class="hidden" id="logged-in">
+            <img class="profile" src="assets/images/profile.png" alt="Profile image">
+            <p>*name*</p>
+        </div>
+        <a class="hidden" id="btn-logout" href="">Logout</a>
+        <a class="" id="btn-login" href="login.html">Login</a>
     </nav>
 </header>
 <main>
     <section id="intro">
         <h1 id="home-title">Just arrived at Mars?</h1>
         <p id="home-intro">We look out for each other by monitoring your health vitals and location, speeding aid for those in need. </p>
-        <a id="subscribe" href="#">Subscribe</a>
+        <a id="subscribe" href="subscriptions.html">Subscribe</a>
     </section>
 </main>
 <script src="assets/js/main.js"></script>

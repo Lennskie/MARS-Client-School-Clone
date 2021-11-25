@@ -6,6 +6,11 @@
   font-family: "Adobe Clean";
   src: url("../fonts/AdobeClean-Regular.otf") format("opentype");
 }
+.hidden {
+  visibility: hidden;
+  display: none !important;
+}
+
 body {
   font-size: 16px;
 }
@@ -27,16 +32,44 @@ nav {
   justify-content: space-between;
 }
 
-#home-link {
+#home-link, #rescue-request {
   display: flex;
   cursor: pointer;
 }
-#home-link > p {
+#home-link > p, #rescue-request > p {
   line-height: 100%;
   margin: auto 0;
   font-family: Poppins, sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+#rescue-request {
+  border: 1px solid red;
+  background-color: red;
+  padding: 0.5rem;
+  border-radius: 50px;
+}
+#rescue-request > p {
+  color: white;
+  font-size: 1rem;
+}
+
+#logged-in {
+  background-color: black;
+  border: 1px black solid;
+  border-radius: 50px 0 0 50px;
+  padding: 0 0.5rem;
+  margin: auto 0;
+  width: 10rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#logged-in p {
+  display: inline;
+  color: white;
+  margin: auto 0;
 }
 
 #main-nav {
@@ -45,8 +78,14 @@ nav {
   justify-content: space-around;
 }
 
-#logo {
+.logo {
   width: 3rem;
+}
+
+.profile {
+  width: 1.5rem;
+  display: inline;
+  padding-right: 0.5rem;
 }
 
 nav > a, #main-nav > a {
@@ -56,7 +95,7 @@ nav > a, #main-nav > a {
   margin: auto 0;
 }
 
-#btn-login {
+#btn-login, #btn-logout {
   border: 1px solid black;
   border-radius: 50px;
   padding: 0.25rem 1rem;
@@ -64,19 +103,23 @@ nav > a, #main-nav > a {
   color: white;
 }
 
+#btn-logout {
+  border-radius: 0 50px 50px 0;
+}
+
 .active-nav {
   text-decoration: underline;
   font-weight: bold;
 }
 
-h1 {
+h1:not(.callPanel h1) {
   font-family: "Adobe Clean Bold", sans-serif;
   text-align: center;
   font-size: 3rem;
   margin-top: 4rem;
 }
 
-p:not(.subscriptions .grid p) {
+p:not(.subscriptions .grid p, .callPanel p) {
   font-family: "Adobe Clean", sans-serif;
   text-align: center;
   margin: 2rem 30% 0 30%;
@@ -142,13 +185,16 @@ p:not(.subscriptions .grid p) {
   text-decoration: none;
   border: 1px solid #F7B500;
   border-radius: 50px;
-  background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
   color: black;
   padding: 0.5rem 1.5rem;
   margin-left: 15rem;
 }
 #subscribe.nav {
   margin-left: 0;
+}
+
+#subscribe, input[type=submit] {
+  background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
 }
 
 /* RESCUERS */
@@ -191,7 +237,7 @@ p:not(.subscriptions .grid p) {
   font-family: Poppins, sans-serif;
   font-size: 1.5rem;
 }
-#faq h3 {
+#faq h3:not(.callPanel h3) {
   font-family: Poppins, sans-serif;
   font-weight: bold;
   font-size: 1rem;
@@ -335,6 +381,126 @@ footer img {
 .mapbox {
   width: 100%;
   height: 50em;
+}
+/* Login page */
+form {
+  background-image: url("../images/login.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12em;
+  padding-top: 20em;
+  width: 100%;
+}
+
+input[id=marsID] {
+  margin-bottom: 0.4em;
+}
+
+input[type=submit] {
+  font-weight: bold;
+}
+
+input {
+  display: block;
+  width: 20em;
+  margin: 0 auto;
+  padding: 0.8em 0.2em 0.8em 0.2em;
+  box-sizing: border-box;
+  border-radius: 0.3em;
+  border-color: lightgray;
+  border-width: 1px;
+}
+
+/* call panel */
+.callPanel {
+  font-family: "Adobe Clean", sans-serif;
+  width: 80%;
+  margin: 1em auto;
+}
+.callPanel h2 {
+  font-size: 1.2em;
+  color: #6D7278;
+}
+.callPanel h1 {
+  margin-top: 0.1em;
+  font-size: 2em;
+  text-align: left;
+}
+.callPanel h3 {
+  font-size: 1.1em;
+}
+.callPanel ul {
+  align-items: center;
+  margin-top: 3em;
+  margin-bottom: 0.3em;
+}
+.callPanel ul li {
+  font-size: 0.9em;
+  color: #7D7D7D;
+  padding: 0.7em 0.8em;
+}
+.callPanel article:last-child {
+  padding-left: 2em;
+}
+.callPanel button:hover {
+  cursor: pointer;
+}
+
+.filter {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 22em;
+  margin-top: 3em;
+  margin-bottom: 4em;
+  padding: 1em 2em;
+  border-radius: 1.3em;
+  background-color: #EFEFEF;
+}
+.filter p {
+  margin-right: 4.5em;
+}
+.filter button {
+  padding: 0.4em 1.5em;
+  border: none;
+  border-radius: 1em;
+  background-color: white;
+}
+
+.callsGrid, .callPanel ul {
+  grid-gap: 0.7em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: min-content;
+  grid-template-areas: ". . . . . .";
+  width: 85%;
+}
+
+.callsGrid div {
+  font-family: Poppins, sans-serif;
+  background-color: #F8F8F8;
+  padding: 1em 0.8em;
+}
+.callsGrid div span {
+  font-weight: bold;
+}
+.callsGrid button {
+  padding: 1em;
+  border: none;
+  border-radius: 2em;
+  background-color: #E5E5E5;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.callsGrid .activeCall, .callsGrid .inactiveCall {
+  padding-right: 3em;
+  background-image: url("../images/call.png");
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 90%;
+}
+.callsGrid .activeCall {
+  background-color: #979797;
 }
 
 /*# sourceMappingURL=style.css.map */
