@@ -10,15 +10,32 @@ function init() {
 function delegateAction(e) {
     e.preventDefault();
 
-    if( e.target.innerText === 'On dispatch') {
+    if(e.target.id === 'filterDispatch') {
+        e.target.classList.add('activeFilter');
+        removeActiveFilters(document.querySelector('#filterStandby'),
+            document.querySelector('#filterNonOperational'))
+
         rescuersGridFilter('Dispatched');
     }
-    else if( e.target.innerText === 'On Standby' ) {
+    else if(e.target.id === 'filterStandby') {
+        e.target.classList.add('activeFilter')
+        removeActiveFilters(document.querySelector('#filterDispatch'),
+            document.querySelector('#filterNonOperational'))
+
         rescuersGridFilter('Standby');
     }
-    else if (e.target.innerText === 'Non-Operational') {
+    else if (e.target.id === 'filterNonOperational') {
+        e.target.classList.add('activeFilter')
+        removeActiveFilters(document.querySelector('#filterDispatch'),
+            document.querySelector('#filterStandby'))
+
         rescuersGridFilter('Repairing');
     }
+}
+
+function removeActiveFilters(id1, id2) {
+    id1.classList.remove('activeFilter');
+    id2.classList.remove('activeFilter');
 }
 
 function rescuersGridFilter(filterOn) {
