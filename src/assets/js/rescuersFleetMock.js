@@ -4,44 +4,44 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadRescuersfleetGrid(rescuersFleetDataMock);
-    document.querySelectorAll('.rescuersfleetPanel .filter button').forEach(el => el.addEventListener('click', delegateAction));
+    document.querySelectorAll('.rescuersfleetPanel .filter button').forEach(el => el.addEventListener('click', changeFilter));
 }
 
-function delegateAction(e) {
+function changeFilter(e) {
     e.preventDefault();
+    let arr = [];
+    let filter;
 
     if(e.target.id === 'filterDispatch') {
         e.target.classList.add('activeFilter');
-        removeActiveFilters(document.querySelector('#filterStandby'),
-            document.querySelector('#filterNonOperational'))
-
-        return rescuersGridFilter('Dispatched');
+        arr.push(document.querySelector('#filterStandby'), document.querySelector('#filterNonOperational'));
+        filter = 'Dispatched';
     }
     else if(e.target.id === 'filterStandby') {
         e.target.classList.add('activeFilter')
-        removeActiveFilters(document.querySelector('#filterDispatch'),
-            document.querySelector('#filterNonOperational'))
-
-        return rescuersGridFilter('Standby');
+        arr.push(document.querySelector('#filterDispatch'), document.querySelector('#filterNonOperational'));
+        filter = 'Standby';
     }
     else if (e.target.id === 'filterNonOperational') {
         e.target.classList.add('activeFilter')
-        removeActiveFilters(document.querySelector('#filterDispatch'),
-            document.querySelector('#filterStandby'))
-
-        return rescuersGridFilter('Repairing');
+        arr.push(document.querySelector('#filterDispatch'), document.querySelector('#filterStandby'));
+        filter = 'Repairing';
     }
+
+    removeActiveFilters(arr);
+    return rescuersGridFilter(filter);
 }
 
-function removeActiveFilters(id1, id2) {
-    id1.classList.remove('activeFilter');
-    id2.classList.remove('activeFilter');
+function removeActiveFilters(array) {
+    for (let i in array) {
+        array[i].classList.remove('activeFilter')
+    }
 }
 
 function rescuersGridFilter(filterOn) {
     let arr = [];
 
-    for (let i = 0; i < rescuersFleetDataMock.length; i++) {
+    for (let i in rescuersFleetDataMock) {
         if(rescuersFleetDataMock[i]['status'] === filterOn) {
             arr.push(rescuersFleetDataMock[i]);
         }

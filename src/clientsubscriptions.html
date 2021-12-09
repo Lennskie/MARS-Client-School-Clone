@@ -9,8 +9,8 @@
 <header>
     <nav>
         <div id="home-link" class="operator-home-link">
-                <img class="logo" src="assets/images/ambulance.png" alt="Home">
-                <p>MARS</p>
+            <img class="logo" src="assets/images/ambulance.png" alt="Home">
+            <p>MARS</p>
         </div>
         <div id="rescue-request" class="hidden">
             <img class="logo" src="assets/images/ambulance.png" alt="Home">
@@ -19,7 +19,7 @@
         <div id="main-nav">
             <a href="#">Locations</a>
             <a href="rescuersfleet.html">Rescuers</a>
-            <a href="clientsubscriptions.html">Subscriptions</a>
+            <a class="active-nav" href="#">Subscriptions</a>
             <a href="#">Support</a>
         </div>
         <div class="hidden" id="logged-in">
@@ -31,31 +31,30 @@
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
     </nav>
 </header>
-<main class="callPanel">
-    <article>
-        <h2>Welcome, Azar Nemanli</h2>
-        <h1>Support Operator</h1>
-        <div class="filter">
-            <p>filter by</p>
-            <button id="filterClients">Clients</button>
-            <button id="filterAmbulances">Ambulances</button>
-        </div>
-    </article>
-    <article>
-        <h3>Inncomming calls</h3>
+<main class="clientSubscriptions">
+    <div class="filter">
+        <form>
+            <label for="searchClient">Search client</label>
+            <input type="text" name="searchClient" id="searchClient">
+            <button type="submit">Search</button>
+        </form>
+     </div>
+    <div>
+        <h3>Client subscriptions</h3>
         <ul>
-            <li>Communication</li>
-            <li>Caller</li>
-            <li>Status</li>
-            <li>Rescue ETA</li>
-            <li>Actions</li>
-            <li>Location </li>
+            <li>MarsID</li>
+            <li>Name/li>
+            <li>Lastname</li>
+            <li>Phone</li>
+            <li>Subscription</li>
+            <li>Sub Status</li>
+            <li>Location Status</li>
+            <li>Vital Status</li>
         </ul>
-        <div class="callsGrid">
+        <div class="clientSubscriptionsGrid">
         </div>
-    </article>
+    </div>
 </main>
-<script src="assets/js/callsMock.js"></script>
-<script src="assets/js/data/callsDataMock.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

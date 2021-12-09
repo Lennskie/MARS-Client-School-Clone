@@ -49,7 +49,7 @@ function delegateFilter(e) {
 function callsGridFilter(filterOn) {
     let arr= [];
 
-    for (let i = 0; i < callsDataMock.length; i++) {
+    for (let i in callsDataMock) {
         if(callsDataMock[i]['type'] === filterOn) {
             arr.push(callsDataMock[i]);
         }
