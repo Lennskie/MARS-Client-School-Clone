@@ -31,31 +31,29 @@
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
     </nav>
 </header>
-<main class="callPanel">
-    <article>
-        <h2>Welcome, Azar Nemanli</h2>
-        <h1>Support Operator</h1>
-        <div class="filter">
-            <p>filter by</p>
-            <button id="filterClients">Clients</button>
-            <button id="filterAmbulances">Ambulances</button>
-        </div>
-    </article>
-    <article>
-        <h3>Inncomming calls</h3>
+<main class="rescuersfleetPanel">
+    <div class="filter">
+        <p>filter by</p>
+        <button id="filterDispatch">On dispatch</button>
+        <button id="filterStandby">On Standby</button>
+        <button id="filterNonOperational">Non-Operational</button>
+    </div>
+    <div>
+        <h3>Rescuers fleet</h3>
         <ul>
-            <li>Communication</li>
-            <li>Caller</li>
+            <li>Vehicle ID</li>
+            <li>Condition</li>
             <li>Status</li>
             <li>Rescue ETA</li>
-            <li>Actions</li>
-            <li>Location </li>
+            <li>Base</li>
+            <li>Actual position</li>
+            <li>Final Destination</li>
         </ul>
-        <div class="callsGrid">
+        <div class="rescuersfleetGrid">
         </div>
-    </article>
+    </div>
 </main>
-<script src="assets/js/callsMock.js"></script>
-<script src="assets/js/data/callsDataMock.js"></script>
+<script src="assets/js/data/rescuersFleetDataMock.js"></script>
+<script src="assets/js/rescuersFleetMock.js"></script>
 </body>
 </html>

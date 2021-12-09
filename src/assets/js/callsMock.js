@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     loadCallsList(callsDataMock);
     document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateAction));
+    document.querySelectorAll('.callPanel .filter button').forEach(el => el.addEventListener('click', delegateFilter));
 }
 
 function delegateAction(e) {
@@ -26,6 +27,35 @@ function pickupCall(e) {
 function endCall(e) {
     e.target.classList = "inactiveCall"
     e.target.innerHTML = 'Accept call...'
+}
+
+function delegateFilter(e) {
+    e.preventDefault();
+
+    if(e.target.id === 'filterClients') {
+        e.target.classList.add('activeFilter');
+        document.querySelector('#filterAmbulances').classList.remove('activeFilter');
+
+        return callsGridFilter('client');
+    }
+    else if(e.target.id === 'filterAmbulances') {
+        e.target.classList.add('activeFilter')
+        document.querySelector('#filterClients').classList.remove('activeFilter');
+
+        return callsGridFilter('ambulance');
+    }
+}
+
+function callsGridFilter(filterOn) {
+    let arr= [];
+
+    for (let i = 0; i < callsDataMock.length; i++) {
+        if(callsDataMock[i]['type'] === filterOn) {
+            arr.push(callsDataMock[i]);
+        }
+    }
+
+    return loadCallsList(arr);
 }
 
 function loadCallsList(data) {

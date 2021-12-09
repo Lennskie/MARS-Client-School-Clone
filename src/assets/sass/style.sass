@@ -97,13 +97,13 @@ nav > a, #main-nav > a
     text-decoration: underline
     font-weight: bold
 
-h1:not(.callPanel h1)
+h1:not(.callPanel h1, .rescuersfleetPanel h1)
     font-family: "Adobe Clean Bold", sans-serif
     text-align: center
     font-size: 3rem
     margin-top: 4rem
 
-p:not(.subscriptions .grid p, .callPanel p)
+p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p)
     font-family: "Adobe Clean", sans-serif
     text-align: center
     margin: 2rem 30% 0 30%
@@ -213,7 +213,7 @@ p:not(.subscriptions .grid p, .callPanel p)
         font-family: Poppins, sans-serif
         font-size: 1.5rem
 
-    h3:not(.callPanel h3)
+    h3:not(.callPanel h3, .rescuersfleetPanel h3)
         font-family: Poppins, sans-serif
         font-weight: bold
         font-size: 1rem
@@ -386,7 +386,7 @@ input
 
 /* call panel */
 
-.callPanel
+.callPanel, .rescuersfleetPanel
     font-family: "Adobe Clean", sans-serif
     width: 80%
     margin: 1em auto
@@ -418,6 +418,12 @@ input
     button:hover
         cursor: pointer
 
+.activeFilter
+    font-weight: bold
+    text-decoration: underline
+
+.rescuersfleetPanel .filter
+    width: 35em
 
 .filter
     align-items: center
@@ -451,7 +457,15 @@ input
     grid-template-areas: ". . . . . ."
     width: 85%
 
-.callsGrid
+.rescuersfleetGrid, .rescuersfleetPanel ul
+    grid-gap: 0.7em
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+    grid-template-rows: min-content
+    grid-template-areas: ". . . . . . ."
+    width: 85%
+
+.callsGrid, .rescuersfleetGrid
 
     div
         font-family: Poppins, sans-serif
@@ -478,3 +492,4 @@ input
 
     .activeCall
         background-color: #979797
+

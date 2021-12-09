@@ -112,14 +112,14 @@ nav > a, #main-nav > a {
   font-weight: bold;
 }
 
-h1:not(.callPanel h1) {
+h1:not(.callPanel h1, .rescuersfleetPanel h1) {
   font-family: "Adobe Clean Bold", sans-serif;
   text-align: center;
   font-size: 3rem;
   margin-top: 4rem;
 }
 
-p:not(.subscriptions .grid p, .callPanel p) {
+p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p) {
   font-family: "Adobe Clean", sans-serif;
   text-align: center;
   margin: 2rem 30% 0 30%;
@@ -237,7 +237,7 @@ p:not(.subscriptions .grid p, .callPanel p) {
   font-family: Poppins, sans-serif;
   font-size: 1.5rem;
 }
-#faq h3:not(.callPanel h3) {
+#faq h3:not(.callPanel h3, .rescuersfleetPanel h3) {
   font-family: Poppins, sans-serif;
   font-weight: bold;
   font-size: 1rem;
@@ -413,38 +413,47 @@ input {
 }
 
 /* call panel */
-.callPanel {
+.callPanel, .rescuersfleetPanel {
   font-family: "Adobe Clean", sans-serif;
   width: 80%;
   margin: 1em auto;
 }
-.callPanel h2 {
+.callPanel h2, .rescuersfleetPanel h2 {
   font-size: 1.2em;
   color: #6D7278;
 }
-.callPanel h1 {
+.callPanel h1, .rescuersfleetPanel h1 {
   margin-top: 0.1em;
   font-size: 2em;
   text-align: left;
 }
-.callPanel h3 {
+.callPanel h3, .rescuersfleetPanel h3 {
   font-size: 1.1em;
 }
-.callPanel ul {
+.callPanel ul, .rescuersfleetPanel ul {
   align-items: center;
   margin-top: 3em;
   margin-bottom: 0.3em;
 }
-.callPanel ul li {
+.callPanel ul li, .rescuersfleetPanel ul li {
   font-size: 0.9em;
   color: #7D7D7D;
   padding: 0.7em 0.8em;
 }
-.callPanel article:last-child {
+.callPanel article:last-child, .rescuersfleetPanel article:last-child {
   padding-left: 2em;
 }
-.callPanel button:hover {
+.callPanel button:hover, .rescuersfleetPanel button:hover {
   cursor: pointer;
+}
+
+.activeFilter {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.rescuersfleetPanel .filter {
+  width: 35em;
 }
 
 .filter {
@@ -477,15 +486,24 @@ input {
   width: 85%;
 }
 
-.callsGrid div {
+.rescuersfleetGrid, .rescuersfleetPanel ul {
+  grid-gap: 0.7em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: min-content;
+  grid-template-areas: ". . . . . . .";
+  width: 85%;
+}
+
+.callsGrid div, .rescuersfleetGrid div {
   font-family: Poppins, sans-serif;
   background-color: #F8F8F8;
   padding: 1em 0.8em;
 }
-.callsGrid div span {
+.callsGrid div span, .rescuersfleetGrid div span {
   font-weight: bold;
 }
-.callsGrid button {
+.callsGrid button, .rescuersfleetGrid button {
   padding: 1em;
   border: none;
   border-radius: 2em;
@@ -493,14 +511,14 @@ input {
   font-weight: bold;
   font-size: 0.9em;
 }
-.callsGrid .activeCall, .callsGrid .inactiveCall {
+.callsGrid .activeCall, .callsGrid .inactiveCall, .rescuersfleetGrid .activeCall, .rescuersfleetGrid .inactiveCall {
   padding-right: 3em;
   background-image: url("../images/call.png");
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: 90%;
 }
-.callsGrid .activeCall {
+.callsGrid .activeCall, .rescuersfleetGrid .activeCall {
   background-color: #979797;
 }
 
