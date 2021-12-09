@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     loadClientSubscriptions(clientSubscriptions);
     document.querySelectorAll('.clientSubscriptions .filter button').forEach(el => el.addEventListener('click', searchFilter));
+    document.querySelectorAll('.clientSubscriptions .filter img').forEach(el => el.addEventListener('click', refreshFilter));
 }
 
 function searchFilter(e) {
@@ -26,6 +27,11 @@ function searchFilter(e) {
     }
 
     return loadClientSubscriptions(arr);
+}
+
+function refreshFilter(e) {
+    e.preventDefault();
+    loadClientSubscriptions(clientSubscriptions)
 }
 
 function loadClientSubscriptions(data) {

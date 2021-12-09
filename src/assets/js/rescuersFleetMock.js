@@ -12,7 +12,12 @@ function changeFilter(e) {
     let arr = [];
     let filter;
 
-    if(e.target.id === 'filterDispatch') {
+    if (e.target.classList.contains('activeFilter')) {
+        arr.push(e.target);
+        removeActiveFilters(arr);
+        return loadRescuersfleetGrid(rescuersFleet);
+    }
+    else if (e.target.id === 'filterDispatch') {
         e.target.classList.add('activeFilter');
         arr.push(document.querySelector('#filterStandby'), document.querySelector('#filterNonOperational'));
         filter = 'Dispatched';
