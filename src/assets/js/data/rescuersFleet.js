@@ -1,4 +1,4 @@
-let rescuersFleetDataMock =[
+let rescuersFleet =[
     {
         "vehicle_id":"AV-001",
         "condition":"Operational",

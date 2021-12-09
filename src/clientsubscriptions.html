@@ -18,8 +18,8 @@
         </div>
         <div id="main-nav">
             <a href="#">Locations</a>
-            <a class="active-nav" href="rescuersfleet.html">Rescuers</a>
-            <a href="clientsubscriptions.html">Subscriptions</a>
+            <a href="rescuersfleet.html">Rescuers</a>
+            <a class="active-nav" href="clientsubscriptions.html">Subscriptions</a>
             <a href="#">Support</a>
         </div>
         <div class="hidden" id="logged-in">
@@ -31,30 +31,32 @@
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
     </nav>
 </header>
-<main class="rescuersfleetPanel">
+<main class="clientSubscriptions">
     <div class="filter">
-        <p>filter by</p>
-        <button id="filterDispatch">On dispatch</button>
-        <button id="filterStandby">On Standby</button>
-        <button id="filterNonOperational">Non-Operational</button>
-    </div>
+        <form>
+            <label for="searchClient">Search client</label>
+            <input type="text" name="searchClient" id="searchClient">
+            <button type="submit">Search</button>
+        </form>
+     </div>
     <div>
-        <h3>Rescuers fleet</h3>
+        <h3>Client subscriptions</h3>
         <ul>
-            <li>Vehicle ID</li>
-            <li>Condition</li>
-            <li>Status</li>
-            <li>Rescue ETA</li>
-            <li>Base</li>
-            <li>Actual position</li>
-            <li>Final Destination</li>
+            <li>MarsID</li>
+            <li>Name</li>
+            <li>Lastname</li>
+            <li>Phone</li>
+            <li>Subscription</li>
+            <li>Sub Status</li>
+            <li>Location Status</li>
+            <li>Vital Status</li>
         </ul>
-        <div class="rescuersfleetGrid">
+        <div class="clientSubscriptionsGrid">
         </div>
     </div>
 </main>
-<script src="assets/js/data/rescuersFleet.js"></script>
-<script src="assets/js/rescuersFleetMock.js"></script>
+<script src="assets/js/data/clientSubscriptions.js"></script>
+<script src="assets/js/clientSubscriptionsMock.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

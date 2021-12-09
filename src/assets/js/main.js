@@ -9,7 +9,7 @@ async function init() {
     api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
 
     // Very small proof of concept.
-    poc();
+    //poc();
 }
 
 async function loadConfig() {
@@ -18,6 +18,10 @@ async function loadConfig() {
 }
 
 function goHome() {
-    window.location.href = "./index.html";
+    if(document.querySelector('#home-link').classList.contains('operator-home-link')) {
+        window.location.href = "./callpanel.html";
+    } else {
+        window.location.href = "./index.html";
+    }
+    window.location.reload();
 }
-
