@@ -7,8 +7,25 @@ function init() {
     document.querySelectorAll('.clientSubscriptions .filter button').forEach(el => el.addEventListener('click', searchFilter));
 }
 
-function searchFilter() {
-    // TODO
+function searchFilter(e) {
+    e.preventDefault();
+    const input = document.querySelector('.clientSubscriptions form input[type="text"]').value
+
+    let arr = [];
+
+    for (let i in clientSubscriptions) {
+        if (clientSubscriptions[i]['name'] === input) {
+            arr.push(clientSubscriptions[i]);
+        } else if (clientSubscriptions[i]['lastname'] === input) {
+            arr.push(clientSubscriptions[i]);
+        } else if (clientSubscriptions[i]['phone'] === input) {
+            arr.push(clientSubscriptions[i])
+        } else if (clientSubscriptions[i]['mars_id'] === input) {
+            arr.push(clientSubscriptions[i])
+        }
+    }
+
+    return loadClientSubscriptions(arr);
 }
 
 function loadClientSubscriptions(data) {
