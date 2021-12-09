@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
     loadCallsList(calls);
-    document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateAction));
+    document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateCall));
     document.querySelectorAll('.callPanel .filter button').forEach(el => el.addEventListener('click', delegateFilter));
 }
 
-function delegateAction(e) {
+function delegateCall(e) {
     e.preventDefault();
 
     if( e.target.classList.contains("activeCall")){
@@ -31,6 +31,11 @@ function endCall(e) {
 
 function delegateFilter(e) {
     e.preventDefault();
+
+    if(e.target.classList.contains('activeFilter')) {
+        e.target.classList.remove('activeFilter');
+        return loadCallsList(calls);
+    }
 
     if(e.target.id === 'filterClients') {
         e.target.classList.add('activeFilter');

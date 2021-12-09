@@ -457,7 +457,7 @@ input:not(.clientSubscriptions input) {
 }
 
 .clientSubscriptions .filter {
-  width: 24em;
+  width: 27em;
 }
 
 .filter {
@@ -546,6 +546,15 @@ input:not(.clientSubscriptions input) {
 
 .clientSubscriptions form input[type=text]:focus {
   outline: none;
+}
+
+.clientSubscriptions .filter img {
+  display: block;
+  width: 2em;
+}
+
+.clientSubscriptions .filter img:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
