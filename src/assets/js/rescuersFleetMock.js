@@ -15,21 +15,21 @@ function delegateAction(e) {
         removeActiveFilters(document.querySelector('#filterStandby'),
             document.querySelector('#filterNonOperational'))
 
-        rescuersGridFilter('Dispatched');
+        return rescuersGridFilter('Dispatched');
     }
     else if(e.target.id === 'filterStandby') {
         e.target.classList.add('activeFilter')
         removeActiveFilters(document.querySelector('#filterDispatch'),
             document.querySelector('#filterNonOperational'))
 
-        rescuersGridFilter('Standby');
+        return rescuersGridFilter('Standby');
     }
     else if (e.target.id === 'filterNonOperational') {
         e.target.classList.add('activeFilter')
         removeActiveFilters(document.querySelector('#filterDispatch'),
             document.querySelector('#filterStandby'))
 
-        rescuersGridFilter('Repairing');
+        return rescuersGridFilter('Repairing');
     }
 }
 
