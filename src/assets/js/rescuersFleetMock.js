@@ -57,7 +57,7 @@ function loadRescuersfleetGrid(data) {
     data.forEach((listitem)=> {
         parent.insertAdjacentHTML('beforeend', `
             <div>
-                <p>${listitem['vehicle_id']}</p>
+                <span><p>${listitem['vehicle_id']}</p></span>
             </div>
             <div>
                 <p>${listitem['condition']}</p>
