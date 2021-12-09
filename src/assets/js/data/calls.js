@@ -1,4 +1,4 @@
-let callsDataMock =[
+let calls =[
     {
         "communication":"-",
         "caller":"AV-001",

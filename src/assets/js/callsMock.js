@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadCallsList(callsDataMock);
+    loadCallsList(calls);
     document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateAction));
     document.querySelectorAll('.callPanel .filter button').forEach(el => el.addEventListener('click', delegateFilter));
 }
@@ -49,9 +49,9 @@ function delegateFilter(e) {
 function callsGridFilter(filterOn) {
     let arr= [];
 
-    for (let i in callsDataMock) {
-        if(callsDataMock[i]['type'] === filterOn) {
-            arr.push(callsDataMock[i]);
+    for (let i in calls) {
+        if(calls[i]['type'] === filterOn) {
+            arr.push(calls[i]);
         }
     }
 

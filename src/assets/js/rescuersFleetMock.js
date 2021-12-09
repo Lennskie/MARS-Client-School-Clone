@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadRescuersfleetGrid(rescuersFleetDataMock);
+    loadRescuersfleetGrid(rescuersFleet);
     document.querySelectorAll('.rescuersfleetPanel .filter button').forEach(el => el.addEventListener('click', changeFilter));
 }
 
@@ -41,9 +41,9 @@ function removeActiveFilters(array) {
 function rescuersGridFilter(filterOn) {
     let arr = [];
 
-    for (let i in rescuersFleetDataMock) {
-        if(rescuersFleetDataMock[i]['status'] === filterOn) {
-            arr.push(rescuersFleetDataMock[i]);
+    for (let i in rescuersFleet) {
+        if(rescuersFleet[i]['status'] === filterOn) {
+            arr.push(rescuersFleet[i]);
         }
     }
 
