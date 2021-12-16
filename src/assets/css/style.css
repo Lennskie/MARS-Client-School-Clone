@@ -77,6 +77,44 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+#main-nav * {
+  box-sizing: border-box;
+  transition: all 0.35s ease;
+}
+#main-nav a {
+  padding: 0.5em 0.8em;
+  margin: 0.2em 0;
+  display: block;
+  color: black;
+  position: relative;
+  text-decoration: none;
+}
+#main-nav a::before, #main-nav a::after {
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  content: "";
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+#main-nav a::before {
+  left: 0;
+  top: 0;
+  border-left: 3px solid red;
+  border-top: 3px solid red;
+  transform: translate(100%, 50%);
+}
+#main-nav a::after {
+  right: 0;
+  bottom: 0;
+  border-right: 3px solid red;
+  border-bottom: 3px solid red;
+  transform: translate(-100%, -50%);
+}
+#main-nav a:hover::before, #main-nav .current a::before, #main-nav a:hover::after, #main-nav .current a::after {
+  transform: translate(0%, 0%);
+  opacity: 1;
+}
 
 .logo {
   width: 3rem;
