@@ -143,39 +143,44 @@ nav > a, #main-nav > a {
 }
 
 #btn-login {
+  text-decoration: none;
+  border: #222222;
+  border-radius: 50px;
   color: black;
-  transition: color 0.25s;
+  padding: 0.5rem 1.5rem;
   position: relative;
-  padding: 10px 10px 10px 10px;
-  font-weight: bold;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
 }
-#btn-login::before, #btn-login::after {
-  border: 0 solid transparent;
-  box-sizing: border-box;
+#btn-login:after {
   content: "";
-  pointer-events: none;
   position: absolute;
-  width: 0;
-  height: 0;
   bottom: 0;
-  right: 0;
-}
-#btn-login::before {
-  border-bottom-width: 4px;
-  border-left-width: 4px;
-}
-#btn-login::after {
-  border-top-width: 4px;
-  border-right-width: 4px;
-}
-#btn-login:hover {
-  color: red;
-}
-#btn-login:hover::before, #btn-login:hover::after {
-  border-color: red;
-  transition: border-color 0s, width 0.25s, height 0.25s;
+  left: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(180deg, #ffeebf 0%, #f7b500 100%);
+  border-radius: 10rem;
+  z-index: -2;
+}
+#btn-login:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+#btn-login:hover {
+  color: #fff;
+}
+#btn-login:hover:before {
+  width: 100%;
 }
 
 #btn-logout {
@@ -256,13 +261,20 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
 }
 
 #subscribe {
-  font-family: "Helvetica Neue", sans-serif;
   text-decoration: none;
-  border: 1px solid #F7B500;
+  border: #222222;
   border-radius: 50px;
   color: black;
   padding: 0.5rem 1.5rem;
+  position: relative;
+  transition: all 0.3s;
+  overflow: hidden;
   margin-left: 15rem;
+  z-index: 1;
+  font-family: Poppins, sans-serif;
+}
+#subscribe:hover {
+  color: #fff;
 }
 #subscribe.nav {
   margin-left: 0;
