@@ -133,12 +133,48 @@ nav > a, #main-nav > a {
   margin: auto 0;
 }
 
-#btn-login, #btn-logout {
+#btn-logout {
   border: 1px solid black;
   border-radius: 50px;
   padding: 0.25rem 1rem;
   background-color: black;
   color: white;
+}
+
+#btn-login {
+  box-shadow: inset 0 0 0 4px black;
+  color: black;
+  transition: color 0.25s;
+  position: relative;
+  padding: 10px 10px 10px 10px;
+}
+#btn-login::before, #btn-login::after {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+#btn-login::before {
+  border-bottom-width: 4px;
+  border-left-width: 4px;
+}
+#btn-login::after {
+  border-top-width: 4px;
+  border-right-width: 4px;
+}
+#btn-login:hover {
+  color: red;
+}
+#btn-login:hover::before, #btn-login:hover::after {
+  border-color: red;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
 }
 
 #btn-logout {
