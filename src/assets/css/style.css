@@ -147,6 +147,7 @@ nav > a, #main-nav > a {
   transition: color 0.25s;
   position: relative;
   padding: 10px 10px 10px 10px;
+  font-weight: bold;
 }
 #btn-login::before, #btn-login::after {
   border: 0 solid transparent;
