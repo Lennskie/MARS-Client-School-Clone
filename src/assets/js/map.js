@@ -97,26 +97,7 @@ function drawMap() {
 }
 
 function mapDrawn() {
-	/*
-	// All logic that requires a map to be present gets delegated here
-	document.querySelector("#addDome").addEventListener("click", addDomeToMapListener);
-	document.querySelector("#addClient").addEventListener("click", addClientToMapListener);
-	document.querySelector("#addVehicle").addEventListener("click", addVehicleToMapListener);
-	document.querySelector("#clearActions").addEventListener("click", clearActions);
-	*/
-}
-
-function addClientToMapListener(e) {
-	addClientToMap(document.querySelector("#criticality").value, generateRandomLocation(), clients.size + 1);
-	generateClientsTable();
-}
-
-function addDomeToMapListener(e) {
-	addDomeToMap(generateRandomLocation(), domes.size + 1);
-}
-
-function addVehicleToMapListener(e) {
-	addVehicleToMap(generateRandomLocation(), vehicles.size + 1);
+	// Here comes the logic that requires a map to be present
 }
 
 function addDomeToMap(location, domeId) {
@@ -142,13 +123,6 @@ function addVehicleToMap(location, vehicleId) {
 	vehicles.set(vehicleId, vehicle);
 }
 
-/**
- * Adds a client blip to the map.
- * Currently uses {@link generateRandomLocation()} to place the client blip
- * This should be replaced with actual coördinate parameters further down the road.
- * 
- * @param {String}vitalStatus The vital status of the client ('critical', 'medium', 'healthy')
- */
 function addClientToMap(vitalStatus, location, clientId) {
 	let clientIcon;
 
@@ -190,10 +164,6 @@ function routeTo(clientId) {
 	drawVehicleClientRoute();
 }
 
-/**
- * Only draws if both {@link fromvehicle fromvehicle} and {@link toclient toclient} global variables are set
- * @returns {Void} Nothing
- */
 function drawVehicleClientRoute() {
 	if (fromvehicle !== undefined && toclient !== undefined && fromvehicle !== null && toclient !== null) {
 
@@ -242,11 +212,6 @@ function drawClientDomeRoute() {
 
 }
 
-/**
- * Finds the nearest dome given a client
- * @param {Number} clientId The id of the client to make calculations from
- * @returns {L.marker} Dome
- */
 function findNearestDome(clientId) {
 
 	const client = clients.get(clientId);
