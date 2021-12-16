@@ -232,7 +232,11 @@ function findNearestVehicle(clientId) {
 	let distanceVehicleMap = new Map();
 
 	vehicles.forEach(vehicle => {
-		distanceVehicleMap.set(computeDistance(client, vehicle), vehicle);
+
+		if (vehicle.isOccupied !== true) {
+			distanceVehicleMap.set(computeDistance(client, vehicle), vehicle);
+		}
+
 	});
 
 	let shortestDistance = Math.min(...distanceVehicleMap.keys());
@@ -316,4 +320,21 @@ function generateClientsTable() {
 			routeTo(clientId);
 		})
 	})
+}
+
+
+// Can be removed once this data is fetched from the server
+function generateRandomLocation() {
+	// All magical constants in this code are present
+	// To limit the generated coordinates to the rough area of the standard map viewport.
+    let x = Math.random() * (9 - 0) + 0;
+    let y = Math.random() * (59 - 0) + 0;
+
+    x = x * 0.002
+    y = y * 0.001
+
+    const xpos = 29.62295 + x;
+    const ypos = 35.40 + y;
+
+    return [xpos, ypos]
 }
