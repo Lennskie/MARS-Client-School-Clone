@@ -236,28 +236,46 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
     text-align: left
     margin: 0
 
+    //text-decoration: none
+    //    display: inline-block
+    //    overflow-x: hidden
+    //    position: relative
+    //    border: #222222
+    //    border-radius: 50px
+    //    color: black
+    //    padding: 0.5rem 1.5rem
+    //    background: linear-gradient(180deg, rgba(255,231,165,1) 0%, rgba(247,181,0,1) 100%)
+
 #subscribe
-    text-decoration: none
-    border: #222222
-    border-radius: 50px
-    color: black
-    padding: 0.5rem 1.5rem
-    position: relative
-    transition: all .3s
-    overflow: hidden
-    margin-left: 15rem
-    z-index: 1
+    font-size: 20px
+    padding: 0.5rem 1rem
     font-family: Poppins, sans-serif
-    &:hover
-        color: #fff
-    &.nav
-        margin-left: 0
-
-#subscribe, input[type=submit]
+    border-radius: 50px
+    margin-left: 15rem
+    display: inline-block
+    position: relative
+    overflow: hidden
+    text-decoration: none
+    color: black
+    text-align: center
     background: linear-gradient(180deg, rgba(255,231,165,1) 0%, rgba(247,181,0,1) 100%)
-
-/* RESCUERS */
-
+    &:after
+        content: ''
+        width: 20%
+        height: 100%
+        position: absolute
+        left: auto
+        top: 0
+        bottom: 0
+        right: -20%
+        background-image: linear-gradient(135deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0))
+    &:hover
+        &:after
+            transition: all .4s ease-out
+            right: 100%
+nav>#subscribe
+    margin-left: 0 !important
+    font-size: 16px
 #steps
     margin-top: 3rem
     display: flex
