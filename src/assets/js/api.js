@@ -1,4 +1,4 @@
-function poc() {
+/* function poc() {
     const messageBody = {
         "quote": "some quote"
     };
@@ -59,3 +59,4 @@ function logError(error) {
 function call(request, successHandler, errorHandler) {
    fetch(request).then(successHandler).catch(errorHandler);
 }
+ */

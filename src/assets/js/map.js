@@ -8,23 +8,24 @@ let mymap;
 let fromvehicle;
 let toclient;
 
+const connectionStyles = {
+	vehicleClient: {
+		color: 'red',
+		weight: 3,
+		opacity: 1
+	},
+	clientDome: {
+		color: 'blue',
+		weight: 3,
+		opacity: 1
+	}
+}
+
 // Global variable to work with drawn vehicle-client routes
 let vehicleClientConnections = new Map();
 
-let vehicleClientConnectionStyle = {
-	color: 'red',
-	weight: 3,
-	opacity: 1
-};
-
 // Global variable to work with drawn vehicle-dome routes
 let clientDomeConnections = new Map();
-
-let clientDomeConnectionStyle = {
-	color: 'blue',
-	weight: 3,
-	opacity: 1
-};
 
 // Global variable to work with displayed domes
 let domes = new Map();
@@ -36,40 +37,45 @@ let clients = new Map();
 let vehicles = new Map();
 
 // Icons for leaflet
-const surfaceColonyIcon = new L.Icon({
-	iconUrl: 'assets/images/planet.png',
-	iconSize: [128, 128],
-	iconAnchor: [64, 64],
-	popupAnchor: [0, -64],
-});
 
-const criticalClientIcon = new L.Icon({
-	iconUrl: 'assets/images/reddot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const mediumClientIcon = new L.Icon({
-	iconUrl: 'assets/images/orangedot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const healthyClientIcon = new L.Icon({
-	iconUrl: 'assets/images/greendot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const vehicleIcon = new L.Icon({
-	iconUrl: 'assets/images/vehicle.png',
-	iconSize: [64, 64],
-	iconAnchor: [32, 32],
-	popupAnchor: [0, -32]
-});
+const icons = {
+	// "Dome"
+	surfaceColony: new L.Icon({
+	   iconUrl: 'assets/images/planet.png',
+	   iconSize: [128, 128],
+	   iconAnchor: [64, 64],
+	   popupAnchor: [0, -64],
+	}),
+	client: {
+		// red
+	   critical: new L.Icon({
+		  iconUrl: 'assets/images/reddot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   }),
+	   // orange
+	   medium: new L.Icon({
+		  iconUrl: 'assets/images/orangedot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   }),
+	   // green
+	   healthy: new L.Icon({
+		  iconUrl: 'assets/images/greendot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   })
+	},
+	vehicle: new L.Icon({
+	   iconUrl: 'assets/images/vehicle.png',
+	   iconSize: [64, 64],
+	   iconAnchor: [32, 32],
+	   popupAnchor: [0, -32]
+	})
+ };
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -103,7 +109,7 @@ function mapDrawn() {
 function addDomeToMap(location, domeId) {
 
 	let dome = L.marker([location[0], location[1]], {
-		icon: surfaceColonyIcon,
+		icon: icons.surfaceColony,
 		opacity: 0.5
 	})
 		.addTo(mymap);
@@ -114,7 +120,7 @@ function addDomeToMap(location, domeId) {
 
 function addVehicleToMap(location, vehicleId) {
 
-	let vehicle = L.marker([location[0], location[1]], { icon: vehicleIcon })
+	let vehicle = L.marker([location[0], location[1]], { icon: icons.vehicle })
 		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`)
 		.addTo(mymap);
 
@@ -124,24 +130,8 @@ function addVehicleToMap(location, vehicleId) {
 }
 
 function addClientToMap(vitalStatus, location, clientId) {
-	let clientIcon;
 
-	switch (vitalStatus) {
-		case 'critical':
-			clientIcon = criticalClientIcon;
-			break;
-
-		case 'medium':
-			clientIcon = mediumClientIcon;
-			break;
-
-		case 'healthy':
-			clientIcon = healthyClientIcon;
-			break;
-
-		default:
-			clientIcon = healthyClientIcon;
-	}
+	let clientIcon = icons.client[vitalStatus] || icons.client['healthy'];
 
 	let client = L.marker([location[0], location[1]], { icon: clientIcon })
 		.bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`)
@@ -169,9 +159,6 @@ function drawVehicleClientRoute() {
 
 		const id = fromvehicle;
 
-		console.log(id);
-		console.log(fromvehicle);
-
 		var pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
 
 		// Clients and Vehicles that are in an active response should no longer be
@@ -188,7 +175,7 @@ function drawVehicleClientRoute() {
 
 		client.isBeingTransported = true;
 
-		let clientVehicleConnection = new L.polyline(pointList, vehicleClientConnectionStyle);
+		let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
 
 		clientVehicleConnection.addTo(mymap);
 		vehicleClientConnections.set(id, clientVehicleConnection);
@@ -205,7 +192,7 @@ function drawClientDomeRoute() {
 
 	var pointList = [clients.get(toclient)._latlng, destination._latlng];
 
-	let clientDomeConnection = new L.polyline(pointList, clientDomeConnectionStyle);
+	let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
 
 	clientDomeConnection.addTo(mymap);
 	clientDomeConnections.set(toclient, clientDomeConnection);
@@ -320,16 +307,10 @@ function generateClientsTable() {
 
 		actionCell.appendChild(actionButton);
 
-		console.log(vehicles);
-
 
 		document.querySelector(`button[data-client-id="${clientId}"]`).addEventListener("click", function () {
 			const nearestVehicle = findNearestVehicle(clientId);
 			let nearestVehicleId = Array.from(vehicles.keys()).find(key => vehicles.get(key)===nearestVehicle);
-			
-
-			console.log(nearestVehicleId);
-			console.log(clientId);
 
 			routeFrom(nearestVehicleId);
 			routeTo(clientId);
