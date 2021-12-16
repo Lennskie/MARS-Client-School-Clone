@@ -104,6 +104,7 @@ function drawMap() {
 
 function mapDrawn() {
 	// Here comes the logic that requires a map to be present
+	// This would be for example getting the eventbus and listeners started
 }
 
 function addDomeToMap(location, domeId) {
@@ -202,40 +203,39 @@ function drawClientDomeRoute() {
 function findNearestDome(clientId) {
 
 	const client = clients.get(clientId);
-	let xclient = client._latlng.lat;
-	let yclient = client._latlng.lng;
 
 	let distanceDomeMap = new Map();
 
 	domes.forEach(dome => {
-		let xdome = dome._latlng.lat;
-		let ydome = dome._latlng.lng;
-
-		let distance = Math.sqrt(Math.pow((xclient-xdome), 2) + Math.pow((yclient-ydome), 2));
-		distanceDomeMap.set(distance, dome);
+		distanceDomeMap.set(computeDistance(client, dome), dome);
 	});
 
-	let shortestDistance = Array.from(distanceDomeMap.keys()).sort()[0];
+	let shortestDistance = Math.min(...distanceDomeMap.keys());
 	return (distanceDomeMap.get(shortestDistance));
+}
+
+function computeDistance(firstMapObject, secondMapObject) {
+
+	let xa = firstMapObject._latlng.lat;
+	let ya = firstMapObject._latlng.lng;
+
+	let xb = secondMapObject._latlng.lat;
+	let yb = secondMapObject._latlng.lng;
+
+	return Math.sqrt(Math.pow((xa-xb), 2) + Math.pow((ya-yb), 2));
 }
 
 function findNearestVehicle(clientId) {
 
 	const client = clients.get(clientId);
-	let xclient = client._latlng.lat;
-	let yclient = client._latlng.lng;
 
 	let distanceVehicleMap = new Map();
 
 	vehicles.forEach(vehicle => {
-		let xvehicle = vehicle._latlng.lat;
-		let yvehicle = vehicle._latlng.lng;
-
-		let distance = Math.sqrt(Math.pow((xclient-xvehicle), 2) + Math.pow((yclient-yvehicle), 2));
-		distanceVehicleMap.set(distance, vehicle);
+		distanceVehicleMap.set(computeDistance(client, vehicle), vehicle);
 	});
 
-	let shortestDistance = Array.from(distanceVehicleMap.keys()).sort()[0];
+	let shortestDistance = Math.min(...distanceVehicleMap.keys());
 	return (distanceVehicleMap.get(shortestDistance));
 }
 
