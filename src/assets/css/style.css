@@ -341,26 +341,56 @@ nav > #subscribe {
   background-color: #FFADAD;
 }
 .subscriptions table tr td:nth-child(2):not(tfoot tr td) {
-  background-color: #FFDAC7;
+  background-color: darkgray;
 }
 .subscriptions table tr td:nth-child(3):not(tfoot tr td) {
-  background-color: #FFEFBC;
+  background-color: darkgoldenrod;
 }
 .subscriptions table tr td:nth-child(4):not(tfoot tr td) {
-  background-color: #FFFEB7;
+  background-color: #6d92d6;
 }
-.subscriptions table button {
-  text-decoration: none;
-  background-color: #E93B81;
-  color: white;
+
+#silver-sub {
+  background: linear-gradient(180deg, #a1a2a3 0%, #d2ccc4 100%);
+}
+
+#gold-sub {
+  background: linear-gradient(180deg, #bf953f, #fcf6ba);
+}
+
+#platinum-sub {
+  background: linear-gradient(180deg, #6d92d6 0%, white 100%);
+}
+
+.btn-sub {
+  padding: 0.5rem;
   border: none;
-  padding: 0.5em;
-  border-radius: 1em;
+  font-family: Poppins, sans-serif;
+  border-radius: 50px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  text-align: center;
 }
-.subscriptions table button:hover {
+.btn-sub:after {
+  content: "";
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: auto;
+  top: 0;
+  bottom: 0;
+  right: -20%;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+.btn-sub:hover:after {
+  transition: all 0.4s ease-out;
+  right: 100%;
   cursor: pointer;
 }
-.subscriptions table #costs {
+.btn-sub #costs {
   background: none;
   text-align: right;
 }
