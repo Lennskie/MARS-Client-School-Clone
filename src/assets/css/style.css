@@ -385,7 +385,7 @@ nav > #subscribe {
 }
 
 #platinum-sub {
-  background-color: #6d92d6;
+  background: linear-gradient(180deg, #6d92d6 0%, white 100%);
 }
 
 .btn-sub {
