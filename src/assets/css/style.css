@@ -367,13 +367,13 @@ nav > #subscribe {
   background-color: #FFADAD;
 }
 .subscriptions table tr td:nth-child(2):not(tfoot tr td) {
-  background-color: #FFDAC7;
+  background-color: darkgray;
 }
 .subscriptions table tr td:nth-child(3):not(tfoot tr td) {
-  background-color: #FFEFBC;
+  background-color: darkgoldenrod;
 }
 .subscriptions table tr td:nth-child(4):not(tfoot tr td) {
-  background-color: #FFFEB7;
+  background-color: #6d92d6;
 }
 
 #silver-sub {
@@ -385,7 +385,7 @@ nav > #subscribe {
 }
 
 #platinum-sub {
-  background: linear-gradient(180deg, #7d7d7a 0%, #a1a2a3 100%);
+  background-color: #6d92d6;
 }
 
 .btn-sub {
