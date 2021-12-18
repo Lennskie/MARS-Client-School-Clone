@@ -30,7 +30,7 @@ hr {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 #home-link, #rescue-request, #home-link-operator {
@@ -74,9 +74,9 @@ nav {
 }
 
 #main-nav {
-  width: 60%;
+  width: 70%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 #main-nav * {
   box-sizing: border-box;
@@ -142,47 +142,6 @@ nav > a, #main-nav > a {
   color: white;
 }
 
-#btn-login {
-  text-decoration: none;
-  border: #222222;
-  border-radius: 50px;
-  color: black;
-  padding: 0.5rem 1.5rem;
-  position: relative;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-}
-#btn-login:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #ffeebf 0%, #f7b500 100%);
-  border-radius: 10rem;
-  z-index: -2;
-}
-#btn-login:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
-  transition: all 0.3s;
-  border-radius: 10rem;
-  z-index: -1;
-}
-#btn-login:hover {
-  color: #fff;
-}
-#btn-login:hover:before {
-  width: 100%;
-}
-
 #btn-logout {
   border-radius: 0 50px 50px 0;
 }
@@ -205,6 +164,20 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem 30% 0 30%;
 }
 
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 10px lightcoral;
+  }
+}
+nav > .alert > #alert-text {
+  font-size: 28px;
+}
+
+nav > .alert {
+  margin-top: 0;
+  padding: 0.5rem 1.5rem;
+}
+
 .alert {
   border: 1px red solid;
   background-color: red;
@@ -214,6 +187,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem auto 0 auto;
   display: flex;
   justify-content: space-evenly;
+  animation: pulse 1s infinite;
 }
 .alert > #alert-text {
   font-family: "Adobe Clean Bold", sans-serif;
@@ -261,7 +235,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
 }
 
 #subscribe {
-  font-size: 20px;
+  font-size: 30px;
   padding: 0.5rem 1rem;
   font-family: Poppins, sans-serif;
   border-radius: 50px;
@@ -291,7 +265,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
 }
 
 nav > #subscribe {
-  margin-left: 0 !important;
+  margin-left: 3rem !important;
   font-size: 16px;
 }
 
