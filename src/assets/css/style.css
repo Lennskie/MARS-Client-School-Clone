@@ -551,9 +551,6 @@ input:not(.clientSubscriptions input) {
   color: #7D7D7D;
   padding: 0.7em 0.8em;
 }
-.callPanel article:last-child, .rescuersfleetPanel article:last-child, .clientSubscriptions article:last-child {
-  padding-left: 2em;
-}
 .callPanel button:hover, .rescuersfleetPanel button:hover, .clientSubscriptions button:hover {
   cursor: pointer;
   border-color: transparent;
@@ -668,16 +665,17 @@ input:not(.clientSubscriptions input) {
 }
 .callsGrid .activeCall, .callsGrid .inactiveCall, .rescuersfleetGrid .activeCall, .rescuersfleetGrid .inactiveCall, .clientSubscriptionsGrid .activeCall, .clientSubscriptionsGrid .inactiveCall {
   padding-right: 3em;
-  background-image: url("../images/call.png");
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: 90%;
 }
 .callsGrid .activeCall, .rescuersfleetGrid .activeCall, .clientSubscriptionsGrid .activeCall {
   background-color: lightcoral;
+  background-image: url("../images/call.png");
 }
 .callsGrid .inactiveCall, .rescuersfleetGrid .inactiveCall, .clientSubscriptionsGrid .inactiveCall {
   background-color: #D2EA9B;
+  background-image: url("../images/pick_up.png");
 }
 
 /* Search client form */
