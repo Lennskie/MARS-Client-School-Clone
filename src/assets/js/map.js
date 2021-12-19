@@ -8,23 +8,24 @@ let mymap;
 let fromvehicle;
 let toclient;
 
+const connectionStyles = {
+	vehicleClient: {
+		color: 'red',
+		weight: 3,
+		opacity: 1
+	},
+	clientDome: {
+		color: 'blue',
+		weight: 3,
+		opacity: 1
+	}
+}
+
 // Global variable to work with drawn vehicle-client routes
 let vehicleClientConnections = new Map();
 
-let vehicleClientConnectionStyle = {
-	color: 'red',
-	weight: 3,
-	opacity: 1
-};
-
 // Global variable to work with drawn vehicle-dome routes
 let clientDomeConnections = new Map();
-
-let clientDomeConnectionStyle = {
-	color: 'blue',
-	weight: 3,
-	opacity: 1
-};
 
 // Global variable to work with displayed domes
 let domes = new Map();
@@ -36,40 +37,45 @@ let clients = new Map();
 let vehicles = new Map();
 
 // Icons for leaflet
-const surfaceColonyIcon = new L.Icon({
-	iconUrl: 'assets/images/planet.png',
-	iconSize: [128, 128],
-	iconAnchor: [64, 64],
-	popupAnchor: [0, -64],
-});
 
-const criticalClientIcon = new L.Icon({
-	iconUrl: 'assets/images/reddot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const mediumClientIcon = new L.Icon({
-	iconUrl: 'assets/images/orangedot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const healthyClientIcon = new L.Icon({
-	iconUrl: 'assets/images/greendot.png',
-	iconSize: [16, 16],
-	iconAnchor: [8, 8],
-	popupAnchor: [0, -8]
-});
-
-const vehicleIcon = new L.Icon({
-	iconUrl: 'assets/images/vehicle.png',
-	iconSize: [64, 64],
-	iconAnchor: [32, 32],
-	popupAnchor: [0, -32]
-});
+const icons = {
+	// "Dome"
+	surfaceColony: new L.Icon({
+	   iconUrl: 'assets/images/planet.png',
+	   iconSize: [128, 128],
+	   iconAnchor: [64, 64],
+	   popupAnchor: [0, -64],
+	}),
+	client: {
+		// red
+	   critical: new L.Icon({
+		  iconUrl: 'assets/images/reddot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   }),
+	   // orange
+	   medium: new L.Icon({
+		  iconUrl: 'assets/images/orangedot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   }),
+	   // green
+	   healthy: new L.Icon({
+		  iconUrl: 'assets/images/greendot.png',
+		  iconSize: [16, 16],
+		  iconAnchor: [8, 8],
+		  popupAnchor: [0, -8]
+	   })
+	},
+	vehicle: new L.Icon({
+	   iconUrl: 'assets/images/vehicle.png',
+	   iconSize: [64, 64],
+	   iconAnchor: [32, 32],
+	   popupAnchor: [0, -32]
+	})
+ };
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -97,32 +103,14 @@ function drawMap() {
 }
 
 function mapDrawn() {
-	/*
-	// All logic that requires a map to be present gets delegated here
-	document.querySelector("#addDome").addEventListener("click", addDomeToMapListener);
-	document.querySelector("#addClient").addEventListener("click", addClientToMapListener);
-	document.querySelector("#addVehicle").addEventListener("click", addVehicleToMapListener);
-	document.querySelector("#clearActions").addEventListener("click", clearActions);
-	*/
-}
-
-function addClientToMapListener(e) {
-	addClientToMap(document.querySelector("#criticality").value, generateRandomLocation(), clients.size + 1);
-	generateClientsTable();
-}
-
-function addDomeToMapListener(e) {
-	addDomeToMap(generateRandomLocation(), domes.size + 1);
-}
-
-function addVehicleToMapListener(e) {
-	addVehicleToMap(generateRandomLocation(), vehicles.size + 1);
+	// Here comes the logic that requires a map to be present
+	// This would be for example getting the eventbus and listeners started
 }
 
 function addDomeToMap(location, domeId) {
 
 	let dome = L.marker([location[0], location[1]], {
-		icon: surfaceColonyIcon,
+		icon: icons.surfaceColony,
 		opacity: 0.5
 	})
 		.addTo(mymap);
@@ -133,7 +121,7 @@ function addDomeToMap(location, domeId) {
 
 function addVehicleToMap(location, vehicleId) {
 
-	let vehicle = L.marker([location[0], location[1]], { icon: vehicleIcon })
+	let vehicle = L.marker([location[0], location[1]], { icon: icons.vehicle })
 		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`)
 		.addTo(mymap);
 
@@ -142,32 +130,9 @@ function addVehicleToMap(location, vehicleId) {
 	vehicles.set(vehicleId, vehicle);
 }
 
-/**
- * Adds a client blip to the map.
- * Currently uses {@link generateRandomLocation()} to place the client blip
- * This should be replaced with actual coördinate parameters further down the road.
- * 
- * @param {String}vitalStatus The vital status of the client ('critical', 'medium', 'healthy')
- */
 function addClientToMap(vitalStatus, location, clientId) {
-	let clientIcon;
 
-	switch (vitalStatus) {
-		case 'critical':
-			clientIcon = criticalClientIcon;
-			break;
-
-		case 'medium':
-			clientIcon = mediumClientIcon;
-			break;
-
-		case 'healthy':
-			clientIcon = healthyClientIcon;
-			break;
-
-		default:
-			clientIcon = healthyClientIcon;
-	}
+	let clientIcon = icons.client[vitalStatus] || icons.client['healthy'];
 
 	let client = L.marker([location[0], location[1]], { icon: clientIcon })
 		.bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`)
@@ -190,17 +155,10 @@ function routeTo(clientId) {
 	drawVehicleClientRoute();
 }
 
-/**
- * Only draws if both {@link fromvehicle fromvehicle} and {@link toclient toclient} global variables are set
- * @returns {Void} Nothing
- */
 function drawVehicleClientRoute() {
 	if (fromvehicle !== undefined && toclient !== undefined && fromvehicle !== null && toclient !== null) {
 
 		const id = fromvehicle;
-
-		console.log(id);
-		console.log(fromvehicle);
 
 		var pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
 
@@ -218,7 +176,7 @@ function drawVehicleClientRoute() {
 
 		client.isBeingTransported = true;
 
-		let clientVehicleConnection = new L.polyline(pointList, vehicleClientConnectionStyle);
+		let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
 
 		clientVehicleConnection.addTo(mymap);
 		vehicleClientConnections.set(id, clientVehicleConnection);
@@ -235,55 +193,53 @@ function drawClientDomeRoute() {
 
 	var pointList = [clients.get(toclient)._latlng, destination._latlng];
 
-	let clientDomeConnection = new L.polyline(pointList, clientDomeConnectionStyle);
+	let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
 
 	clientDomeConnection.addTo(mymap);
 	clientDomeConnections.set(toclient, clientDomeConnection);
 
 }
 
-/**
- * Finds the nearest dome given a client
- * @param {Number} clientId The id of the client to make calculations from
- * @returns {L.marker} Dome
- */
 function findNearestDome(clientId) {
 
 	const client = clients.get(clientId);
-	let xclient = client._latlng.lat;
-	let yclient = client._latlng.lng;
 
 	let distanceDomeMap = new Map();
 
 	domes.forEach(dome => {
-		let xdome = dome._latlng.lat;
-		let ydome = dome._latlng.lng;
-
-		let distance = Math.sqrt(Math.pow((xclient-xdome), 2) + Math.pow((yclient-ydome), 2));
-		distanceDomeMap.set(distance, dome);
+		distanceDomeMap.set(computeDistance(client, dome), dome);
 	});
 
-	let shortestDistance = Array.from(distanceDomeMap.keys()).sort()[0];
+	let shortestDistance = Math.min(...distanceDomeMap.keys());
 	return (distanceDomeMap.get(shortestDistance));
+}
+
+function computeDistance(firstMapObject, secondMapObject) {
+
+	let xa = firstMapObject._latlng.lat;
+	let ya = firstMapObject._latlng.lng;
+
+	let xb = secondMapObject._latlng.lat;
+	let yb = secondMapObject._latlng.lng;
+
+	return Math.sqrt(Math.pow((xa-xb), 2) + Math.pow((ya-yb), 2));
 }
 
 function findNearestVehicle(clientId) {
 
 	const client = clients.get(clientId);
-	let xclient = client._latlng.lat;
-	let yclient = client._latlng.lng;
 
 	let distanceVehicleMap = new Map();
 
 	vehicles.forEach(vehicle => {
-		let xvehicle = vehicle._latlng.lat;
-		let yvehicle = vehicle._latlng.lng;
 
-		let distance = Math.sqrt(Math.pow((xclient-xvehicle), 2) + Math.pow((yclient-yvehicle), 2));
-		distanceVehicleMap.set(distance, vehicle);
+		if (vehicle.isOccupied !== true) {
+			distanceVehicleMap.set(computeDistance(client, vehicle), vehicle);
+		}
+
 	});
 
-	let shortestDistance = Array.from(distanceVehicleMap.keys()).sort()[0];
+	let shortestDistance = Math.min(...distanceVehicleMap.keys());
 	return (distanceVehicleMap.get(shortestDistance));
 }
 
@@ -355,19 +311,30 @@ function generateClientsTable() {
 
 		actionCell.appendChild(actionButton);
 
-		console.log(vehicles);
-
 
 		document.querySelector(`button[data-client-id="${clientId}"]`).addEventListener("click", function () {
 			const nearestVehicle = findNearestVehicle(clientId);
 			let nearestVehicleId = Array.from(vehicles.keys()).find(key => vehicles.get(key)===nearestVehicle);
-			
-
-			console.log(nearestVehicleId);
-			console.log(clientId);
 
 			routeFrom(nearestVehicleId);
 			routeTo(clientId);
 		})
 	})
+}
+
+
+// Can be removed once this data is fetched from the server
+function generateRandomLocation() {
+	// All magical constants in this code are present
+	// To limit the generated coordinates to the rough area of the standard map viewport.
+    let x = Math.random() * (9 - 0) + 0;
+    let y = Math.random() * (59 - 0) + 0;
+
+    x = x * 0.002
+    y = y * 0.001
+
+    const xpos = 29.62295 + x;
+    const ypos = 35.40 + y;
+
+    return [xpos, ypos]
 }
