@@ -556,11 +556,13 @@ input:not(.clientSubscriptions input) {
 }
 .callPanel button:hover, .rescuersfleetPanel button:hover, .clientSubscriptions button:hover {
   cursor: pointer;
+  border-color: transparent;
 }
 
 .activeFilter {
-  font-weight: bold;
-  text-decoration: underline;
+  color: red !important;
+  box-shadow: 0 0 0 2PX lightcoral !important;
+  border-color: transparent;
 }
 
 .rescuersfleetPanel .filter {
@@ -587,9 +589,40 @@ input:not(.clientSubscriptions input) {
 }
 .filter button {
   padding: 0.4em 1.5em;
-  border: none;
-  border-radius: 1em;
-  background-color: white;
+  color: black;
+  border-color: transparent;
+  box-shadow: inset 0 0 0 2px black;
+  color: black;
+  transition: color 0.25s;
+  position: relative;
+}
+.filter button::before, .filter button::after {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+.filter button::before {
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+.filter button::after {
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+.filter button:hover {
+  color: red;
+}
+.filter button:hover::before, .filter button:hover::after {
+  border-color: red;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
 }
 
 /* ======================== */
@@ -641,7 +674,10 @@ input:not(.clientSubscriptions input) {
   background-position-x: 90%;
 }
 .callsGrid .activeCall, .rescuersfleetGrid .activeCall, .clientSubscriptionsGrid .activeCall {
-  background-color: #979797;
+  background-color: lightcoral;
+}
+.callsGrid .inactiveCall, .rescuersfleetGrid .inactiveCall, .clientSubscriptionsGrid .inactiveCall {
+  background-color: #D2EA9B;
 }
 
 /* Search client form */
