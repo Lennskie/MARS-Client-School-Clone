@@ -364,11 +364,11 @@ nav > #subscribe {
 }
 
 #silver-sub {
-  background: linear-gradient(180deg, #a1a2a3 0%, #d2ccc4 100%);
+  background: linear-gradient(180deg, #a1a2a3 0%, white 100%);
 }
 
 #gold-sub {
-  background: linear-gradient(180deg, #bf953f, #fcf6ba);
+  background: linear-gradient(180deg, #bf953f 0%, #fcffff 100%);
 }
 
 #platinum-sub {
