@@ -32,14 +32,22 @@ nav
     display: flex
     cursor: pointer
 
-
     & > p
         line-height: 100%
         margin: auto 0
         font-family: Poppins, sans-serif
         font-weight: bold
         font-size: 1.5rem
-
+#home-link
+    -webkit-filter: grayscale(50%)
+    filter: grayscale(50%)
+    -webkit-transition: all .2s
+    transition: all .2s
+    &:hover
+        filter: grayscale(0)
+        -webkit-filter: grayscale(0)
+        transform: scale(1.1)
+        -webkit-transform: scale(1.1)
 #rescue-request
     border: 1px solid red
     background-color: red
@@ -74,6 +82,7 @@ nav
     *
         box-sizing: border-box
         transition: all 0.35s ease
+
 
     a
         padding: 0.5em 0.8em

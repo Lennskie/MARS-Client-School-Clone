@@ -45,6 +45,19 @@ nav {
   font-size: 1.5rem;
 }
 
+#home-link {
+  -webkit-filter: grayscale(50%);
+  filter: grayscale(50%);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+#home-link:hover {
+  filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
+
 #rescue-request {
   border: 1px solid red;
   background-color: red;
