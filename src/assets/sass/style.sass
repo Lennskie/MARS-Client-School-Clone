@@ -13,6 +13,7 @@
 body
     font-size: 16px
     min-width: min-content
+    animation: .2s ease-out 0s 1 slideFromTop
 
 header
     padding: 1rem 10rem
@@ -27,6 +28,7 @@ hr
 nav
     display: flex
     justify-content: space-evenly
+    animation: .2s ease-out 0s 1 slideFromTop
 
 #home-link, #rescue-request, #home-link-operator
     display: flex
@@ -157,10 +159,6 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
     text-align: center
     margin: 2rem 30% 0 30%
 
-
-@keyframes pulse
-    from
-        box-shadow: 0 0 0 10px lightcoral
 nav>.alert>#alert-text
     font-size: 28px
 nav>.alert
@@ -629,3 +627,17 @@ input:not(.clientSubscriptions input)
 
 .clientSubscriptions .filter img:hover
     cursor: pointer
+
+/* ======================== */
+/*         KEYFRAMES        */
+/* ======================== */
+
+@keyframes pulse
+    from
+        box-shadow: 0 0 0 10px lightcoral
+
+@keyframes slideFromTop
+    0%
+        transform: translateY(-100%)
+    100%
+        transform: translateY(0%)
