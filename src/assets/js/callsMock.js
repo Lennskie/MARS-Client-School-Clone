@@ -12,7 +12,7 @@ function delegateCall(e) {
     e.preventDefault();
 
     if( e.target.classList.contains("activeCall")){
-        endCall(e)
+        endCall(e);
     }
     else if( e.target.classList.contains("inactiveCall")){
         pickupCall(e);
@@ -34,6 +34,7 @@ function delegateFilter(e) {
 
     if(e.target.classList.contains('activeFilter')) {
         e.target.classList.remove('activeFilter');
+
         return loadCallsList(calls);
     }
 
@@ -59,7 +60,6 @@ function callsGridFilter(filterOn) {
             arr.push(calls[i]);
         }
     }
-
     return loadCallsList(arr);
 }
 
@@ -84,8 +84,7 @@ function loadCallsList(data) {
             <button class="${listitem['info']}">${listitem['action']}</button>
             <button>${listitem['location']}</button>
         `)
+        document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateCall));
     })
-}
 
-//TODO: the active and inactive call has to be switched properly, because an inactive call had active text on it and vise versa.
-//TODO: same todo, after filtering they lose their eventListener
+}
