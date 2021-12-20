@@ -5,7 +5,7 @@ const auth = localStorage.getItem("auth")
 document.addEventListener("DOMContentLoaded", init);
 
 function init(){
-    document.querySelector('h1').innerHTML = "hello, " + auth;
+    document.querySelector('h1').innerHTML = "Hello, " + auth;
     if(checkUser() === "client"){
         setTimeout( function(){
             document.querySelector('.loader').className += " loader-done"
