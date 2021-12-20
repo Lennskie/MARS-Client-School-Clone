@@ -693,8 +693,8 @@ input:not(.clientSubscriptions input)
 #loadingContainer
     margin-top: 15rem
     .loader
-        border: 16px solid #f3f3f3 /* Light grey */
-        border-top: 16px solid darkred /* Blue */
+        border: 16px solid #f3f3f3 /* circle */
+        border-top: 16px solid darkred /* loader */
         border-radius: 50%
         width: 120px
         height: 120px
@@ -706,6 +706,38 @@ input:not(.clientSubscriptions input)
         margin-top: 3rem
     p
         margin-top: 3rem
+    .loader-done
+        border: 16px solid darkred /* full circle */
+        border-radius: 50%
+        width: 120px
+        height: 120px
+        position: relative
+        top: 30%
+        margin: -10px auto
+
+.checkmark
+    width: 140px
+    height: 140px
+    border-radius: 50%
+    display: block
+    stroke-width: 2
+    stroke: #fff
+    stroke-miterlimit: 1
+    box-shadow: inset 0 0 0 #7ac142
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+    .checkmark__circle
+        stroke-dasharray: 166
+        stroke-dashoffset: 500
+        stroke-width: 2
+        stroke-miterlimit: 10
+        stroke: #7ac142
+        fill: #7ac142
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+    .checkmark__check
+        transform-origin: 50% 50%
+        stroke-dasharray: 48
+        stroke-dashoffset: 48
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
 
 
 /* ======================== */
@@ -727,3 +759,19 @@ input:not(.clientSubscriptions input)
         transform: rotate(0deg)
     100%
         transform: rotate(360deg)
+
+@keyframes stroke
+    100%
+        stroke-dashoffset: 0
+
+@keyframes scale
+    0%, 100%
+        transform: none
+
+    50%
+        transform: scale3d(1.1, 1.1, 1)
+
+@keyframes fill
+    100%
+        box-shadow: inset 0px 0px 0px 30px #7ac142
+
