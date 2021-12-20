@@ -513,7 +513,7 @@ input[id=marsID] {
   margin-bottom: 0.4em;
 }
 
-input[type=submit] {
+input[type=button] {
   font-weight: bold;
   border: 1px solid black;
   color: black;
@@ -522,7 +522,7 @@ input[type=submit] {
   background-color: transparent;
   transition: 0.4s;
 }
-input[type=submit]:hover {
+input[type=button]:hover {
   background-size: 100%;
   background-color: darkred;
   color: #fff;
