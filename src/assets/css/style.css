@@ -11,8 +11,14 @@
   display: none !important;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-size: 16px;
+  min-width: min-content;
+  animation: 0.2s ease-out 0s 1 slideFromTop;
 }
 
 header {
@@ -20,6 +26,7 @@ header {
   border-bottom: 1px solid black;
   font-family: Poppins, sans-serif;
   font-size: 1rem;
+  background-color: white;
 }
 
 hr {
@@ -29,7 +36,8 @@ hr {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  animation: 0.2s ease-out 0s 1 slideFromTop;
 }
 
 #home-link, #rescue-request, #home-link-operator {
@@ -42,6 +50,19 @@ nav {
   font-family: Poppins, sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+#home-link {
+  -webkit-filter: grayscale(50%);
+  filter: grayscale(50%);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+#home-link:hover {
+  filter: grayscale(0);
+  -webkit-filter: grayscale(0);
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
 
 #rescue-request {
@@ -73,9 +94,47 @@ nav {
 }
 
 #main-nav {
-  width: 60%;
+  width: 70%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+#main-nav * {
+  box-sizing: border-box;
+  transition: all 0.35s ease;
+}
+#main-nav a {
+  padding: 0.5em 0.8em;
+  margin: 0.2em 0;
+  display: block;
+  color: black;
+  position: relative;
+  text-decoration: none;
+}
+#main-nav a::before, #main-nav a::after {
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  content: "";
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+#main-nav a::before {
+  left: 0;
+  top: 0;
+  border-left: 3px solid red;
+  border-top: 3px solid red;
+  transform: translate(100%, 50%);
+}
+#main-nav a::after {
+  right: 0;
+  bottom: 0;
+  border-right: 3px solid red;
+  border-bottom: 3px solid red;
+  transform: translate(-100%, -50%);
+}
+#main-nav a:hover::before, #main-nav .current a::before, #main-nav a:hover::after, #main-nav .current a::after {
+  transform: translate(0%, 0%);
+  opacity: 1;
 }
 
 .logo {
@@ -95,7 +154,7 @@ nav > a, #main-nav > a {
   margin: auto 0;
 }
 
-#btn-login, #btn-logout {
+#btn-logout {
   border: 1px solid black;
   border-radius: 50px;
   padding: 0.25rem 1rem;
@@ -125,6 +184,15 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem 30% 0 30%;
 }
 
+nav > .alert > #alert-text {
+  font-size: 28px;
+}
+
+nav > .alert {
+  margin-top: 0;
+  padding: 0.5rem 1.5rem;
+}
+
 .alert {
   border: 1px red solid;
   background-color: red;
@@ -134,6 +202,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem auto 0 auto;
   display: flex;
   justify-content: space-evenly;
+  animation: pulse 1s infinite;
 }
 .alert > #alert-text {
   font-family: "Adobe Clean Bold", sans-serif;
@@ -181,23 +250,40 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
 }
 
 #subscribe {
-  font-family: "Helvetica Neue", sans-serif;
-  text-decoration: none;
-  border: 1px solid #F7B500;
+  font-size: 30px;
+  padding: 0.5rem 1rem;
+  font-family: Poppins, sans-serif;
   border-radius: 50px;
-  color: black;
-  padding: 0.5rem 1.5rem;
   margin-left: 15rem;
-}
-#subscribe.nav {
-  margin-left: 0;
-}
-
-#subscribe, input[type=submit] {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  text-align: center;
   background: linear-gradient(180deg, #ffe7a5 0%, #f7b500 100%);
 }
+#subscribe:after {
+  content: "";
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: auto;
+  top: 0;
+  bottom: 0;
+  right: -20%;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+#subscribe:hover:after {
+  transition: all 0.4s ease-out;
+  right: 100%;
+}
 
-/* RESCUERS */
+nav > #subscribe {
+  margin-left: 3rem !important;
+  font-size: 16px;
+}
+
 #steps {
   margin-top: 3rem;
   display: flex;
@@ -270,26 +356,56 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   background-color: #FFADAD;
 }
 .subscriptions table tr td:nth-child(2):not(tfoot tr td) {
-  background-color: #FFDAC7;
+  background-color: darkgray;
 }
 .subscriptions table tr td:nth-child(3):not(tfoot tr td) {
-  background-color: #FFEFBC;
+  background-color: darkgoldenrod;
 }
 .subscriptions table tr td:nth-child(4):not(tfoot tr td) {
-  background-color: #FFFEB7;
+  background-color: #6d92d6;
 }
-.subscriptions table button {
-  text-decoration: none;
-  background-color: #E93B81;
-  color: white;
+
+#silver-sub {
+  background: linear-gradient(180deg, #a1a2a3 0%, white 100%);
+}
+
+#gold-sub {
+  background: linear-gradient(180deg, #bf953f 0%, #fcffff 100%);
+}
+
+#platinum-sub {
+  background: linear-gradient(180deg, #6d92d6 0%, white 100%);
+}
+
+.btn-sub {
+  padding: 0.5rem;
   border: none;
-  padding: 0.5em;
-  border-radius: 1em;
+  font-family: Poppins, sans-serif;
+  border-radius: 50px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+  text-align: center;
 }
-.subscriptions table button:hover {
+.btn-sub:after {
+  content: "";
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: auto;
+  top: 0;
+  bottom: 0;
+  right: -20%;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+}
+.btn-sub:hover:after {
+  transition: all 0.4s ease-out;
+  right: 100%;
   cursor: pointer;
 }
-.subscriptions table #costs {
+.btn-sub #costs {
   background: none;
   text-align: right;
 }
@@ -440,16 +556,15 @@ input:not(.clientSubscriptions input) {
   color: #7D7D7D;
   padding: 0.7em 0.8em;
 }
-.callPanel article:last-child, .rescuersfleetPanel article:last-child, .clientSubscriptions article:last-child {
-  padding-left: 2em;
-}
 .callPanel button:hover, .rescuersfleetPanel button:hover, .clientSubscriptions button:hover {
   cursor: pointer;
+  border-color: transparent;
 }
 
 .activeFilter {
-  font-weight: bold;
-  text-decoration: underline;
+  color: red !important;
+  box-shadow: 0 0 0 2PX lightcoral !important;
+  border-color: transparent;
 }
 
 .rescuersfleetPanel .filter {
@@ -476,9 +591,40 @@ input:not(.clientSubscriptions input) {
 }
 .filter button {
   padding: 0.4em 1.5em;
-  border: none;
-  border-radius: 1em;
-  background-color: white;
+  color: black;
+  border-color: transparent;
+  box-shadow: inset 0 0 0 2px black;
+  color: black;
+  transition: color 0.25s;
+  position: relative;
+}
+.filter button::before, .filter button::after {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 0;
+  right: 0;
+}
+.filter button::before {
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+.filter button::after {
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+.filter button:hover {
+  color: red;
+}
+.filter button:hover::before, .filter button:hover::after {
+  border-color: red;
+  transition: border-color 0s, width 0.25s, height 0.25s;
+  width: 100%;
+  height: 100%;
 }
 
 /* ======================== */
@@ -524,13 +670,17 @@ input:not(.clientSubscriptions input) {
 }
 .callsGrid .activeCall, .callsGrid .inactiveCall, .rescuersfleetGrid .activeCall, .rescuersfleetGrid .inactiveCall, .clientSubscriptionsGrid .activeCall, .clientSubscriptionsGrid .inactiveCall {
   padding-right: 3em;
-  background-image: url("../images/call.png");
   background-repeat: no-repeat;
   background-position-y: center;
   background-position-x: 90%;
 }
 .callsGrid .activeCall, .rescuersfleetGrid .activeCall, .clientSubscriptionsGrid .activeCall {
-  background-color: #979797;
+  background-color: lightcoral;
+  background-image: url("../images/call.png");
+}
+.callsGrid .inactiveCall, .rescuersfleetGrid .inactiveCall, .clientSubscriptionsGrid .inactiveCall {
+  background-color: #D2EA9B;
+  background-image: url("../images/pick_up.png");
 }
 
 /* Search client form */
@@ -555,6 +705,23 @@ input:not(.clientSubscriptions input) {
 
 .clientSubscriptions .filter img:hover {
   cursor: pointer;
+}
+
+/* ======================== */
+/*         KEYFRAMES        */
+/* ======================== */
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 10px lightcoral;
+  }
+}
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

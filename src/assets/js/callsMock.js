@@ -86,3 +86,6 @@ function loadCallsList(data) {
         `)
     })
 }
+
+//TODO: the active and inactive call has to be switched properly, because an inactive call had active text on it and vise versa.
+//TODO: same todo, after filtering they lose their eventListener
