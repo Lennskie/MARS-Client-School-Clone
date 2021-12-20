@@ -480,8 +480,20 @@ form:not(.clientSubscriptions form)
 input[id=marsID]
     margin-bottom: 0.4em
 
+
+
 input[type=submit]
     font-weight: bold
+    border: 1px solid black
+    color: black
+    cursor: pointer
+    border-radius: 3px
+    background-color: transparent
+    transition: .4s
+    &:hover
+        background-size: 100%
+        background-color: darkred
+        color: #fff
 
 input:not(.clientSubscriptions input)
     display: block
@@ -675,6 +687,28 @@ input:not(.clientSubscriptions input)
     cursor: pointer
 
 /* ======================== */
+/*           LOADER         */
+/* ======================== */
+
+#loadingContainer
+    margin-top: 15rem
+    .loader
+        border: 16px solid #f3f3f3 /* Light grey */
+        border-top: 16px solid darkred /* Blue */
+        border-radius: 50%
+        width: 120px
+        height: 120px
+        animation: spin 2s linear infinite
+        position: relative
+        top: 30%
+        margin: -10px auto
+    h1
+        margin-top: 3rem
+    p
+        margin-top: 3rem
+
+
+/* ======================== */
 /*         KEYFRAMES        */
 /* ======================== */
 
@@ -687,3 +721,9 @@ input:not(.clientSubscriptions input)
         transform: translateY(-100%)
     100%
         transform: translateY(0%)
+
+@keyframes spin
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
