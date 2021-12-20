@@ -1,7 +1,5 @@
 "use strict"
 
-const auth = localStorage.getItem("auth")
-
 document.addEventListener("DOMContentLoaded", init);
 
 function init(){
@@ -40,19 +38,4 @@ function init(){
             setTimeout(function () { document.location.href = "login.html"}, 2000);
         }, 2000);
     }
-}
-
-
-function checkUser(){
-    if (auth === 'client'){
-        return "client";
-    }else if (auth === 'employee'){
-        return "employee";
-    }else{
-        return false;
-    }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
