@@ -86,5 +86,4 @@ function loadCallsList(data) {
         `)
         document.querySelectorAll('.callsGrid button').forEach(el => el.addEventListener('click', delegateCall));
     })
-
 }
