@@ -49,7 +49,6 @@ function checkUser(){
     }else if (auth === 'employee'){
         return "employee";
     }else{
-        console.log("hey!")
         return false;
     }
 }
