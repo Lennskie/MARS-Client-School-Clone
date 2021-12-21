@@ -468,7 +468,8 @@ form:not(.clientSubscriptions form)
 input[id=marsID]
     margin-bottom: 0.4em
 
-input[type=button]
+input[type=button], #backButton
+    text-decoration: none
     font-weight: bold
     border: 1px solid black
     color: black
@@ -480,7 +481,8 @@ input[type=button]
         background-size: 100%
         background-color: darkred
         color: #fff
-
+    &#backButton
+        padding: 1rem
 input:not(.clientSubscriptions input)
     display: block
     width: 20em
@@ -546,7 +548,8 @@ form[id='savemenowform']
     border-color: transparent
 
 .rescuersfleetPanel .filter
-    width: 35em
+    width: 40em
+    margin-right: 0
 
 .clientSubscriptions .filter
     width: 27em
@@ -688,6 +691,15 @@ form[id='savemenowform']
 
 .clientSubscriptions .filter img:hover
     cursor: pointer
+
+/* ======================== */
+/*          CHART           */
+/* ======================== */
+
+canvas
+    margin-top: 2%
+    width: 100% !important
+    height: 600px !important
 
 /* ======================== */
 /*           LOADER         */
