@@ -540,6 +540,10 @@ form[id=savemenowform] img {
   display: block;
   margin: 2rem auto 2rem;
 }
+form[id=savemenowform] input:hover {
+  background-size: 100%;
+  background-color: #ff0000;
+}
 
 /* call panel */
 .callPanel, .rescuersfleetPanel, .clientSubscriptions {
