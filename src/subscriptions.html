@@ -28,13 +28,15 @@
             <a href="rescuers.html">Rescuers</a>
             <a class="active-nav" href="#">Subscriptions</a>
             <a href="support.html">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
+        <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
 <main>
@@ -119,8 +121,9 @@
         </select>
         <img src="assets/images/subscriptioninfo.png" alt="subscription info">
     </footer>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/api.js"></script>
 </main>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/loginlogout.js"></script>
 </body>
 </html>

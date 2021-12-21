@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Mars 16: Mars Active Response System</title>
 </head>
-<body id="intro">
+<body>
 <header>
     <nav>
         <div id="home-link" class="">
@@ -35,18 +35,21 @@
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
+        <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a id="savemenow" class="hidden" href="#">Save me!</a>
     </nav>
 </header>
 <main>
-    <section>
-        <h1 id="home-title">Just arrived at Mars?</h1>
-        <p id="home-intro">We look out for each other by monitoring your health vitals and location, speeding aid for those in need. </p>
-        <a id="subscribe" href="subscriptions.html">Subscribe</a>
-    </section>
+    <form id="savemenowform">
+        <img src="assets/images/warning.png" alt="warning" title="warning">
+        <input type="button" value="Save me now!" id="SaveButton">
+    </form>
+    <p>
+        By clicking "Save me now", you will pay a year's worth of subscription upfront without the
+        ability to cancel. You will automatically cast your gps location to our main office so
+        that we can send a rescue team to you.
+    </p>
 </main>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/api.js"></script>
 <script src="assets/js/loginlogout.js"></script>
 </body>
 </html>

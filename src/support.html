@@ -28,20 +28,23 @@
             <a href="rescuers.html">Rescuers</a>
             <a href="subscriptions.html">Subscriptions</a>
             <a class="active-nav" href="#">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a id="savemenow" class="hidden" href="#">Save me!</a>
     </nav>
 </header>
 
 <main>
-    <h1>I need Help!</h1>
-    <p>Our team is ready to support you at any time, just call</p>
+    <h1>I need help!</h1>
+    <p>Our team is ready to support you at any time, just call.
+    This is not a rescue button, this is to call our support team.
+    The button to rescue you is at the top right.</p>
 
     <div class="alert">
         <p id="alert-text">999</p>
@@ -61,5 +64,6 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/api.js"></script>
+<script src="assets/js/loginlogout.js"></script>
 </body>
 </html>
