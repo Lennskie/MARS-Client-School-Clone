@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     loadRescuersfleetGrid(rescuersFleet);
     document.querySelectorAll('.rescuersfleetPanel .filter button').forEach(el => el.addEventListener('click', changeFilter));
+    document.querySelector('#getChart').removeEventListener('click',changeFilter);
+    document.querySelector('#getChart').addEventListener('click',goToChart)
 }
 
 function changeFilter(e) {
@@ -84,4 +86,8 @@ function loadRescuersfleetGrid(data) {
             </div>
         `)
     })
+}
+
+function goToChart(){
+    window.location.assign("chartvehicles.html");
 }

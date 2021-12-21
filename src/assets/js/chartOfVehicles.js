@@ -48,7 +48,7 @@ function init(){
                         stepSize: 1,
                         beginAtZero: true
                     },
-                    max: amountOfVehicles + 10
+                    max: amountOfVehicles + 5
                 }
             }
         }

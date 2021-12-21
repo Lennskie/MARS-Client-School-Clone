@@ -502,7 +502,8 @@ input[id=marsID] {
   margin-bottom: 0.4em;
 }
 
-input[type=button] {
+input[type=button], #backButton {
+  text-decoration: none;
   font-weight: bold;
   border: 1px solid black;
   color: black;
@@ -511,10 +512,13 @@ input[type=button] {
   background-color: transparent;
   transition: 0.4s;
 }
-input[type=button]:hover {
+input[type=button]:hover, #backButton:hover {
   background-size: 100%;
   background-color: darkred;
   color: #fff;
+}
+input[type=button]#backButton, #backButton#backButton {
+  padding: 1rem;
 }
 
 input:not(.clientSubscriptions input) {
@@ -585,7 +589,8 @@ form[id=savemenowform] input:hover {
 }
 
 .rescuersfleetPanel .filter {
-  width: 35em;
+  width: 40em;
+  margin-right: 0;
 }
 
 .clientSubscriptions .filter {
