@@ -12,6 +12,7 @@
     "watch-sass": "sass --watch ./src/assets/sass:./src/assets/css"
   },
   "dependencies": {
+    "chart.js": "^3.6.2",
     "sonar-scanner": "^3.1.0",
     "vnu-jar": "^20.2.28"
   },
