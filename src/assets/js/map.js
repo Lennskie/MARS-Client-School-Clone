@@ -105,6 +105,7 @@ function drawMap() {
 function mapDrawn() {
 	// Here comes the logic that requires a map to be present
 	// This would be for example getting the eventbus and listeners started
+	eventBusStart();
 }
 
 function addDomeToMap(location, domeId) {
@@ -121,20 +122,21 @@ function addDomeToMap(location, domeId) {
 
 function addVehicleToMap(location, vehicleId) {
 
-	let vehicle = L.marker([location[0], location[1]], { icon: icons.vehicle })
+	let vehicle = L.marker([location.latitude, location.longitude], { icon: icons.vehicle })
 		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`)
 		.addTo(mymap);
 
 	vehicle.id = vehicleId;
 	vehicle.isOccupied = false;
 	vehicles.set(vehicleId, vehicle);
+	console.log('adding vehicle');
 }
 
 function addClientToMap(vitalStatus, location, clientId) {
 
 	let clientIcon = icons.client[vitalStatus] || icons.client['healthy'];
 
-	let client = L.marker([location[0], location[1]], { icon: clientIcon })
+	let client = L.marker([location.latitude, location.longitude], { icon: clientIcon })
 		.bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`)
 		.addTo(mymap);
 	
@@ -143,6 +145,7 @@ function addClientToMap(vitalStatus, location, clientId) {
 	client.isBeingTransported = false;
 
 	clients.set(clientId, client);
+	console.log('adding client');
 }
 
 function routeFrom(vehicleId) {
@@ -320,21 +323,4 @@ function generateClientsTable() {
 			routeTo(clientId);
 		})
 	})
-}
-
-
-// Can be removed once this data is fetched from the server
-function generateRandomLocation() {
-	// All magical constants in this code are present
-	// To limit the generated coordinates to the rough area of the standard map viewport.
-    let x = Math.random() * (9 - 0) + 0;
-    let y = Math.random() * (59 - 0) + 0;
-
-    x = x * 0.002
-    y = y * 0.001
-
-    const xpos = 29.62295 + x;
-    const ypos = 35.40 + y;
-
-    return [xpos, ypos]
 }
