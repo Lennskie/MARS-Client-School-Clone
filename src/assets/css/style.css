@@ -177,7 +177,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem auto 0 auto;
   display: flex;
   justify-content: space-evenly;
-  animation: pulse 1s infinite;
+  animation: pulse 2s infinite;
 }
 .alert > #alert-text {
   font-family: "Adobe Clean Bold", sans-serif;
@@ -526,6 +526,19 @@ input:not(.clientSubscriptions input) {
   border-radius: 0.3em;
   border-color: lightgray;
   border-width: 1px;
+}
+
+/* saveme page */
+form[id=savemenowform] {
+  background-image: none !important;
+  padding-top: 0 !important;
+}
+form[id=savemenowform] img {
+  animation: scale 1s infinite;
+  height: 15rem;
+  width: 15rem;
+  display: block;
+  margin: 2rem auto 2rem;
 }
 
 /* call panel */

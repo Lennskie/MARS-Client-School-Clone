@@ -159,7 +159,7 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
     margin: 2rem auto 0 auto
     display: flex
     justify-content: space-evenly
-    animation: pulse 1s infinite
+    animation: pulse 2s infinite
 
     > #alert-text
         font-family: "Adobe Clean Bold", sans-serif
@@ -468,8 +468,6 @@ form:not(.clientSubscriptions form)
 input[id=marsID]
     margin-bottom: 0.4em
 
-
-
 input[type=button]
     font-weight: bold
     border: 1px solid black
@@ -493,6 +491,18 @@ input:not(.clientSubscriptions input)
     border-color: lightgray
     border-width: 1px
 
+
+/* saveme page */
+
+form[id='savemenowform']
+    background-image: none !important
+    padding-top: 0 !important //reset margin of other form
+    & img
+        animation: scale 1s infinite
+        height: 15rem
+        width: 15rem
+        display: block
+        margin: 2rem auto 2rem
 /* call panel */
 
 .callPanel, .rescuersfleetPanel, .clientSubscriptions
