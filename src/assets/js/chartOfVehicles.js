@@ -1,20 +1,17 @@
 "use scrict"
 
 document.addEventListener("DOMContentLoaded", init);
+let amountOfVehicles
 
-const amountOfVehicles = rescuersFleet.length;
-const amountOfOperationalVehicles = countAmountOfOperational();
-const amountOfNonOperationalVehicles = amountOfVehicles - amountOfOperationalVehicles
-
-function init(){
+function init() {
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["amount of vehicles","amount of operational vehicles", "amount of non operational vehicles"],
+            labels: ["amount of vehicles", "amount of operational vehicles", "amount of non operational vehicles"],
             datasets: [{
                 label: "",
-                data: [amountOfVehicles, amountOfOperationalVehicles, amountOfNonOperationalVehicles],
+                data: [],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(75, 255, 192, 0.2)',
@@ -42,13 +39,29 @@ function init(){
                         stepSize: 1,
                         beginAtZero: true
                     },
-                    max: amountOfVehicles + 3
+                    max: 20
                 }
             }
         }
     });
+    getData();
+    setTimeout(function() {
+        const amountOfOperationalVehicles = countAmountOfOperational();
+        const amountOfNonOperationalVehicles = amountOfVehicles - amountOfOperationalVehicles;
+        addData(myChart, [amountOfVehicles, amountOfOperationalVehicles, amountOfNonOperationalVehicles], 0);
+    }, 1000);
+    function addData(chart, data, datasetIndex) {
+        chart.data.datasets[datasetIndex].data = data;
+        chart.update();
+    }
 }
 
+function getData() {
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
+        .then(function(response){
+            amountOfVehicles = response.vehicles.length; //todo: add more vehicles in the server
+        });
+}
 
 function countAmountOfOperational(){
     let operationalVehicles = 0;
