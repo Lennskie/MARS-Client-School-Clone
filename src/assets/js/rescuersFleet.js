@@ -27,7 +27,7 @@ function changeFilter(e) {
 }
 
 function getDataForFilter(buttonData){
-        fetchFromServer(`http://localhost:8080/api/dispatches`, 'GET',)
+        fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/dispatches`, 'GET',)
             .then(response => {
                     filterOnButtonData(response, buttonData)
                 }
@@ -74,7 +74,7 @@ function filterOnButtonData(DATA, buttonDATA){
 }
 
 function getData() {
-    fetchFromServer(`http://localhost:8080/api/dispatches`, 'GET',)
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/dispatches`, 'GET',)
         .then(response => {
             loadRescuersfleetGrid(response)
             }
