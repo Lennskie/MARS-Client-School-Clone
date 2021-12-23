@@ -2,6 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", init);
 
+let amountOfVehicles = 0;
+
 function init() {
     getData();
     const ctx = document.getElementById('myChart').getContext('2d');
@@ -33,15 +35,6 @@ function init() {
             },
             responsive: true,
             maintainAspectRatio: false,
-            scales: {
-                y: {
-                    ticks: {
-                        stepSize: 1,
-                        beginAtZero: true
-                    },
-                    max: 20
-                }
-            }
         }
     });
 
@@ -53,7 +46,7 @@ function init() {
             );
     }
     function setData(response){
-        const amountOfVehicles = response.length;
+        amountOfVehicles = response.length;
         let amountOfNonBusyVehicles = 0;
         for (let i = 0; i<response.length;i++){
             if (response[i].occupied===false){
@@ -65,6 +58,22 @@ function init() {
     }
     function addData(chart, data, datasetIndex) {
         chart.data.datasets[datasetIndex].data = data;
+        chart.update();
+        changeScaleDynamically(chart);
+    }
+
+    function changeScaleDynamically(chart) {
+        chart.options = {
+            scales: {
+                y: {
+                    ticks: {
+                        stepSize: 1,
+                        beginAtZero: true
+                    },
+                    max: amountOfVehicles + 5
+                }
+            }
+        };
         chart.update();
     }
 
