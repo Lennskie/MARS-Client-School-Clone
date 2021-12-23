@@ -670,8 +670,8 @@ form[id=savemenowform] input:hover {
 }
 
 .clientSubscriptionsGrid, .clientSubscriptions ul {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . . . . . .";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . . . . .";
 }
 
 .callsGrid div, .rescuersfleetGrid div, .clientSubscriptionsGrid div {

@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadClientSubscriptions(clientSubscriptions);
+    getData();
     document.querySelectorAll('.clientSubscriptions .filter button').forEach(el => el.addEventListener('click', searchFilter));
     document.querySelectorAll('.clientSubscriptions .filter img').forEach(el => el.addEventListener('click', refreshFilter));
 }
@@ -26,44 +26,83 @@ function searchFilter(e) {
         }
     }
 
-    return loadClientSubscriptions(arr);
+    return loadClientSubscriptions();
 }
 
 function refreshFilter(e) {
     e.preventDefault();
-    loadClientSubscriptions(clientSubscriptions)
+    loadClientSubscriptions();
 }
 
-function loadClientSubscriptions(data) {
-    const parent = document.querySelector(".clientSubscriptionsGrid");
-    parent.innerHTML = '';
+function getData() {
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients`, 'GET',)
+        .then(response => {
+                loadClientSubscriptions(response)
+            }
+        );
+}
 
-    data.forEach((listitem)=> {
-        parent.insertAdjacentHTML('beforeend', `
-            <div>
-                <span><p>${listitem['mars_id']}</p></span>
-            </div>
-            <div>
-                <p>${listitem['name']}</p>
-            </div>
-            <div>
-                <p>${listitem['lastname']}</p>
-            </div>
-            <div>
-                <p>${listitem['phone']}</p>
-            </div>
-            <div>
-                <p>${listitem['subscription']}</p>
-            </div>
-            <div>
-                <p>${listitem['sub_status']}</p>
-            </div>
-            <div>
-                <p>${listitem['location_status']}</p>
-            </div>
-            <div>
-                <p>${listitem['vital_status']}</p>
-            </div>
-        `)
-    })
+function loadClientSubscriptions(DATA) {
+    DATA = DATA.clients;
+    const parent = document.querySelector(".clientSubscriptionsGrid");
+
+    parent.innerHTML = ''; //reset the HTML
+
+    for (let  i=0; i < DATA.length; i++){
+        let userlatitude = DATA[i].location.latitude.toFixed(4)
+        let userlongitude = DATA[i].location.longitude.toFixed(4)
+        console.log(DATA[i].subscription);
+        if ( (DATA[i].subscription === null || DATA[i].subscription.reimbursed === false) ) {
+            parent.insertAdjacentHTML('beforeend', `
+        <div>
+            <p>${DATA[i].identifier}</p>
+        </div>
+        <div>
+            <p>${DATA[i].firstname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].lastname}</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+            `)
+        } else {
+            parent.insertAdjacentHTML('beforeend', `
+        <div>
+            <p>${DATA[i].identifier}</p>
+        </div>
+        <div>
+            <p>${DATA[i].firstname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].lastname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].subscription.name}</p>
+        </div>
+        <div>
+            <p>${DATA[i].subscription.reimbursed}</p>
+        </div>
+        <div>
+            <p>${userlatitude}; ${userlongitude}</p>
+        </div>
+        <div>
+            <p>${DATA[i].vitals}</p>
+        </div>
+            `)
+        }
+        }
+
+
+
 }

@@ -1,15 +1,14 @@
 "use scrict"
 
 document.addEventListener("DOMContentLoaded", init);
-let amountOfVehicles;
-let amountOfOperationalVehicles = 0; //has to be declared 0 to work in other functions
 
 function init() {
+    getData();
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["amount of vehicles", "amount of operational vehicles", "amount of non operational vehicles"],
+            labels: ["amount of vehicles", "amount of busy vehicles", "amount of non busy vehicles"],
             datasets: [{
                 label: "",
                 data: [],
@@ -45,28 +44,31 @@ function init() {
             }
         }
     });
-    getData();
-    setTimeout(function() {
-        const amountOfNonOperationalVehicles = amountOfVehicles - amountOfOperationalVehicles;
-        addData(myChart, [amountOfVehicles, amountOfOperationalVehicles, amountOfNonOperationalVehicles], 0);
-    }, 1000); //needs timeout because chartJS was faster than the API
+
+    function getData() {
+        fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
+            .then(response => {
+                    setData(response.vehicles)
+                }
+            );
+    }
+    function setData(response){
+        const amountOfVehicles = response.length;
+        let amountOfNonBusyVehicles = 0;
+        for (let i = 0; i<response.length;i++){
+            if (response[i].occupied===false){
+                amountOfNonBusyVehicles += 1;
+            }
+        }
+        const amountOfBusyVehicles = amountOfVehicles - amountOfNonBusyVehicles;
+        addData(myChart, [amountOfVehicles, amountOfBusyVehicles, amountOfNonBusyVehicles], 0);
+    }
     function addData(chart, data, datasetIndex) {
         chart.data.datasets[datasetIndex].data = data;
         chart.update();
     }
+
 }
 
-function getData() {
-    let i = 0;
-    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
-        .then(function(response){
-            amountOfVehicles = response.vehicles.length;
-            while (i<response.vehicles.length){
-                if (response.vehicles[i].occupied === true){
-                    amountOfOperationalVehicles += 1;
-                }
-                 i += 1;
-            }
-        });
-}
+
 

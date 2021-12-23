@@ -1,4 +1,4 @@
-let rescuersFleet =[
+let rescuersFleet =[ //TODO: redundant, delete!
     {
         "vehicle_id":"AV-001",
         "condition":"Operational",
