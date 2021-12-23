@@ -19,7 +19,7 @@ async function loadConfig() {
 
 function goHome() {
     if(document.querySelector('#home-link').classList.contains('operator-home-link')) {
-        window.location.href = "./callpanel.html";
+        window.location.href = "./rescuersfleet.html";
     } else {
         window.location.href = "./index.html";
     }
