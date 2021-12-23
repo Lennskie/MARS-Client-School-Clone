@@ -11,9 +11,19 @@ function init() {
 
 function changeFilter(e) {
     e.preventDefault();
-    let buttonData = e.target.dataset.buttondata;
-    e.target.className.add("active");
-    getDataForFilter(buttonData)
+
+    if (e.target.className === "activeFilter"){
+        e.target.classList.remove("activeFilter");
+        getData();
+    }else{
+        document.querySelectorAll('.rescuersfleetPanel .filter button').forEach(e=>e.classList.remove("activeFilter"));
+        e.target.classList.add("activeFilter");
+        //getting data
+        let buttonData = e.target.dataset.buttondata;
+        //sending data to the fetch
+        getDataForFilter(buttonData)
+    }
+
 }
 
 function getDataForFilter(buttonData){
@@ -26,8 +36,6 @@ function getDataForFilter(buttonData){
 
 function filterOnButtonData(DATA, buttonDATA){
     DATA = DATA.dispatches;
-    console.log(DATA)
-    console.log(buttonDATA)
 
     const parent = document.querySelector(".rescuersfleetGrid");
     parent.innerHTML = ''; //reset the HTML
