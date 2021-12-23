@@ -11,10 +11,62 @@ function init() {
 
 function changeFilter(e) {
     e.preventDefault();
+    let buttonData = e.target.dataset.buttondata;
+    e.target.className.add("active");
+    getDataForFilter(buttonData)
+}
+
+function getDataForFilter(buttonData){
+        fetchFromServer(`http://localhost:8080/api/dispatches`, 'GET',)
+            .then(response => {
+                    filterOnButtonData(response, buttonData)
+                }
+            );
+}
+
+function filterOnButtonData(DATA, buttonDATA){
+    DATA = DATA.dispatches;
+    console.log(DATA)
+    console.log(buttonDATA)
+
+    const parent = document.querySelector(".rescuersfleetGrid");
+    parent.innerHTML = ''; //reset the HTML
+
+    for (let  i=0; i < DATA.length; i++) {
+
+        let sourceLocation = DATA[i].source.location.latitude + " ; " + DATA[i].source.location.longitude;
+        let destinationLocation = DATA[i].destination.location.latitude + " ; " + DATA[i].destination.location.longitude;
+
+        if (DATA[i].source.identifier.includes(buttonDATA) ||  DATA[i].destination.identifier.includes(buttonDATA)) {
+            parent.insertAdjacentHTML('beforeend', `
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${DATA[i].source.identifier}</p>
+        </div>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${DATA[i].destination.identifier}</p>
+        </div>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>operational</p>
+        </div>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>2 minutes</p>
+        </div>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${sourceLocation}<p>
+        </div>  
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${sourceLocation}<p>
+        </div>  
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${destinationLocation}<p>
+        </div>
+            `)
+        }
+    }
 }
 
 function getData() {
-    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
+    fetchFromServer(`http://localhost:8080/api/dispatches`, 'GET',)
         .then(response => {
             loadRescuersfleetGrid(response)
             }
@@ -22,34 +74,37 @@ function getData() {
 }
 
 function loadRescuersfleetGrid(DATA) {
-    DATA = DATA.vehicles;
-    let temp = rescuersFleet;
+    DATA = DATA.dispatches;
     const parent = document.querySelector(".rescuersfleetGrid");
 
     parent.innerHTML = ''; //reset the HTML
 
     for (let  i=0; i < DATA.length; i++){
+
+        let sourceLocation = DATA[i].source.location.latitude + " ; " + DATA[i].source.location.longitude;
+        let destinationLocation = DATA[i].destination.location.latitude + " ; " + DATA[i].destination.location.longitude;
+
             parent.insertAdjacentHTML('beforeend', `
-        <div>
-            <p>${DATA[i].identifier}</p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${DATA[i].source.identifier}</p>
         </div>
-        <div>
-            <p>working</p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${DATA[i].destination.identifier}</p>
         </div>
-        <div>
-            <p>${DATA[i].occupied}</p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>operational</p>
         </div>
-        <div>
-            <p>${temp[i].status}</p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>2 minutes</p>
         </div>
-        <div>
-            <p>${temp[i].rescue_eta}<p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${sourceLocation}<p>
         </div>  
-        <div>
-            <p>${temp[i].actual_position}</p>
-        </div>
-        <div>
-            <p>${temp[i].final_destination}<p>
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${sourceLocation}<p>
+        </div>  
+        <div data-identifier="${DATA[i].identifier}">
+            <p>${destinationLocation}<p>
         </div>
             `)
         }

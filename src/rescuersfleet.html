@@ -41,21 +41,21 @@
 <main class="rescuersfleetPanel">
     <div class="filter">
         <p>filter by</p>
-        <button id="filterDispatch">On dispatch</button>
-        <button id="filterStandby">On Standby</button>
-        <button id="filterNonOperational">Non-Operational</button>
+        <button id="filterVehicle" data-buttondata="AV">Contains vehicle</button>
+        <button id="filterClient" data-buttondata="MARS">Contains client</button>
+        <button id="filterDome" data-buttondata="DOME">Contains dome</button>
         <button id="getChart">Get chart</button>
     </div>
     <div>
         <h3>Vehicles fleet</h3>
         <ul>
-            <li>Vehicle ID</li>
-            <li>Condition</li>
+            <li>Source ID</li>
+            <li>Destination ID</li>
             <li>Status</li>
             <li>Rescue ETA</li>
-            <li>Base</li>
-            <li>Actual position</li>
-            <li>Final Destination</li>
+            <li>Source location</li>
+            <li>Actual location</li>
+            <li>Destination location</li>
         </ul>
         <div class="rescuersfleetGrid">
         </div>
