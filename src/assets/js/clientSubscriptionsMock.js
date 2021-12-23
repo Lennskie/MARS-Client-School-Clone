@@ -11,27 +11,76 @@ function init() {
 function searchFilter(e) {
     e.preventDefault();
     const input = document.querySelector('.clientSubscriptions form input[type="text"]').value
+    getSingularData(input);
+}
 
-    let arr = [];
-
-    for (let i in clientSubscriptions) {
-        if (clientSubscriptions[i]['name'] === input) {
-            arr.push(clientSubscriptions[i]);
-        } else if (clientSubscriptions[i]['lastname'] === input) {
-            arr.push(clientSubscriptions[i]);
-        } else if (clientSubscriptions[i]['phone'] === input) {
-            arr.push(clientSubscriptions[i])
-        } else if (clientSubscriptions[i]['mars_id'] === input) {
-            arr.push(clientSubscriptions[i])
-        }
+function displayFilteredResult(response){
+    const parent = document.querySelector(".clientSubscriptionsGrid");
+    parent.innerHTML = ''; //reset the HTML
+    let userlatitude = response.location.latitude.toFixed(4)
+    let userlongitude = response.location.longitude.toFixed(4)
+    if ( response.subscription === null || response.subscription.reimbursed === false) {
+        parent.insertAdjacentHTML('beforeend', `
+    <div>
+        <p>${response.identifier}</p>
+    </div>
+    <div>
+        <p>${response.firstname}</p>
+    </div>
+    <div>
+        <p>${response.lastname}</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+        `)
+    } else {
+        parent.insertAdjacentHTML('beforeend', `
+    <div>
+        <p>${response.identifier}</p>
+    </div>
+    <div>
+        <p>${response.firstname}</p>
+    </div>
+    <div>
+        <p>${response.lastname}</p>
+    </div>
+    <div>
+        <p>${response.subscription.name}</p>
+    </div>
+    <div>
+        <p>${response.subscription.reimbursed}</p>
+    </div>
+    <div>
+        <p>${userlatitude}; ${userlongitude}</p>
+    </div>
+    <div>
+        <p>${response.vitals}</p>
+    </div>
+        `)
     }
-
-    return loadClientSubscriptions();
 }
 
 function refreshFilter(e) {
     e.preventDefault();
-    loadClientSubscriptions();
+    getData();
+}
+
+function getSingularData(input) {
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients/${input}`, 'GET',)
+        .then(response => {
+            displayFilteredResult(response)
+            }
+        );
 }
 
 function getData() {
@@ -51,7 +100,6 @@ function loadClientSubscriptions(DATA) {
     for (let  i=0; i < DATA.length; i++){
         let userlatitude = DATA[i].location.latitude.toFixed(4)
         let userlongitude = DATA[i].location.longitude.toFixed(4)
-        console.log(DATA[i].subscription);
         if ( (DATA[i].subscription === null || DATA[i].subscription.reimbursed === false) ) {
             parent.insertAdjacentHTML('beforeend', `
         <div>
@@ -102,7 +150,4 @@ function loadClientSubscriptions(DATA) {
             `)
         }
         }
-
-
-
 }
