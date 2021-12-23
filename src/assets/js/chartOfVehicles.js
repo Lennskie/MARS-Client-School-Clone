@@ -2,19 +2,18 @@
 
 document.addEventListener("DOMContentLoaded", init);
 
-const amountOfVehicles = rescuersFleet.length;
-const amountOfOperationalVehicles = countAmountOfOperational();
-const amountOfNonOperationalVehicles = amountOfVehicles - amountOfOperationalVehicles
+let amountOfVehicles = 0;
 
-function init(){
+function init() {
+    getData();
     const ctx = document.getElementById('myChart').getContext('2d');
     const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["amount of vehicles","amount of operational vehicles", "amount of non operational vehicles"],
+            labels: ["amount of vehicles", "amount of busy vehicles", "amount of non busy vehicles"],
             datasets: [{
                 label: "",
-                data: [amountOfVehicles, amountOfOperationalVehicles, amountOfNonOperationalVehicles],
+                data: [],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(75, 255, 192, 0.2)',
@@ -36,26 +35,53 @@ function init(){
             },
             responsive: true,
             maintainAspectRatio: false,
+        }
+    });
+
+    function getData() {
+        fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
+            .then(response => {
+                    setData(response.vehicles)
+                }
+            );
+    }
+    function setData(response){
+        amountOfVehicles = response.length;
+        let amountOfNonBusyVehicles = 0;
+        for (let i = 0; i<response.length;i++){
+            if (response[i].occupied===false){
+                amountOfNonBusyVehicles += 1;
+            }
+        }
+        const amountOfBusyVehicles = amountOfVehicles - amountOfNonBusyVehicles;
+        addData(myChart, [amountOfVehicles, amountOfBusyVehicles, amountOfNonBusyVehicles], 0);
+    }
+    function addData(chart, data, datasetIndex) {
+        chart.data.datasets[datasetIndex].data = data;
+        changeScaleDynamically(chart);
+    }
+
+    function changeScaleDynamically(chart) {
+        chart.options = {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             scales: {
                 y: {
                     ticks: {
                         stepSize: 1,
                         beginAtZero: true
                     },
-                    max: amountOfVehicles + 3
+                    max: amountOfVehicles + 5
                 }
             }
-        }
-    });
-}
-
-
-function countAmountOfOperational(){
-    let operationalVehicles = 0;
-    for (let i = 0;i<rescuersFleet.length; i++){
-        if (rescuersFleet[i].condition === "Operational"){
-            operationalVehicles += 1;
-        }
+        };
+        chart.update();
     }
-    return operationalVehicles
+
 }
+
+
+

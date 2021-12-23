@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    loadClientSubscriptions(clientSubscriptions);
+    getData();
     document.querySelectorAll('.clientSubscriptions .filter button').forEach(el => el.addEventListener('click', searchFilter));
     document.querySelectorAll('.clientSubscriptions .filter img').forEach(el => el.addEventListener('click', refreshFilter));
 }
@@ -11,59 +11,143 @@ function init() {
 function searchFilter(e) {
     e.preventDefault();
     const input = document.querySelector('.clientSubscriptions form input[type="text"]').value
+    getSingularData(input);
+}
 
-    let arr = [];
-
-    for (let i in clientSubscriptions) {
-        if (clientSubscriptions[i]['name'] === input) {
-            arr.push(clientSubscriptions[i]);
-        } else if (clientSubscriptions[i]['lastname'] === input) {
-            arr.push(clientSubscriptions[i]);
-        } else if (clientSubscriptions[i]['phone'] === input) {
-            arr.push(clientSubscriptions[i])
-        } else if (clientSubscriptions[i]['mars_id'] === input) {
-            arr.push(clientSubscriptions[i])
-        }
+function displayFilteredResult(response){
+    const parent = document.querySelector(".clientSubscriptionsGrid");
+    parent.innerHTML = ''; //reset the HTML
+    let userlatitude = response.location.latitude.toFixed(4)
+    let userlongitude = response.location.longitude.toFixed(4)
+    if ( response.subscription === null || response.subscription.reimbursed === false) {
+        parent.insertAdjacentHTML('beforeend', `
+    <div>
+        <p>${response.identifier}</p>
+    </div>
+    <div>
+        <p>${response.firstname}</p>
+    </div>
+    <div>
+        <p>${response.lastname}</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+    <div>
+        <p>Not subscribed</p>
+    </div>
+        `)
+    } else {
+        parent.insertAdjacentHTML('beforeend', `
+    <div>
+        <p>${response.identifier}</p>
+    </div>
+    <div>
+        <p>${response.firstname}</p>
+    </div>
+    <div>
+        <p>${response.lastname}</p>
+    </div>
+    <div>
+        <p>${response.subscription.name}</p>
+    </div>
+    <div>
+        <p>${response.subscription.reimbursed}</p>
+    </div>
+    <div>
+        <p>${userlatitude}; ${userlongitude}</p>
+    </div>
+    <div>
+        <p>${response.vitals}</p>
+    </div>
+        `)
     }
-
-    return loadClientSubscriptions(arr);
 }
 
 function refreshFilter(e) {
     e.preventDefault();
-    loadClientSubscriptions(clientSubscriptions)
+    getData();
 }
 
-function loadClientSubscriptions(data) {
-    const parent = document.querySelector(".clientSubscriptionsGrid");
-    parent.innerHTML = '';
+function getSingularData(input) {
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients/${input}`, 'GET',)
+        .then(response => {
+            displayFilteredResult(response)
+            }
+        );
+}
 
-    data.forEach((listitem)=> {
-        parent.insertAdjacentHTML('beforeend', `
-            <div>
-                <span><p>${listitem['mars_id']}</p></span>
-            </div>
-            <div>
-                <p>${listitem['name']}</p>
-            </div>
-            <div>
-                <p>${listitem['lastname']}</p>
-            </div>
-            <div>
-                <p>${listitem['phone']}</p>
-            </div>
-            <div>
-                <p>${listitem['subscription']}</p>
-            </div>
-            <div>
-                <p>${listitem['sub_status']}</p>
-            </div>
-            <div>
-                <p>${listitem['location_status']}</p>
-            </div>
-            <div>
-                <p>${listitem['vital_status']}</p>
-            </div>
-        `)
-    })
+function getData() {
+    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients`, 'GET',)
+        .then(response => {
+                loadClientSubscriptions(response)
+            }
+        );
+}
+
+function loadClientSubscriptions(DATA) {
+    DATA = DATA.clients;
+    const parent = document.querySelector(".clientSubscriptionsGrid");
+
+    parent.innerHTML = ''; //reset the HTML
+
+    for (let  i=0; i < DATA.length; i++){
+        let userlatitude = DATA[i].location.latitude.toFixed(4)
+        let userlongitude = DATA[i].location.longitude.toFixed(4)
+        if ( (DATA[i].subscription === null || DATA[i].subscription.reimbursed === false) ) {
+            parent.insertAdjacentHTML('beforeend', `
+        <div>
+            <p>${DATA[i].identifier}</p>
+        </div>
+        <div>
+            <p>${DATA[i].firstname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].lastname}</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+        <div>
+            <p>Not subscribed</p>
+        </div>
+            `)
+        } else {
+            parent.insertAdjacentHTML('beforeend', `
+        <div>
+            <p>${DATA[i].identifier}</p>
+        </div>
+        <div>
+            <p>${DATA[i].firstname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].lastname}</p>
+        </div>
+        <div>
+            <p>${DATA[i].subscription.name}</p>
+        </div>
+        <div>
+            <p>${DATA[i].subscription.reimbursed}</p>
+        </div>
+        <div>
+            <p>${userlatitude}; ${userlongitude}</p>
+        </div>
+        <div>
+            <p>${DATA[i].vitals}</p>
+        </div>
+            `)
+        }
+        }
 }
