@@ -58,7 +58,6 @@ function init() {
     }
     function addData(chart, data, datasetIndex) {
         chart.data.datasets[datasetIndex].data = data;
-        chart.update();
         changeScaleDynamically(chart);
     }
 
