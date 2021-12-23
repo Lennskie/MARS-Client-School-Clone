@@ -64,6 +64,11 @@ function init() {
 
     function changeScaleDynamically(chart) {
         chart.options = {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             scales: {
                 y: {
                     ticks: {
