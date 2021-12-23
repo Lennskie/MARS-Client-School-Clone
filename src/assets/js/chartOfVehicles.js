@@ -1,7 +1,8 @@
 "use scrict"
 
 document.addEventListener("DOMContentLoaded", init);
-let amountOfVehicles
+let amountOfVehicles;
+let amountOfOperationalVehicles = 0; //has to be declared 0 to work in other functions
 
 function init() {
     const ctx = document.getElementById('myChart').getContext('2d');
@@ -46,10 +47,9 @@ function init() {
     });
     getData();
     setTimeout(function() {
-        const amountOfOperationalVehicles = countAmountOfOperational();
         const amountOfNonOperationalVehicles = amountOfVehicles - amountOfOperationalVehicles;
         addData(myChart, [amountOfVehicles, amountOfOperationalVehicles, amountOfNonOperationalVehicles], 0);
-    }, 1000);
+    }, 1000); //needs timeout because chartJS was faster than the API
     function addData(chart, data, datasetIndex) {
         chart.data.datasets[datasetIndex].data = data;
         chart.update();
@@ -57,18 +57,16 @@ function init() {
 }
 
 function getData() {
+    let i = 0;
     fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
         .then(function(response){
-            amountOfVehicles = response.vehicles.length; //todo: add more vehicles in the server
+            amountOfVehicles = response.vehicles.length;
+            while (i<response.vehicles.length){
+                if (response.vehicles[i].occupied === true){
+                    amountOfOperationalVehicles += 1;
+                }
+                 i += 1;
+            }
         });
 }
 
-function countAmountOfOperational(){
-    let operationalVehicles = 0;
-    for (let i = 0;i<rescuersFleet.length; i++){
-        if (rescuersFleet[i].condition === "Operational"){
-            operationalVehicles += 1;
-        }
-    }
-    return operationalVehicles
-}
