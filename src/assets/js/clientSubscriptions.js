@@ -76,7 +76,6 @@ function refreshFilter(e) {
 }
 
 function getSingularData(input) {
-    console.log(configuration.api.url + `/clients/${input}`);
     fetchFromServer(configuration.api.url + `/clients/${input}`, 'GET',)
         .then(response => {
             displayFilteredResult(response)
@@ -85,7 +84,6 @@ function getSingularData(input) {
 }
 
 function getData() {
-    console.log(configuration.api.url + "/clients");
     fetchFromServer(configuration.api.url + "/clients", 'GET',)
         .then(response => {
                 loadClientSubscriptions(response)

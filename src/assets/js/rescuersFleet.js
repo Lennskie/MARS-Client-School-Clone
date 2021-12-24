@@ -27,7 +27,6 @@ function changeFilter(e) {
 }
 
 function getDataForFilter(buttonData){
-    console.log(configuration.api.url + `/dispatches`);
         fetchFromServer(configuration.api.url + `/dispatches`, 'GET')
             .then(response => {
                     filterOnButtonData(response, buttonData)
@@ -90,10 +89,11 @@ function loadRescuersfleetGrid(DATA) {
 
     for (let  i=0; i < DATA.length; i++){
 
-        let sourceLocation = DATA[i].source.location.latitude + " ; " + DATA[i].source.location.longitude;
-        let destinationLocation = DATA[i].destination.location.latitude + " ; " + DATA[i].destination.location.longitude;
+        let sourceLocation = DATA[i].source.location.latitude.toFixed(4) + " ; " + DATA[i].source.location.longitude.toFixed(4);
+        let destinationLocation = DATA[i].destination.location.latitude.toFixed(4) + " ; " + DATA[i].destination.location.longitude.toFixed(4);
 
-            parent.insertAdjacentHTML('beforeend', `
+
+        parent.insertAdjacentHTML('beforeend', `
         <div data-identifier="${DATA[i].identifier}">
             <p>${DATA[i].source.identifier}</p>
         </div>
