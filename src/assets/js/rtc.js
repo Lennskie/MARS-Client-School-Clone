@@ -55,18 +55,19 @@ function handleDeletedDispatch(error, message) {
 }
 
 function handleClientLocationUpdate(error, message) {
-    let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
-    clients.get(message.body.identifier).setLatLng(newLocation);
-    fetchNewDispatches();
-
-
+    if (!error) {
+        let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
+        clients.get(message.body.identifier).setLatLng(newLocation);
+        fetchNewDispatches();
+    }
 }
 
 function handleVehicleLocationUpdate(error, message) {
-    let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
-    vehicles.get(message.body.identifier).setLatLng(newLocation);
-    fetchNewDispatches();
-
+    if (!error) {
+        let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
+        vehicles.get(message.body.identifier).setLatLng(newLocation);
+        fetchNewDispatches();
+    }
 }
 
 function fetchNewDispatches() {
