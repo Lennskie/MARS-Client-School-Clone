@@ -20,12 +20,12 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
 
     configuration = {
         prefix: "https://",
-        suffix: "",
+        suffix: "/mars-16",
         eventbus: {
             url: "https://project-ii.ti.howest.be/mars-16/events/"
         },
         api: {
-            url: "https://project-ii.ti.howest.be/api"
+            url: "https://project-ii.ti.howest.be/mars-16/api"
         },
         environment: 'deployment'
     }
