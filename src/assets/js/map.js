@@ -422,33 +422,36 @@ function startLogic() {
 }
 
 function drawFirstMapState(data) {
-
-	const InitialVehicles = data.vehicles;
-	const InitialClients = data.clients;
-	const InitialDomes = data.domes;
-	const InitialDispatches = data.dispatches;
-
-	console.log(InitialVehicles);
-	console.log(InitialDomes);
-	console.log(InitialClients);
-	console.log(InitialDispatches);
-
-	InitialVehicles.forEach(vehicle => {
-		addVehicleToMap(vehicle);
-	});
-
-	InitialClients.forEach(client => {
-		addClientToMap(client.vitals, client.location, client.identifier);
-	});
-
-	InitialDomes.forEach(dome => {
-		addDomeToMap(dome.location, dome.identifier);
-	});
-
-	fetchNewDispatches();
-
-
-	eventBusStart();
+	if (localStorage.getItem("auth") === "employee" && !(window.location.href.includes("clientsmap.html"))) {
+		const InitialVehicles = data.vehicles;
+		const InitialClients = data.clients;
+		const InitialDomes = data.domes;
+		const InitialDispatches = data.dispatches;
+	
+		console.log(InitialVehicles);
+		console.log(InitialDomes);
+		console.log(InitialClients);
+		console.log(InitialDispatches);
+	
+		InitialVehicles.forEach(vehicle => {
+			addVehicleToMap(vehicle);
+		});
+	
+		InitialClients.forEach(client => {
+			addClientToMap(client.vitals, client.location, client.identifier);
+		});
+	
+		InitialDomes.forEach(dome => {
+			addDomeToMap(dome.location, dome.identifier);
+		});
+	
+		fetchNewDispatches();
+		eventBusStart();
+	} else {
+		// TODO
+		// create function addDagnerzoneToMap
+		// fetch them just once
+	}
 }
 
 
