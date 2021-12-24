@@ -8,8 +8,8 @@ function eventBusStart() {
     eb.onopen = () => {
         eb.registerHandler('new.client', handleNewClient);
         eb.registerHandler('new.vehicle', handleNewVehicle);
-        eb.registerHandler('new.dispatch', handleNewDispatch);
-        eb.registerHandler('delete.dipsatch', handleDeletedDispatch);
+        eb.registerHandler('new.dispatch', handleNewDipsatch);
+        eb.registerHandler('delete.dipsatch', handleDeletedDipspatch);
         eb.registerHandler('location.client', handleClientLocationUpdate);
         eb.registerHandler('location.vehicle', handleVehicleLocationUpdate);
     }
@@ -39,23 +39,47 @@ function handleNewVehicle(error, message) {
 
 }
 
-function handleNewDispatch(error, message) {
-    // Some Text
+function handleNewDipsatch(error, message) {
+    if (!error) {
+        vehicleClientConnections.forEach(connection => {
+            mymap.removeLayer(connection);
+        });
+    
+        clientDomeConnections.forEach(connection => {
+            mymap.removeLayer(connection);
+        });
+
+        fetchNewDispatches();
+    }
+
 }
 
-function handleDeletedDispatch(error, message) {
-    // Some Text
+function handleDeletedDipspatch() {
+    // Placeholder
 }
 
 function handleClientLocationUpdate(error, message) {
-    console.log("Client should move");
     let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
     clients.get(message.body.identifier).setLatLng(newLocation);
 
 }
 
 function handleVehicleLocationUpdate(error, message) {
-    console.log("Vehicle should move");
     let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
     vehicles.get(message.body.identifier).setLatLng(newLocation);
+}
+
+function fetchNewDispatches() {
+
+    fetch(configuration.api.url + "/dispatches")
+    .then(response => response.json())
+    .then(data => drawNewDispatches(data));
+
+}
+
+function drawNewDispatches(data) {
+    const dispatches = data.dispatches;
+    dispatches.forEach(dispatch => {
+        drawVehicleClientRoute();
+    });
 }
