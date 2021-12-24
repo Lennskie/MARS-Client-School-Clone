@@ -112,6 +112,15 @@ function mapDrawn() {
 	startLogic();
 }
 
+function addDagnerzoneToMap(location, diameter) {
+	let zone = L.circle([location.latitude, location.longitude], {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5,
+		radius: diameter
+	}).addTo(mymap);
+}
+
 function addDomeToMap(location, domeId) {
 
 	let dome = L.marker([location.latitude, location.longitude], {
@@ -448,10 +457,18 @@ function drawFirstMapState(data) {
 		fetchNewDispatches();
 		eventBusStart();
 	} else {
-		// TODO
-		// create function addDagnerzoneToMap
-		// fetch them just once
+		drawDangerZones();
 	}
+}
+
+function drawDangerZones() {
+	fetch(configuration.api.url + "/dangerzones")
+	.then(response => response.json())
+	.then(data => {
+		data.dangerzones.forEach(dangerzone => {
+			addDagnerzoneToMap(dangerzone.location, dangerzone.radius);
+		})
+	});
 }
 
 
