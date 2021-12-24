@@ -123,7 +123,7 @@ function addDomeToMap(location, domeId) {
 function addVehicleToMap(location, vehicleId) {
 
 	let vehicle = L.marker([location.latitude, location.longitude], { icon: icons.vehicle })
-		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`)
+		.bindPopup(`<button onclick="routeFrom('${vehicleId}')">Dispatch</button>`)
 		.addTo(mymap);
 
 	vehicle.id = vehicleId;
@@ -137,7 +137,7 @@ function addClientToMap(vitalStatus, location, clientId) {
 	let clientIcon = icons.client[vitalStatus] || icons.client['healthy'];
 
 	let client = L.marker([location.latitude, location.longitude], { icon: clientIcon })
-		.bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`)
+		.bindPopup(`<button onclick="routeTo('${clientId}')">Save</button>`)
 		.addTo(mymap);
 	
 	client.status = vitalStatus;
