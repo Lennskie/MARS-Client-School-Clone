@@ -8,8 +8,8 @@ function eventBusStart() {
     eb.onopen = () => {
         eb.registerHandler('new.client', handleNewClient);
         eb.registerHandler('new.vehicle', handleNewVehicle);
-        eb.registerHandler('new.dispatch', handleNewDipsatch);
-        eb.registerHandler('delete.dipsatch', handleDeletedDipspatch);
+        eb.registerHandler('new.dispatch', handleNewDispatch);
+        eb.registerHandler('delete.dispatch', handleDeletedDispatch);
         eb.registerHandler('location.client', handleClientLocationUpdate);
         eb.registerHandler('location.vehicle', handleVehicleLocationUpdate);
     }
@@ -41,14 +41,14 @@ function handleNewVehicle(error, message) {
 
 }
 
-function handleNewDipsatch(error, message) {
+function handleNewDispatch(error, message) {
     if (!error) {
         fetchNewDispatches();
     }
 
 }
 
-function handleDeletedDipspatch() {
+function handleDeletedDispatch() {
     // Placeholder
 }
 
