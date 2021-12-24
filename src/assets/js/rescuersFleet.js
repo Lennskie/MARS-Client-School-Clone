@@ -43,8 +43,8 @@ function filterOnButtonData(DATA, buttonDATA){
 
     for (let  i=0; i < DATA.length; i++) {
 
-        let sourceLocation = DATA[i].source.location.latitude + " ; " + DATA[i].source.location.longitude;
-        let destinationLocation = DATA[i].destination.location.latitude + " ; " + DATA[i].destination.location.longitude;
+        let sourceLocation = DATA[i].source.location.latitude.toFixed(4) + " ; " + DATA[i].source.location.longitude.toFixed(4);
+        let destinationLocation = DATA[i].destination.location.latitude.toFixed(4) + " ; " + DATA[i].destination.location.longitude.toFixed(4);
 
         if (DATA[i].source.identifier.includes(buttonDATA) ||  DATA[i].destination.identifier.includes(buttonDATA)) {
             parent.insertAdjacentHTML('beforeend', `
