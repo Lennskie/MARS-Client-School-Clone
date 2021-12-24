@@ -289,9 +289,12 @@ nav>#subscribe
     background-position-y: center
     margin: 1rem 0 0 2rem
 
-table
-    margin: 1rem 0 1rem 2rem
+#clients-table
+    border-collapse: unset
+    margin: 0 auto
     font-family: Poppins, sans-serif
+    border-spacing: 5px 0.75rem
+    width: 95%
 
 th
     padding: 1rem
@@ -303,12 +306,20 @@ td
     padding: 1rem 0.5rem
     text-align: center
 
-button
+td:hover
+    background-color: #444444
+    color: white
+
+    tr
+        background-color: #EEEEEE
+
+button[name="client-action-button"]
     border: 1px solid black
     padding: 0.5rem
     background-color: red
     color: white
     border-radius: 50px
+    cursor: pointer
 
 /* SUPPORT */
 
