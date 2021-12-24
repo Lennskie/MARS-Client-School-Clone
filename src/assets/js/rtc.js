@@ -48,8 +48,10 @@ function handleNewDispatch(error, message) {
 
 }
 
-function handleDeletedDispatch() {
-    // Placeholder
+function handleDeletedDispatch(error, message) {
+    if (!error) {
+        fetchNewDispatches();
+    }
 }
 
 function handleClientLocationUpdate(error, message) {

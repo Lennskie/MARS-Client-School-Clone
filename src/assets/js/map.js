@@ -110,6 +110,11 @@ function mapDrawn() {
 	// Here comes the logic that requires a map to be present
 	// This would be for example getting the eventbus and listeners started
 	startLogic();
+	document.querySelector('button#clearActions').addEventListener('click', function (e) {
+		fetch(configuration.api.url + "/dispatches")
+		.then(response => response.json())
+		.then(data => deleteAllDispatches(data))
+	});
 }
 
 function addDagnerzoneToMap(location, diameter) {
@@ -467,6 +472,14 @@ function drawDangerZones() {
 	.then(data => {
 		data.dangerzones.forEach(dangerzone => {
 			addDagnerzoneToMap(dangerzone.location, dangerzone.radius);
+		})
+	});
+}
+
+function deleteAllDispatches(dispatchesObject) {
+	dispatchesObject.dispatches.forEach(dispatch => {
+		fetch(configuration.api.url + `/dispatch/${dispatch.identifier}`, {
+			method: 'DELETE',
 		})
 	});
 }
