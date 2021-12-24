@@ -340,12 +340,8 @@ td {
   text-align: center;
 }
 
-td:hover {
-  background-color: #444444;
-  color: white;
-}
-td:hover tr {
-  background-color: #EEEEEE;
+tr:hover td {
+  background-color: #E4E4E4;
 }
 
 button[name=client-action-button] {
