@@ -40,17 +40,22 @@ function handleNewVehicle(error, message) {
 }
 
 function handleNewDispatch(error, message) {
-
+    // Some Text
 }
 
 function handleDeletedDispatch(error, message) {
-
+    // Some Text
 }
 
 function handleClientLocationUpdate(error, message) {
+    console.log("Client should move");
+    let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
+    clients.get(message.body.identifier).setLatLng(newLocation);
 
 }
 
 function handleVehicleLocationUpdate(error, message) {
-
+    console.log("Vehicle should move");
+    let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
+    vehicles.get(message.body.identifier).setLatLng(newLocation);
 }

@@ -356,5 +356,5 @@ function drawFirstMapState(data) {
 	});
 
 
-	// eventBusStart();
+    eventBusStart();
 }
