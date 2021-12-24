@@ -8,6 +8,10 @@ function eventBusStart() {
     eb.onopen = () => {
         eb.registerHandler('new.client', handleNewClient);
         eb.registerHandler('new.vehicle', handleNewVehicle);
+        eb.registerHandler('new.dispatch', handleNewDispatch);
+        eb.registerHandler('delete.dipsatch', handleDeletedDispatch);
+        eb.registerHandler('location.client', handleClientLocationUpdate);
+        eb.registerHandler('location.vehicle', handleVehicleLocationUpdate);
     }
 
     // Logs closing of busses, shouldn't actaully occur during runtime but might be 
@@ -31,4 +35,22 @@ function handleNewVehicle(error, message) {
     } else {
         console.log('NewVehicle Error: ', error);
     }
+
+
+}
+
+function handleNewDispatch(error, message) {
+
+}
+
+function handleDeletedDispatch(error, message) {
+
+}
+
+function handleClientLocationUpdate(error, message) {
+
+}
+
+function handleVehicleLocationUpdate(error, message) {
+
 }

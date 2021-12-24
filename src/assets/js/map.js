@@ -105,12 +105,12 @@ function drawMap() {
 function mapDrawn() {
 	// Here comes the logic that requires a map to be present
 	// This would be for example getting the eventbus and listeners started
-	eventBusStart();
+	startLogic();
 }
 
 function addDomeToMap(location, domeId) {
 
-	let dome = L.marker([location[0], location[1]], {
+	let dome = L.marker([location.latitude, location.longitude], {
 		icon: icons.surfaceColony,
 		opacity: 0.5
 	})
@@ -323,4 +323,38 @@ function generateClientsTable() {
 			routeTo(clientId);
 		})
 	})
+}
+
+function startLogic() {
+
+	fetch(configuration.api.url + "/overview")
+	.then(response => response.json())
+	.then(data => drawFirstMapState(data));
+
+}
+
+function drawFirstMapState(data) {
+
+    const InitialVehicles = data.vehicles;
+	const InitialClients = data.clients;
+	const InitialDomes = data.domes;
+
+	console.log(InitialVehicles);
+	console.log(InitialDomes);
+	console.log(InitialClients);
+
+	InitialVehicles.forEach(vehicle => {
+		addVehicleToMap(vehicle.location, vehicle.identifier);
+	});
+
+	InitialClients.forEach(client => {
+		addClientToMap(client.vitals, client.location, client.identifier);
+	});
+
+	InitialDomes.forEach(dome => {
+		addDomeToMap(dome.location, dome.identifier);
+	});
+
+
+	// eventBusStart();
 }
