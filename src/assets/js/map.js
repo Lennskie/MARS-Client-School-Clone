@@ -150,7 +150,6 @@ function addVehicleToMap(newVehicle) {
 	vehicle.id = vehicleId;
 	vehicle.isOccupied = false;
 	vehicles.set(vehicleId, vehicle);
-	console.log('adding vehicle');
 }
 
 function addClientToMap(vitalStatus, location, clientId) {
@@ -166,7 +165,6 @@ function addClientToMap(vitalStatus, location, clientId) {
 	client.isBeingTransported = false;
 
 	clients.set(clientId, client);
-	console.log('adding client');
 }
 
 function routeFrom(vehicleId) {
@@ -236,8 +234,7 @@ function drawVehicleClientRoute(source = null, destination = null) {
 				},
 				body: JSON.stringify(firstDispatchObj),
 			})
-			.then(response => response.json())
-			.then(data => console.log(data));
+			.then(response => response.json());
 
 			fetch(configuration.api.url + "/dispatch/create", {
 				method: 'POST',
@@ -246,8 +243,7 @@ function drawVehicleClientRoute(source = null, destination = null) {
 				},
 				body: JSON.stringify(secondDispatchObj),
 			})
-			.then(response => response.json())
-			.then(data => console.log(data));
+			.then(response => response.json());
 
 			fromvehicle = null;
 			toclient = null;
@@ -441,11 +437,7 @@ function drawFirstMapState(data) {
 		const InitialClients = data.clients;
 		const InitialDomes = data.domes;
 		const InitialDispatches = data.dispatches;
-	
-		console.log(InitialVehicles);
-		console.log(InitialDomes);
-		console.log(InitialClients);
-		console.log(InitialDispatches);
+
 	
 		InitialVehicles.forEach(vehicle => {
 			addVehicleToMap(vehicle);

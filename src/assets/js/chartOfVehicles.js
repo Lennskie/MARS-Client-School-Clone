@@ -39,7 +39,6 @@ function init() {
     });
 
     function getData() {
-        console.log(configuration.api.url + "/vehicles");
         fetchFromServer(configuration.api.url + `/vehicles`, 'GET',)
             .then(response => {
                     setData(response.vehicles)

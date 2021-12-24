@@ -17,7 +17,7 @@ function eventBusStart() {
     // Logs closing of busses, shouldn't actaully occur during runtime but might be 
     // usefull to show some sort of "Loading/something went wrong" message
     eb.onclose = (param) => {
-        console.log('closed: ', param);
+        //catch onclose event, but do nothing
     }
 }
 
@@ -26,7 +26,7 @@ function handleNewClient(error, message) {
         addClientToMap(message.body.vitals.status, message.body.location, message.body.identifier);
         fetchNewDispatches();
     } else {
-        console.log('NewClient Error: ', error);
+        //catch NewClient error, but do nothing
     }
 }
 
@@ -35,7 +35,7 @@ function handleNewVehicle(error, message) {
         addVehicleToMap(message.body.location, message.body.identifier);
         fetchNewDispatches();
     } else {
-        console.log('NewVehicle Error: ', error);
+        //catch NewVehicle error, but do nothing
     }
 
 

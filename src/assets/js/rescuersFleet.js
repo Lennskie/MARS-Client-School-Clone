@@ -27,7 +27,6 @@ function changeFilter(e) {
 }
 
 function getDataForFilter(buttonData){
-    console.log(configuration.api.url + `/dispatches`);
         fetchFromServer(configuration.api.url + `/dispatches`, 'GET')
             .then(response => {
                     filterOnButtonData(response, buttonData)
