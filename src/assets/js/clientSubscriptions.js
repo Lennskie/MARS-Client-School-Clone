@@ -76,7 +76,8 @@ function refreshFilter(e) {
 }
 
 function getSingularData(input) {
-    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients/${input}`, 'GET',)
+    console.log(configuration.api.url + `/clients/${input}`);
+    fetchFromServer(configuration.api.url + `/clients/${input}`, 'GET',)
         .then(response => {
             displayFilteredResult(response)
             }
@@ -84,7 +85,8 @@ function getSingularData(input) {
 }
 
 function getData() {
-    fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/clients`, 'GET',)
+    console.log(configuration.api.url + "/clients");
+    fetchFromServer(configuration.api.url + "/clients", 'GET',)
         .then(response => {
                 loadClientSubscriptions(response)
             }
