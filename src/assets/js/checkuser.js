@@ -26,7 +26,7 @@ function init(){
                       <circle class="checkmark__circle" cx="00" cy="00" r="55" fill="none"/>
                       <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                 </svg>`
-            setTimeout(function(){document.location.href = "callpanel.html"}, 2000);
+            setTimeout(function(){document.location.href = "rescuersfleet.html"}, 2000);
         }, 2000);
     }else if (checkUser() === false){
         setTimeout( function() {
