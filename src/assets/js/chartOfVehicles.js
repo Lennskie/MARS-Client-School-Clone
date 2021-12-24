@@ -39,7 +39,8 @@ function init() {
     });
 
     function getData() {
-        fetchFromServer(`https://project-ii.ti.howest.be/mars-16/api/vehicles`, 'GET',)
+        console.log(configuration.api.url + "/vehicles");
+        fetchFromServer(configuration.api.url + `/vehicles`, 'GET',)
             .then(response => {
                     setData(response.vehicles)
                 }

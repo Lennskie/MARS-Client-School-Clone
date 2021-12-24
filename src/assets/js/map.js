@@ -7,6 +7,7 @@ let mymap;
 // Connections helper values
 let fromvehicle;
 let toclient;
+let toDome;
 
 const connectionStyles = {
 	vehicleClient: {
@@ -36,46 +37,49 @@ let clients = new Map();
 // Global variable to work with displayed vehicles
 let vehicles = new Map();
 
+// Issue that cannot be fixed in a "pretty" way in time, sorry
+let dump = new Array();
+
 // Icons for leaflet
 
 const icons = {
 	// "Dome"
 	surfaceColony: new L.Icon({
-	   iconUrl: 'assets/images/planet.png',
-	   iconSize: [128, 128],
-	   iconAnchor: [64, 64],
-	   popupAnchor: [0, -64],
+		iconUrl: 'assets/images/planet.png',
+		iconSize: [128, 128],
+		iconAnchor: [64, 64],
+		popupAnchor: [0, -64],
 	}),
 	client: {
 		// red
-	   critical: new L.Icon({
-		  iconUrl: 'assets/images/reddot.png',
-		  iconSize: [16, 16],
-		  iconAnchor: [8, 8],
-		  popupAnchor: [0, -8]
-	   }),
-	   // orange
-	   medium: new L.Icon({
-		  iconUrl: 'assets/images/orangedot.png',
-		  iconSize: [16, 16],
-		  iconAnchor: [8, 8],
-		  popupAnchor: [0, -8]
-	   }),
-	   // green
-	   healthy: new L.Icon({
-		  iconUrl: 'assets/images/greendot.png',
-		  iconSize: [16, 16],
-		  iconAnchor: [8, 8],
-		  popupAnchor: [0, -8]
-	   })
+		critical: new L.Icon({
+			iconUrl: 'assets/images/reddot.png',
+			iconSize: [16, 16],
+			iconAnchor: [8, 8],
+			popupAnchor: [0, -8]
+		}),
+		// orange
+		medium: new L.Icon({
+			iconUrl: 'assets/images/orangedot.png',
+			iconSize: [16, 16],
+			iconAnchor: [8, 8],
+			popupAnchor: [0, -8]
+		}),
+		// green
+		healthy: new L.Icon({
+			iconUrl: 'assets/images/greendot.png',
+			iconSize: [16, 16],
+			iconAnchor: [8, 8],
+			popupAnchor: [0, -8]
+		})
 	},
 	vehicle: new L.Icon({
-	   iconUrl: 'assets/images/vehicle.png',
-	   iconSize: [64, 64],
-	   iconAnchor: [32, 32],
-	   popupAnchor: [0, -32]
+		iconUrl: 'assets/images/vehicle.png',
+		iconSize: [64, 64],
+		iconAnchor: [32, 32],
+		popupAnchor: [0, -32]
 	})
- };
+};
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -105,11 +109,21 @@ function drawMap() {
 function mapDrawn() {
 	// Here comes the logic that requires a map to be present
 	// This would be for example getting the eventbus and listeners started
+	startLogic();
+}
+
+function addDagnerzoneToMap(location, diameter) {
+	let zone = L.circle([location.latitude, location.longitude], {
+		color: 'red',
+		fillColor: '#f03',
+		fillOpacity: 0.5,
+		radius: diameter
+	}).addTo(mymap);
 }
 
 function addDomeToMap(location, domeId) {
 
-	let dome = L.marker([location[0], location[1]], {
+	let dome = L.marker([location.latitude, location.longitude], {
 		icon: icons.surfaceColony,
 		opacity: 0.5
 	})
@@ -119,30 +133,35 @@ function addDomeToMap(location, domeId) {
 	domes.set(domeId, dome);
 }
 
-function addVehicleToMap(location, vehicleId) {
+function addVehicleToMap(newVehicle) {
 
-	let vehicle = L.marker([location[0], location[1]], { icon: icons.vehicle })
-		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`)
+	let location = newVehicle.location;
+	let vehicleId = newVehicle.identifier;
+
+	let vehicle = L.marker([location.latitude, location.longitude], { icon: icons.vehicle })
+		.bindPopup(`<button onclick="routeFrom('${vehicleId}')">Dispatch</button>`)
 		.addTo(mymap);
 
 	vehicle.id = vehicleId;
 	vehicle.isOccupied = false;
 	vehicles.set(vehicleId, vehicle);
+	console.log('adding vehicle');
 }
 
 function addClientToMap(vitalStatus, location, clientId) {
 
 	let clientIcon = icons.client[vitalStatus] || icons.client['healthy'];
 
-	let client = L.marker([location[0], location[1]], { icon: clientIcon })
-		.bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`)
+	let client = L.marker([location.latitude, location.longitude], { icon: clientIcon })
+		.bindPopup(`<button onclick="routeTo('${clientId}')">Save</button>`)
 		.addTo(mymap);
-	
+
 	client.status = vitalStatus;
 	client.id = clientId;
 	client.isBeingTransported = false;
 
 	clients.set(clientId, client);
+	console.log('adding client');
 }
 
 function routeFrom(vehicleId) {
@@ -155,23 +174,95 @@ function routeTo(clientId) {
 	drawVehicleClientRoute();
 }
 
-function drawVehicleClientRoute() {
-	if (fromvehicle !== undefined && toclient !== undefined && fromvehicle !== null && toclient !== null) {
+function addDispatchToMap() {
+	// Boilerplate
+}
 
-		const id = fromvehicle;
+function drawVehicleClientRoute(source = null, destination = null) {
+	if (source === null && destination === null) {
+		if (fromvehicle !== undefined && toclient !== undefined && fromvehicle !== null && toclient !== null) {
 
-		var pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
+			const id = fromvehicle;
 
-		// Clients and Vehicles that are in an active response should no longer be
-		// be able to be dispached/saved again.
-		const vehicle = vehicles.get(fromvehicle);
+			let pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
+
+			// Clients and Vehicles that are in an active response should no longer be
+			// be able to be dispached/saved again.
+			const vehicle = vehicles.get(fromvehicle);
+
+			vehicle.unbindPopup()
+				.bindPopup(`<div>Occupied</div>`);
+
+			vehicle.isOccupied = true;
+
+			const client = clients.get(toclient);
+			client.unbindPopup();
+
+			client.isBeingTransported = true;
+
+			let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
+
+			clientVehicleConnection.addTo(mymap);
+			dump.push(clientVehicleConnection);
+			vehicleClientConnections.set(id, clientVehicleConnection);
+
+			drawClientDomeRoute();
+
+			const firstDispatchObj = {
+				'identifier': getRandomIntBetween(0, 100000).toString(),
+				'source_type': 'Vehicle',
+				'destination_type': 'Client',
+				'source_identifier': fromvehicle.toString(),
+				'destination_identifier': toclient.toString()
+			}
+
+			const secondDispatchObj = {
+				'identifier': getRandomIntBetween(0, 100000).toString(),
+				'source_type': 'Client',
+				'destination_type': 'Dome',
+				'source_identifier': toclient.toString(),
+				'destination_identifier': toDome.id.toString()
+			}
+
+			fetch(configuration.api.url + "/dispatch/create", {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json;',
+				},
+				body: JSON.stringify(firstDispatchObj),
+			})
+			.then(response => response.json())
+			.then(data => console.log(data));
+
+			fetch(configuration.api.url + "/dispatch/create", {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json;',
+				},
+				body: JSON.stringify(secondDispatchObj),
+			})
+			.then(response => response.json())
+			.then(data => console.log(data));
+
+			fromvehicle = null;
+			toclient = null;
+			toDome = null;
+		}
+	} else {
+		// Instant delegation call
+		const thisVehicleId = source.identifier;
+		const thisClientId = destination.identifier;
+
+		let pointList = [vehicles.get(thisVehicleId)._latlng, clients.get(thisClientId)._latlng];
+
+		const vehicle = vehicles.get(thisVehicleId);
 
 		vehicle.unbindPopup()
-		.bindPopup(`<div>Occupied</div>`);
+			.bindPopup(`<div>Occupied</div>`);
 
 		vehicle.isOccupied = true;
 
-		const client = clients.get(toclient);
+		const client = clients.get(thisClientId);
 		client.unbindPopup();
 
 		client.isBeingTransported = true;
@@ -179,24 +270,33 @@ function drawVehicleClientRoute() {
 		let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
 
 		clientVehicleConnection.addTo(mymap);
-		vehicleClientConnections.set(id, clientVehicleConnection);
-
-		drawClientDomeRoute();
-
-		fromvehicle = null;
-		toclient = null;
+		dump.push(clientVehicleConnection);
+		vehicleClientConnections.set(thisVehicleId, clientVehicleConnection);
 	}
 }
 
-function drawClientDomeRoute() {
-	const destination = findNearestDome(toclient);
+function drawClientDomeRoute(source = null, destination = null) {
+	if (source === null && destination === null) {
+		toDome = findNearestDome(toclient);
 
-	var pointList = [clients.get(toclient)._latlng, destination._latlng];
+		let pointList = [clients.get(toclient)._latlng, toDome._latlng];
 
-	let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
+		let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
 
-	clientDomeConnection.addTo(mymap);
-	clientDomeConnections.set(toclient, clientDomeConnection);
+		clientDomeConnection.addTo(mymap);
+		clientDomeConnections.set(toclient, clientDomeConnection);
+	} else {
+		toDome = destination;
+
+		let pointList = [clients.get(source.identifier)._latlng, domes.get(destination.identifier)._latlng];
+
+		let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
+
+		clientDomeConnection.addTo(mymap);
+		dump.push(clientDomeConnection);
+		clientDomeConnections.set(source.identifier, clientDomeConnection);
+
+	}
 
 }
 
@@ -222,7 +322,7 @@ function computeDistance(firstMapObject, secondMapObject) {
 	let xb = secondMapObject._latlng.lat;
 	let yb = secondMapObject._latlng.lng;
 
-	return Math.sqrt(Math.pow((xa-xb), 2) + Math.pow((ya-yb), 2));
+	return Math.sqrt(Math.pow((xa - xb), 2) + Math.pow((ya - yb), 2));
 }
 
 function findNearestVehicle(clientId) {
@@ -247,7 +347,7 @@ function redeployVehicle(vehicleId) {
 
 	mymap.removeLayer(vehicleClientConnections.get(vehicleId));
 	vehicles.get(vehicleId).unbindPopup()
-	.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`);
+		.bindPopup(`<button onclick="routeFrom('${vehicleId}')">Dispatch</button>`);
 }
 
 function removeDomeConnection(connectionId) {
@@ -257,7 +357,7 @@ function removeDomeConnection(connectionId) {
 
 function enableClientInteraction(clientId) {
 
-	clients.get(clientId).bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`);
+	clients.get(clientId).bindPopup(`<button onclick="routeTo('${clientId}')">Save</button>`);
 
 }
 
@@ -292,7 +392,7 @@ function generateClientsTable() {
 
 	Array.from(clients.keys()).forEach(clientId => {
 		const currentClient = clients.get(clientId);
-		
+
 		let row = tableBody.insertRow();
 
 		let idCell = row.insertCell();
@@ -303,7 +403,7 @@ function generateClientsTable() {
 		idCell.innerHTML = `<span>${clientId}</span>`;
 		locationCell.innerHTML = `<span>Latitude: ${currentClient._latlng.lat} Longitude: ${currentClient._latlng.lng}</span>`;
 		statusCell.innerHTML = `<span>${currentClient.status}</span>`;
-		
+
 		let actionButton = document.createElement("button");
 		actionButton.innerHTML = "Rescue with nearest vehicle";
 		actionButton.name = "client-action-button";
@@ -314,7 +414,7 @@ function generateClientsTable() {
 
 		document.querySelector(`button[data-client-id="${clientId}"]`).addEventListener("click", function () {
 			const nearestVehicle = findNearestVehicle(clientId);
-			let nearestVehicleId = Array.from(vehicles.keys()).find(key => vehicles.get(key)===nearestVehicle);
+			let nearestVehicleId = Array.from(vehicles.keys()).find(key => vehicles.get(key) === nearestVehicle);
 
 			routeFrom(nearestVehicleId);
 			routeTo(clientId);
@@ -322,19 +422,74 @@ function generateClientsTable() {
 	})
 }
 
+function startLogic() {
 
-// Can be removed once this data is fetched from the server
-function generateRandomLocation() {
-	// All magical constants in this code are present
-	// To limit the generated coordinates to the rough area of the standard map viewport.
-    let x = Math.random() * (9 - 0) + 0;
-    let y = Math.random() * (59 - 0) + 0;
+	fetch(configuration.api.url + "/overview")
+		.then(response => response.json())
+		.then(data => drawFirstMapState(data));
 
-    x = x * 0.002
-    y = y * 0.001
-
-    const xpos = 29.62295 + x;
-    const ypos = 35.40 + y;
-
-    return [xpos, ypos]
 }
+
+function drawFirstMapState(data) {
+	if (localStorage.getItem("auth") === "employee" && !(window.location.href.includes("clientsmap.html"))) {
+		const InitialVehicles = data.vehicles;
+		const InitialClients = data.clients;
+		const InitialDomes = data.domes;
+		const InitialDispatches = data.dispatches;
+	
+		console.log(InitialVehicles);
+		console.log(InitialDomes);
+		console.log(InitialClients);
+		console.log(InitialDispatches);
+	
+		InitialVehicles.forEach(vehicle => {
+			addVehicleToMap(vehicle);
+		});
+	
+		InitialClients.forEach(client => {
+			addClientToMap(client.vitals, client.location, client.identifier);
+		});
+	
+		InitialDomes.forEach(dome => {
+			addDomeToMap(dome.location, dome.identifier);
+		});
+	
+		fetchNewDispatches();
+		eventBusStart();
+	} else {
+		drawDangerZones();
+	}
+}
+
+function drawDangerZones() {
+	fetch(configuration.api.url + "/dangerzones")
+	.then(response => response.json())
+	.then(data => {
+		data.dangerzones.forEach(dangerzone => {
+			addDagnerzoneToMap(dangerzone.location, dangerzone.radius);
+		})
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// SHOULD BE MOVED TO A util.js FILE
+function keyGet(map, searchValue) {
+	for (let [key, value] of map.entries()) {
+	  if (value === searchValue)
+		    return key;
+	}
+  }
+
+  function getRandomIntBetween(min, max) { // min and max included 
+	return Math.floor(Math.random() * (max - min + 1) + min)
+  }

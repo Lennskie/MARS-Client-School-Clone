@@ -1,6 +1,36 @@
 let config;
 let api;
 
+let configuration;
+
+// Detect local or remote env
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    configuration = {
+        prefix: "http://",
+        suffix: "/src",
+        eventbus: {
+            url: "http://localhost:8080/events/"
+        },
+        api: {
+            url: "http://localhost:8080/api"
+        },
+        environment: 'local'
+    }
+} else {
+
+    configuration = {
+        prefix: "https://",
+        suffix: "",
+        eventbus: {
+            url: "https://project-ii.ti.howest.be/mars-16/events/"
+        },
+        api: {
+            url: "https://project-ii.ti.howest.be/api"
+        },
+        environment: 'deployment'
+    }
+}
+
 document.addEventListener("DOMContentLoaded", init);
 document.querySelector('#home-link').addEventListener("click", goHome);
 
@@ -23,4 +53,9 @@ function goHome() {
     } else {
         window.location.href = "./index.html";
     }
+}
+
+// Dirty fix for embeded wrong redirects
+if (window.location.href.includes("clientsmap.html") && localStorage.getItem("auth") === "employee") {
+    window.location.href = configuration.prefix + window.location.host + configuration.suffix + "/employeesmap.html";
 }
