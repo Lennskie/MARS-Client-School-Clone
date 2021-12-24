@@ -24,6 +24,7 @@ function eventBusStart() {
 function handleNewClient(error, message) {
     if (!error) {
         addClientToMap(message.body.vitals.status, message.body.location, message.body.identifier);
+        fetchNewDispatches();
     } else {
         console.log('NewClient Error: ', error);
     }
@@ -32,6 +33,7 @@ function handleNewClient(error, message) {
 function handleNewVehicle(error, message) {
     if (!error) {
         addVehicleToMap(message.body.location, message.body.identifier);
+        fetchNewDispatches();
     } else {
         console.log('NewVehicle Error: ', error);
     }
@@ -41,14 +43,6 @@ function handleNewVehicle(error, message) {
 
 function handleNewDipsatch(error, message) {
     if (!error) {
-        vehicleClientConnections.forEach(connection => {
-            mymap.removeLayer(connection);
-        });
-    
-        clientDomeConnections.forEach(connection => {
-            mymap.removeLayer(connection);
-        });
-
         fetchNewDispatches();
     }
 
@@ -61,15 +55,26 @@ function handleDeletedDipspatch() {
 function handleClientLocationUpdate(error, message) {
     let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
     clients.get(message.body.identifier).setLatLng(newLocation);
+    fetchNewDispatches();
+
 
 }
 
 function handleVehicleLocationUpdate(error, message) {
     let newLocation = new L.LatLng(message.body.location.latitude, message.body.location.longitude);
     vehicles.get(message.body.identifier).setLatLng(newLocation);
+    fetchNewDispatches();
+
 }
 
 function fetchNewDispatches() {
+
+    clearActions();
+
+    dump.forEach(line => {
+        mymap.removeLayer(line);
+        dump = new Array();
+    });
 
     fetch(configuration.api.url + "/dispatches")
     .then(response => response.json())
@@ -80,6 +85,14 @@ function fetchNewDispatches() {
 function drawNewDispatches(data) {
     const dispatches = data.dispatches;
     dispatches.forEach(dispatch => {
-        drawVehicleClientRoute();
+        delegateDrawing(dispatch);
     });
+}
+
+function delegateDrawing(dispatchObj) {
+    if (dispatchObj.source.identifier.includes("AV")) {
+        drawVehicleClientRoute(dispatchObj.source, dispatchObj.destination);
+    } else {
+        drawClientDomeRoute(dispatchObj.source, dispatchObj.destination);
+    }
 }

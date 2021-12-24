@@ -37,6 +37,9 @@ let clients = new Map();
 // Global variable to work with displayed vehicles
 let vehicles = new Map();
 
+// Issue that cannot be fixed in a "pretty" way in time, sorry
+let dump = new Array();
+
 // Icons for leaflet
 
 const icons = {
@@ -172,7 +175,7 @@ function drawVehicleClientRoute(source = null, destination = null) {
 
 			const id = fromvehicle;
 
-			var pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
+			let pointList = [vehicles.get(fromvehicle)._latlng, clients.get(toclient)._latlng];
 
 			// Clients and Vehicles that are in an active response should no longer be
 			// be able to be dispached/saved again.
@@ -191,6 +194,7 @@ function drawVehicleClientRoute(source = null, destination = null) {
 			let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
 
 			clientVehicleConnection.addTo(mymap);
+			dump.push(clientVehicleConnection);
 			vehicleClientConnections.set(id, clientVehicleConnection);
 
 			drawClientDomeRoute();
@@ -235,6 +239,30 @@ function drawVehicleClientRoute(source = null, destination = null) {
 			toclient = null;
 			toDome = null;
 		}
+	} else {
+		// Instant delegation call
+		const thisVehicleId = source.identifier;
+		const thisClientId = destination.identifier;
+
+		let pointList = [vehicles.get(thisVehicleId)._latlng, clients.get(thisClientId)._latlng];
+
+		const vehicle = vehicles.get(thisVehicleId);
+
+		vehicle.unbindPopup()
+			.bindPopup(`<div>Occupied</div>`);
+
+		vehicle.isOccupied = true;
+
+		const client = clients.get(thisClientId);
+		client.unbindPopup();
+
+		client.isBeingTransported = true;
+
+		let clientVehicleConnection = new L.polyline(pointList, connectionStyles.vehicleClient);
+
+		clientVehicleConnection.addTo(mymap);
+		dump.push(clientVehicleConnection);
+		vehicleClientConnections.set(thisVehicleId, clientVehicleConnection);
 	}
 }
 
@@ -242,12 +270,23 @@ function drawClientDomeRoute(source = null, destination = null) {
 	if (source === null && destination === null) {
 		toDome = findNearestDome(toclient);
 
-		var pointList = [clients.get(toclient)._latlng, toDome._latlng];
+		let pointList = [clients.get(toclient)._latlng, toDome._latlng];
 
 		let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
 
 		clientDomeConnection.addTo(mymap);
 		clientDomeConnections.set(toclient, clientDomeConnection);
+	} else {
+		toDome = destination;
+
+		let pointList = [clients.get(source.identifier)._latlng, domes.get(destination.identifier)._latlng];
+
+		let clientDomeConnection = new L.polyline(pointList, connectionStyles.clientDome);
+
+		clientDomeConnection.addTo(mymap);
+		dump.push(clientDomeConnection);
+		clientDomeConnections.set(source.identifier, clientDomeConnection);
+
 	}
 
 }
@@ -299,7 +338,7 @@ function redeployVehicle(vehicleId) {
 
 	mymap.removeLayer(vehicleClientConnections.get(vehicleId));
 	vehicles.get(vehicleId).unbindPopup()
-		.bindPopup(`<button onclick="routeFrom(${vehicleId})">Dispatch</button>`);
+		.bindPopup(`<button onclick="routeFrom('${vehicleId}')">Dispatch</button>`);
 }
 
 function removeDomeConnection(connectionId) {
@@ -309,7 +348,7 @@ function removeDomeConnection(connectionId) {
 
 function enableClientInteraction(clientId) {
 
-	clients.get(clientId).bindPopup(`<button onclick="routeTo(${clientId})">Save</button>`);
+	clients.get(clientId).bindPopup(`<button onclick="routeTo('${clientId}')">Save</button>`);
 
 }
 
@@ -406,9 +445,7 @@ function drawFirstMapState(data) {
 		addDomeToMap(dome.location, dome.identifier);
 	});
 
-	InitialDispatches.forEach(dispatch => {
-		addDispatchToMap();
-	})
+	fetchNewDispatches();
 
 
 	eventBusStart();
