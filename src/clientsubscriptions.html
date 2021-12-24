@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="theme-color" content="#d40e00">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#ff0000">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Mars 16: Mars Active Response System</title>
@@ -17,25 +23,26 @@
             <p>Request immediate rescue</p>
         </div>
         <div id="main-nav">
-            <a href="#">Locations</a>
-            <a href="rescuersfleet.html">Rescuers</a>
-            <a class="active-nav" href="clientsubscriptions.html">Subscriptions</a>
-            <a href="#">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a href="employeesmap.html">Locations</a>
+            <a href="rescuersfleet.html">Vehicles</a>
+            <a class="active-nav" href="#">Users</a>
+            <a href="callpanel.html">Callpanel</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
 <main class="clientSubscriptions">
     <div class="filter">
         <form>
             <label for="searchClient">Search client</label>
-            <input type="text" name="searchClient" id="searchClient" placeholder="Search...">
+            <input type="text" name="searchClient" id="searchClient" placeholder="Search by MarsId">
             <button type="submit">Search</button>
         </form>
         <img src="assets/images/refresh.png" alt="refresh" title="refresh filter">
@@ -46,7 +53,6 @@
             <li>MarsID</li>
             <li>Name</li>
             <li>Lastname</li>
-            <li>Phone</li>
             <li>Subscription</li>
             <li>Sub Status</li>
             <li>Location Status</li>
@@ -56,8 +62,10 @@
         </div>
     </div>
 </main>
-<script src="assets/js/data/clientSubscriptions.js"></script>
-<script src="assets/js/clientSubscriptionsMock.js"></script>
+
+<script src="assets/js/clientSubscriptions.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/loginlogout.js"></script>
+<script src="assets/js/api-communication.js"></script>
 </body>
 </html>

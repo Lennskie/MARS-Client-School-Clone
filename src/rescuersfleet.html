@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="theme-color" content="#d40e00">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#ff0000">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Mars 16: Mars Active Response System</title>
@@ -17,37 +23,39 @@
             <p>Request immediate rescue</p>
         </div>
         <div id="main-nav">
-            <a href="#">Locations</a>
-            <a class="active-nav" href="rescuersfleet.html">Rescuers</a>
-            <a href="clientsubscriptions.html">Subscriptions</a>
-            <a href="#">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a href="employeesmap.html">Locations</a>
+            <a class="active-nav" href="#">Vehicles</a>
+            <a href="clientsubscriptions.html">Users</a>
+            <a href="callpanel.html">Callpanel</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
 <main class="rescuersfleetPanel">
     <div class="filter">
         <p>filter by</p>
-        <button id="filterDispatch">On dispatch</button>
-        <button id="filterStandby">On Standby</button>
-        <button id="filterNonOperational">Non-Operational</button>
+        <button id="filterVehicle" data-buttondata="AV">Contains vehicle</button>
+        <button id="filterClient" data-buttondata="MARS">Contains client</button>
+        <button id="filterDome" data-buttondata="DOME">Contains dome</button>
+        <button id="getChart">Get chart</button>
     </div>
     <div>
-        <h3>Rescuers fleet</h3>
+        <h3>Vehicles fleet</h3>
         <ul>
-            <li>Vehicle ID</li>
-            <li>Condition</li>
+            <li>Source ID</li>
+            <li>Destination ID</li>
             <li>Status</li>
             <li>Rescue ETA</li>
-            <li>Base</li>
-            <li>Actual position</li>
-            <li>Final Destination</li>
+            <li>Source location</li>
+            <li>Actual location</li>
+            <li>Destination location</li>
         </ul>
         <div class="rescuersfleetGrid">
         </div>
@@ -55,6 +63,8 @@
 </main>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/data/rescuersFleet.js"></script>
-<script src="assets/js/rescuersFleetMock.js"></script>
+<script src="assets/js/rescuersFleet.js"></script>
+<script src="assets/js/loginlogout.js"></script>
+<script src="assets/js/api-communication.js"></script>
 </body>
 </html>

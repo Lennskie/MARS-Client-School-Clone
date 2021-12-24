@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#d40e00">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -24,24 +25,27 @@
             <p>Request immediate rescue</p>
         </div>
         <div id="main-nav">
-            <a href="locations.html">Locations</a>
+            <a href="clientsmap.html">Locations</a>
             <a href="rescuers.html">Rescuers</a>
             <a href="subscriptions.html">Subscriptions</a>
             <a class="active-nav" href="#">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
 
 <main>
-    <h1>I need Help!</h1>
-    <p>Our team is ready to support you at any time, just call</p>
+    <h1>I need help!</h1>
+    <p>Our team is ready to support you at any time, just call.
+    This is not a rescue button, this is to call our support team.
+    The button to rescue you is at the top right.</p>
 
     <div class="alert">
         <p id="alert-text">999</p>
@@ -61,5 +65,6 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/api.js"></script>
+<script src="assets/js/loginlogout.js"></script>
 </body>
 </html>

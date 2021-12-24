@@ -26,8 +26,8 @@
         </div>
         <div id="main-nav">
             <a href="clientsmap.html">Locations</a>
-            <a class="active-nav" href="#">Rescuers</a>
-            <a href="subscriptions.html">Subscriptions</a>
+            <a href="rescuers.html">Vehicles</a>
+            <a href="subscriptions.html">Users</a>
             <a href="support.html">Support</a>
             <a class="hidden" id="btn-login" href="login.html">Login</a>
             <a class="hidden" id="btn-logout" href="">Logout</a>
@@ -40,41 +40,17 @@
         <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
-
 <main>
-    <h1>Who comes to my rescue?</h1>
-    <p>A team composed of an emergency pilot, a senior medic, a sanitary assistant and a security operator. Our aerial vehicles come equipment with a state of the art cryomedic tank to stabilize your body until you arrive to a proper medical facility.</p>
-
-    <div id="steps">
-        <div class="step">
-            <img src="./assets/images/heart.png" alt="Heart">
-            <h2>Step 1</h2>
-            <p>Your attached BioPatch will send a distress signal via your MarsPhone connection</p>
-        </div>
-        <img class="arrow" src="./assets/images/arrow.png" alt="Arrow right">
-        <div class="step">
-            <img src="./assets/images/location.png" alt="Location">
-            <h2>Step 2</h2>
-            <p>We receive your location also from your MarsPhone</p>
-        </div>
-        <img class="arrow" src="./assets/images/arrow.png" alt="Arrow right">
-        <div class="step">
-            <img src="./assets/images/team.png" alt="Team">
-            <h2>Step 3</h2>
-            <p>We send our team to assist you</p>
-        </div>
-        <img class="arrow" src="./assets/images/arrow.png" alt="Arrow right">
-        <div class="step">
-            <img src="./assets/images/hospital.png" alt="Hospital">
-            <h2>Step 4</h2>
-            <p>We bring you to the Hospital for treatment</p>
-        </div>
-    </div>
-
+    <form id="savemenowform">
+        <img src="assets/images/warning.png" alt="warning" title="warning">
+        <input type="button" value="Save me now!" id="SaveButton">
+    </form>
+    <p>
+        By clicking "Save me now", you will pay a year's worth of subscription upfront without the
+        ability to cancel. You will automatically cast your gps location to our main office so
+        that we can send a rescue team to you.
+    </p>
 </main>
-
-<script src="assets/js/main.js"></script>
-<script src="assets/js/api.js"></script>
 <script src="assets/js/loginlogout.js"></script>
 </body>
 </html>

@@ -1,7 +1,5 @@
 let rescuersFleet =[
     {
-        "vehicle_id":"AV-001",
-        "condition":"Operational",
         "status":"Dispatched",
         "rescue_eta":"5m 50s",
         "base":"Surf. Col. A",
@@ -9,8 +7,6 @@ let rescuersFleet =[
         "final_destination":"SC-A Hospital"
     },
     {
-        "vehicle_id":"AV-002",
-        "condition":"Operational",
         "status":"Dispatched",
         "rescue_eta":"12m 2s",
         "base":"Surf. Col. B",
@@ -18,8 +14,6 @@ let rescuersFleet =[
         "final_destination":"SC-C Hospital"
     },
     {
-        "vehicle_id":"AV-003",
-        "condition":"Operational",
         "status":"Dispatched",
         "rescue_eta":"1m 30s",
         "base":"Surf. Col. C",
@@ -27,8 +21,6 @@ let rescuersFleet =[
         "final _destination":"UC-1 Hospital"
     },
     {
-        "vehicle_id":"AV-004",
-        "condition":"Operational",
         "status":"Standby",
         "rescue_eta":"-",
         "base":"Surf. Col. D",
@@ -36,8 +28,6 @@ let rescuersFleet =[
         "final _destination":"-"
     },
     {
-        "vehicle_id":"AV-005",
-        "condition":"Maintenance",
         "status":"Repairing",
         "rescue_eta":"-",
         "base":"Surf. Col. E",

@@ -11,10 +11,6 @@
   display: none !important;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   font-size: 16px;
   min-width: min-content;
@@ -154,18 +150,6 @@ nav > a, #main-nav > a {
   margin: auto 0;
 }
 
-#btn-logout {
-  border: 1px solid black;
-  border-radius: 50px;
-  padding: 0.25rem 1rem;
-  background-color: black;
-  color: white;
-}
-
-#btn-logout {
-  border-radius: 0 50px 50px 0;
-}
-
 .active-nav {
   text-decoration: underline;
   font-weight: bold;
@@ -184,15 +168,6 @@ p:not(.subscriptions .grid p, .callPanel p, .rescuersfleetPanel p, .clientSubscr
   margin: 2rem 30% 0 30%;
 }
 
-nav > .alert > #alert-text {
-  font-size: 28px;
-}
-
-nav > .alert {
-  margin-top: 0;
-  padding: 0.5rem 1.5rem;
-}
-
 .alert {
   border: 1px red solid;
   background-color: red;
@@ -202,7 +177,7 @@ nav > .alert {
   margin: 2rem auto 0 auto;
   display: flex;
   justify-content: space-evenly;
-  animation: pulse 1s infinite;
+  animation: pulse 2s infinite;
 }
 .alert > #alert-text {
   font-family: "Adobe Clean Bold", sans-serif;
@@ -280,7 +255,21 @@ nav > .alert {
 }
 
 nav > #subscribe {
-  margin-left: 3rem !important;
+  font-size: 16px;
+  margin-left: 0 !important;
+  margin-right: 3rem;
+}
+
+#savemenow {
+  border: 1px red solid;
+  background-color: red;
+  border-radius: 50px;
+  padding: 0.5rem 0.5rem;
+  width: 7rem;
+  display: flex;
+  justify-content: space-evenly;
+  animation: pulse 0.5s infinite;
+  font-weight: bold;
   font-size: 16px;
 }
 
@@ -513,8 +502,23 @@ input[id=marsID] {
   margin-bottom: 0.4em;
 }
 
-input[type=submit] {
+input[type=button], #backButton {
+  text-decoration: none;
   font-weight: bold;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: 0.4s;
+}
+input[type=button]:hover, #backButton:hover {
+  background-size: 100%;
+  background-color: darkred;
+  color: #fff;
+}
+input[type=button]#backButton, #backButton#backButton {
+  padding: 1rem;
 }
 
 input:not(.clientSubscriptions input) {
@@ -526,6 +530,23 @@ input:not(.clientSubscriptions input) {
   border-radius: 0.3em;
   border-color: lightgray;
   border-width: 1px;
+}
+
+/* saveme page */
+form[id=savemenowform] {
+  background-image: none !important;
+  padding-top: 0 !important;
+}
+form[id=savemenowform] img {
+  animation: scale 1s infinite;
+  height: 15rem;
+  width: 15rem;
+  display: block;
+  margin: 2rem auto 2rem;
+}
+form[id=savemenowform] input:hover {
+  background-size: 100%;
+  background-color: #ff0000;
 }
 
 /* call panel */
@@ -568,7 +589,8 @@ input:not(.clientSubscriptions input) {
 }
 
 .rescuersfleetPanel .filter {
-  width: 35em;
+  width: 40em;
+  margin-right: 0;
 }
 
 .clientSubscriptions .filter {
@@ -648,8 +670,8 @@ input:not(.clientSubscriptions input) {
 }
 
 .clientSubscriptionsGrid, .clientSubscriptions ul {
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: ". . . . . . . .";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: ". . . . . . .";
 }
 
 .callsGrid div, .rescuersfleetGrid div, .clientSubscriptionsGrid div {
@@ -708,6 +730,86 @@ input:not(.clientSubscriptions input) {
 }
 
 /* ======================== */
+/*          CHART           */
+/* ======================== */
+canvas {
+  margin-top: 2%;
+  width: 100% !important;
+  height: 600px !important;
+}
+
+/* ======================== */
+/*           LOADER         */
+/* ======================== */
+#loadingContainer {
+  margin-top: 15rem;
+}
+#loadingContainer .loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid darkred;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  top: 30%;
+  margin: -10px auto;
+}
+#loadingContainer h1 {
+  margin-top: 3rem;
+}
+#loadingContainer p {
+  margin-top: 3rem;
+}
+
+.checkmark {
+  position: relative;
+  top: 30%;
+  margin: -20px auto;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 1;
+  box-shadow: inset 0 0 0 #7ac142;
+  animation: fill 0s ease-in-out 0s forwards, scale 0.3s ease-in-out 0.3s both;
+}
+.checkmark .checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 500;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: #7ac142;
+  animation: stroke 0s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark .checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0s cubic-bezier(0.65, 0, 0.45, 1) 0s forwards;
+}
+
+.crosssign {
+  display: table;
+  position: relative;
+  top: 30%;
+  margin: -20px auto;
+  place-content: center;
+  border-radius: 50%;
+  background-color: #d12021;
+  width: 160px;
+  height: 160px;
+}
+.crosssign p {
+  color: white;
+  font-size: 5rem;
+  font-family: Impact, sans-serif;
+}
+
+/* ======================== */
 /*         KEYFRAMES        */
 /* ======================== */
 @keyframes pulse {
@@ -721,6 +823,32 @@ input:not(.clientSubscriptions input) {
   }
   100% {
     transform: translateY(0%);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0 0 0 60px #7ac142;
   }
 }
 

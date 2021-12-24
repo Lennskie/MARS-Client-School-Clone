@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#d40e00">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#ff0000">
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/leaflet.css">
@@ -10,7 +16,7 @@
 <body>
 <header>
     <nav>
-        <div id="home-link" class="">
+        <div id="home-link" class="operator-home-link">
             <img class="logo" src="assets/images/ambulance.png" alt="Home">
             <p>MARS</p>
         </div>
@@ -19,18 +25,19 @@
             <p>Request immediate rescue</p>
         </div>
         <div id="main-nav">
-            <a class="active-nav" href="locations.html">Locations</a>
-            <a href="rescuers.html">Rescuers</a>
-            <a href="subscriptions.html">Subscriptions</a>
-            <a href="support.html">Support</a>
-            <a class="" id="btn-login" href="login.html">Login</a>
+            <a href="#">Locations</a>
+            <a href="rescuersfleet.html">Vehicles</a>
+            <a href="clientsubscriptions.html">Users</a>
+            <a href="callpanel.html">Callpanel</a>
+            <a class="hidden" id="btn-login" href="login.html">Login</a>
+            <a class="hidden" id="btn-logout" href="">Logout</a>
         </div>
         <div class="hidden" id="logged-in">
             <img class="profile" src="assets/images/profile.png" alt="Profile image">
             <p>*name*</p>
         </div>
-        <a class="hidden" id="btn-logout" href="">Logout</a>
         <a id="subscribe" class="nav" href="subscriptions.html">Subscribe</a>
+        <a class="hidden" id="savemenow" href="savemenow.html">Save me!</a>
     </nav>
 </header>
 
@@ -41,15 +48,9 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/api.js"></script>
-<!-- Configuration -->
-<script src="assets/js/config/conf.js"></script>
-<!-- RTC -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.2/sockjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vertx3-eventbus-client@3.9.4/vertx-eventbus.min.js"></script>
-<script src="assets/js/rtc.js"></script>
-<!-- Maps -->
 <script src="assets/js/leaflet.js"></script>
 <script src="assets/js/map.js"></script>
 <script src="assets/js/fullscreen.js"></script>
+<script src="assets/js/loginlogout.js"></script>
 </body>
 </html>
