@@ -100,8 +100,8 @@ function loadClientSubscriptions(DATA) {
     parent.innerHTML = ''; //reset the HTML
 
     for (let  i=0; i < DATA.length; i++){
-        let userlatitude = DATA[i].location.latitude.toFixed(4)
-        let userlongitude = DATA[i].location.longitude.toFixed(4)
+        let userlatitude = DATA[i].location.latitude.toFixed(4);
+        let userlongitude = DATA[i].location.longitude.toFixed(4);
         if ( (DATA[i].subscription === null || DATA[i].subscription.reimbursed === false) ) {
             parent.insertAdjacentHTML('beforeend', `
         <div>
